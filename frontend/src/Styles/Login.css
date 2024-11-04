@@ -9,7 +9,6 @@
     padding-bottom: 30px;
     width: 600px;
     border-radius: 10px;
-
     transition: width 0.3s;
 }
 
@@ -27,7 +26,7 @@
 }
 
 .text {
-    color: blue;
+    color: #55435E;
     font-size: 48px;
     font-weight: 700;
 }
@@ -47,23 +46,27 @@
 }
 
 .input {
-    display: flex;
+    display: block;
     align-items: center;
     margin: auto;
     width: 480px;
     height: 80px;
-    background: #eaeaea;
+    background: #f1f1f1;
+    border: none;
     border-radius: 6px;
+    padding: 20px;
 }
 
 .input input {
+    margin-top: -5px;
     height: 50px;
     width: 400px;
     background: transparent;
     border: none;
     outline: none;
-    color: #797979;
+    color: #313131;
     font-size: 19px;
+    font: italic normal 19px/1 "Calibri", sans-serif;
 }
 
 .submit-container {
@@ -83,7 +86,7 @@
     font-size: 19px;
     font-weight: 700;
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: #43435E;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -91,5 +94,15 @@
 }
 
 .submit:hover {
-    background-color: #0056b3;
+    background-color: #DED32F;
+    color: #5E5D43;
+}
+
+.error {
+    color: red;
+    display: block;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 2.5;
 }

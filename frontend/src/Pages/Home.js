@@ -26,7 +26,7 @@ const Home = () => {
 
                 <a href="/login"><button type="go-to-login" className="search-button">Login Now</button></a>
 
-                <a href="/login"><button type="go-to-login" className="search-button">Create Account</button></a>
+                <a href="/signup"><button type="go-to-signup" className="search-button">Create Account</button></a>
                 
             </div>
         </div>

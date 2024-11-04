@@ -3,7 +3,7 @@ ul {
     padding: 0;
     list-style-type: none;
     overflow: hidden;
-    background-color: rgba(207, 203, 175, 0.837);
+    background-color: #43435E;
     
 }
 
@@ -13,9 +13,9 @@ li {
 }
 
 li a {
-    background-color: rgba(207, 203, 175, 0.837);
+    background-color: #43435E;
     display: block;
-    color: rgb(83, 79, 79);
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -24,6 +24,10 @@ li a {
 
 li a:hover {
     text-decoration: none;
-    background-color: blue;
-    color: white;
+    background-color: #DED32F;
+    color: #5E5D43;
+}
+
+.align-right{
+    float: right;
 }
