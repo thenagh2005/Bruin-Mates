@@ -74,7 +74,7 @@ function SignUp() {
                         </div>
                     </div>
                     <div className='submit-container'>
-                        <button type="login" className="submit">Login</button>
+                        <button type="login" className="submit">Sign Up</button>
                     </div>
                 </div>
             </form>
