@@ -3,7 +3,7 @@ ul {
     padding: 0;
     list-style-type: none;
     overflow: hidden;
-    background-color: #43435E;
+    background-color: #007bff;
     
 }
 
@@ -13,7 +13,7 @@ li {
 }
 
 li a {
-    background-color: #43435E;
+    background-color: #007bff;
     display: block;
     color: white;
     text-align: center;
