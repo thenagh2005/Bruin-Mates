@@ -37,21 +37,21 @@ const Home = () => {
                 {/* Abstract Features Section */}
                 <section className="features">
                     <div className="features-header">
-                        <h2>Why Choose Us?</h2>
+                        <h2>How to get started</h2>
                         <div className="underline"></div>
                     </div>
                     <div className="feature-cards">
                         <div className="feature-card">
-                            <h3>Expert Guidance</h3>
-                            <p>Access insights and resources to navigate your journey.</p>
+                            <h3>If you have an account</h3>
+                            <p>Go ahead and log in</p>
                         </div>
                         <div className="feature-card">
-                            <h3>Community Support</h3>
-                            <p>Connect with fellow Bruins, alumni, and mentors.</p>
+                            <h3>If you don't have an account</h3>
+                            <p>Go ahead and sign up</p>
                         </div>
                         <div className="feature-card">
-                            <h3>Real Results</h3>
-                            <p>Track your progress and celebrate your achievements.</p>
+                            <h3>If you're not a UCLA student</h3>
+                            <p>Why are you here?</p>
                         </div>
                     </div>
                 </section>
