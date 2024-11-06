@@ -1,71 +1,79 @@
-* {
-    box-sizing: border-box;
-}
-
-body, html {
+.landing-page {
+    font-family: Arial, sans-serif;
+    color: #333;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-.landing-container {
+    box-sizing: border-box;
+  }
+  
+  .hero {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #2a93ba;
-}
-
-.hero-section {
-    text-align: center;
-}
-
-.hero-section h1 {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 70px;
-    color: #fdfafa;
-    margin-bottom: 20px;
-}
-
-.hero-section p {
-    font-size: 30px;
-    color: #f9f5f5;
-    margin-bottom: 20px;
-}
-
-.search-form {
-    display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
-
-.search-input {
-    width: 500px;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: width 0.3s;
-}
-
-.search-button {
-    padding: 10px 15px;
-    font-size: 1rem;
+    height: 90vh;
+    background: linear-gradient(to bottom right, #0078ff, #00c4ff);
     color: #fff;
-    background-color: #007bff;
+    text-align: center;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin: 0;
+  }
+  
+  .hero-content p {
+    font-size: 1.5rem;
+    margin: 20px 0;
+  }
+  
+  .cta-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #0078ff;
+    background-color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin-right: 20px;
-}
-
-.search-input:hover {
-    width: 750px;
-}
-
-.search-button:hover {
-    background-color: #0056b3;
-}
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .features {
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  .features h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+  
+  .feature-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .feature-card {
+    flex: 1;
+    max-width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature-card p {
+    font-size: 1rem;
+    color: #666;
+  }
 

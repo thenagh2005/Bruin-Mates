@@ -75,6 +75,32 @@ function ProfileForm() {
 
                     </div>
 
+                    <h2>Are you okay with alcohol?</h2>
+
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="choice" value="1" required />
+                            Yes
+                        </label>
+                        <label>
+                            <input type="radio" name="choice" value="2" />
+                            No
+                        </label>
+
+                    </div>
+
+                    <h2>Please select where your room is</h2>
+
+                    <div class="radio-group">
+                        <select>
+                            <option value="centennial">Centennial</option>
+                            <option value="olympic">Olympic</option>
+                            <option value="rieber">Rieber</option>
+                            <option value="De Neve">De Neve</option>
+                        </select>
+
+                    </div>
+
                     <button type="submit">Submit</button>
                 </form>
             </div>
