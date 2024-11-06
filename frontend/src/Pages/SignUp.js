@@ -61,8 +61,10 @@ function SignUp() {
                     </div>
                     <div className='inputs'>
                         <div className = 'input'>
+            
                             <input type="username" placeholder='Username*' onChange={inputted} onBlur={() => handleBlur('username')} required/>
                             {userClicked && userError && <p className='error'>{userError}</p>}
+                            
                         </div>
                         <div className = 'input'>
                             <input type="password" placeholder='Password*' onChange={inputted} onBlur={() => handleBlur('password')} required/>

@@ -7,6 +7,7 @@ import Home from './Pages/Home';
 import About from './Pages/About';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
+import ProfileForm from './Pages/profileform'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/about" element={<About />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/signup" element={<SignUp />}/>
+        <Route path="/profile-form" element={<ProfileForm />}/>
       </Routes>
     </Router>
   );
