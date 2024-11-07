@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import '../Styles/Home.css';
 
-import NavBar from '../NavBar';
 
 const Home = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -18,7 +17,6 @@ const Home = () => {
 
     return (
         <>
-            <NavBar />
             <div className="landing-page">
                 {/* Abstract Hero Section */}
                 <section className="hero">

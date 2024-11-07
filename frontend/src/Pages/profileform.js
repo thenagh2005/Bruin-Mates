@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 
-import NavBar from '../NavBar';
-
 import '../Styles/ProfileForm.css'
 
 function ProfileForm() {
     return (
         <>
-            <NavBar />
-
             <div class="form-container">
                 <form action="/submit" method="post">
                     <h2>How important is cleanliness to you?</h2>

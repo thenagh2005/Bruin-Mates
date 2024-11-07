@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import NavBar from '../NavBar'
-
 import '../Styles/Login.css'
 
 function SignUp() {
@@ -51,7 +49,6 @@ function SignUp() {
 
     return (
         <>
-            <NavBar />
             <form onSubmit={submit}>
                 <div className='container'>
                     <div className='header'>
