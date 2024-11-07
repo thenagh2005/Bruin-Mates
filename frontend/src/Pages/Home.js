@@ -1,10 +1,18 @@
 // src/LandingPage.js
 import React, { useState } from 'react';
+
+import { useRef } from 'react';
 import '../Styles/Home.css';
 
 
 const Home = () => {
     const [searchTerm, setSearchTerm] = useState('');
+
+    const featuresRef = useRef(null);
+
+    const scrollToFeatures = () => {
+        featuresRef.current.scrollIntoView({ behavior: 'smooth' });
+      };
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
@@ -23,7 +31,7 @@ const Home = () => {
                     <div className="hero-content">
                         <h1>Welcome to the UCLA Roommate Finder</h1>
                         <p>Made by (exhausted) Bruins for Bruins</p>
-                        <button className="cta-button">Get Started</button>
+                        <button className="cta-button" onClick={scrollToFeatures}>Get Started</button>
                     </div>
                     <div className="abstract-shapes">
                         <div className="circle"></div>
@@ -33,7 +41,7 @@ const Home = () => {
                 </section>
 
                 {/* Abstract Features Section */}
-                <section className="features">
+                <section className="features" ref={featuresRef}>
                     <div className="features-header">
                         <h2>How to get started</h2>
                         <div className="underline"></div>
@@ -42,10 +50,13 @@ const Home = () => {
                         <div className="feature-card">
                             <h3>If you have an account</h3>
                             <p>Go ahead and log in</p>
+                            <a href="/login">Log in</a>
                         </div>
                         <div className="feature-card">
                             <h3>If you don't have an account</h3>
                             <p>Go ahead and sign up</p>
+
+                            <a href="/signup">Sign Up</a>
                         </div>
                         <div className="feature-card">
                             <h3>If you're not a UCLA student</h3>

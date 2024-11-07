@@ -146,5 +146,10 @@
     font-size: 1rem;
     color: #666;
   }
+
+  .feature-card button a {
+    color: white;
+    text-decoration: none;
+  }
   
 
