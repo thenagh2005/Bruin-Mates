@@ -12,7 +12,7 @@ const Home = () => {
 
     const scrollToFeatures = () => {
         featuresRef.current.scrollIntoView({ behavior: 'smooth' });
-      };
+    };
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
@@ -32,6 +32,11 @@ const Home = () => {
                         <h1>Welcome to the UCLA Roommate Finder</h1>
                         <p>Made by (exhausted) Bruins for Bruins</p>
                         <button className="cta-button" onClick={scrollToFeatures}>Get Started</button>
+                    </div>
+                    <div className="info-card">
+                        <h2>Explore More</h2>
+                        <p>Discover resources, connect with mentors, and join a thriving community.</p>
+                        <button className="info-card-button">Learn More</button>
                     </div>
                     <div className="abstract-shapes">
                         <div className="circle"></div>
