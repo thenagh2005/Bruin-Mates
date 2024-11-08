@@ -3,11 +3,14 @@ const app = express();
 const dotenv = require("dotenv");
 
 const { connectToDB } = require('./db/connection');
+const appRouter = require('./routes/index.js');
 
 dotenv.config();
 app.use(express.json());
 
 connectToDB();
+
+app.use("/api/v1", appRouter);
 
 app.get('/', (req, res) => {
     res.send("Hello from the backend server!");
