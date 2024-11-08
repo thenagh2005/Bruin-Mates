@@ -45,6 +45,10 @@ function SignUp() {
 
     const submit = (e) => {
         e.preventDefault();
+
+        console.log(username);
+        console.log(password);
+        console.log(email);
     }
 
     return (
@@ -59,16 +63,16 @@ function SignUp() {
                     <div className='inputs'>
                         <div className = 'input'>
             
-                            <input type="username" placeholder='Username*' onChange={inputted} onBlur={() => handleBlur('username')} required/>
+                            <input type="username" placeholder='Username*' onChange={(e) => setUsername(e.target.value)} onBlur={() => handleBlur('username')} required/>
                             {userClicked && userError && <p className='error'>{userError}</p>}
                             
                         </div>
                         <div className = 'input'>
-                            <input type="password" placeholder='Password*' onChange={inputted} onBlur={() => handleBlur('password')} required/>
+                            <input type="password" placeholder='Password*' onChange={(e) => setPW(e.target.value)} onBlur={() => handleBlur('password')} required/>
                             {pwClicked && pwError && <p className='error'>{pwError}</p>}
                         </div>
                         <div className='input'>
-                            <input type="email" placeholder='Email*' onChange={inputted} onBlur={() => handleBlur('email')} required/>
+                            <input type="email" placeholder='Email*' onChange={(e) => setEmail(e.target.value)} onBlur={() => handleBlur('email')} required/>
                             {emailClicked && emailError && <p className='error'>{emailError}</p>}
                         </div>
                     </div>

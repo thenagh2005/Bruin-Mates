@@ -34,6 +34,8 @@ function Login() {
 
     const submit = (e) => {
         e.preventDefault();
+        console.log(`${username}`);
+        console.log(`${password}`);
         if(username.trim() === ''){
             setUNError('This field is required.');
         }
@@ -56,11 +58,11 @@ function Login() {
                     </div>
                     <div className='inputs'>
                         <div className = 'input'>
-                            <input type="text" placeholder='Username or Email*' onChange={inputted} onBlur={() => handleBlur('username')} required/>
+                            <input type="text" placeholder='Username or Email*' onChange={(e) => setUsername(e.target.value)} onBlur={() => handleBlur('username')} required/>
                             {userClicked && userError && <p className='error'>{userError}</p>}
                         </div>
                         <div className = 'input'>
-                            <input type="password" placeholder='Password*' onChange={inputted} onBlur={() => handleBlur('password')} required/>
+                            <input type="password" placeholder='Password*' onChange={(e) => setPW(e.target.value)} onBlur={() => handleBlur('password')} required/>
                             {pwClicked && pwError && <p className='error'>{pwError}</p>}
                         </div>
                     </div>
