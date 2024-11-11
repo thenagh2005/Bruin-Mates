@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
-import '../Styles/Login.css'
+import '../Styles/Login.css';
+
+import { useAuth } from '../AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -9,6 +12,11 @@ function Login() {
     const [pwClicked, setPWClicked] = useState(false);
     const [userError, setUNError] = useState();
     const [pwError, setPWError] = useState();
+
+    const { login } = useAuth();
+
+    const navigate = useNavigate();
+    
 
     const inputted = (e, text) => {
         if(text === 'username' && username.trim() !== ''){
@@ -34,6 +42,13 @@ function Login() {
 
     const submit = (e) => {
         e.preventDefault();
+
+        const success = login();
+
+        if (success) {
+            navigate("/view-profile");
+        }
+
         console.log(`${username}`);
         console.log(`${password}`);
         if(username.trim() === ''){
