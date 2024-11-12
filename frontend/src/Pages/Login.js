@@ -38,6 +38,7 @@ function Login() {
         });
 
         if (response.status === 200) {
+            login();
             navigate("/view-profile");
         }
 
