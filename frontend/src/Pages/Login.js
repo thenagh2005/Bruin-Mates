@@ -63,7 +63,7 @@ function Login() {
                     </div>
                     <div className='inputs'>
                         <div className = 'input'>
-                            <input type="text" placeholder='Username or Email*' onChange={(e) => setUsername(e.target.value)} onBlur={() => handleBlur('username')} required/>
+                            <input type="text" placeholder='Email*' onChange={(e) => setUsername(e.target.value)} onBlur={() => handleBlur('username')} required/>
                             {userClicked && userError && <p className='error'>{userError}</p>}
                         </div>
                         <div className = 'input'>
