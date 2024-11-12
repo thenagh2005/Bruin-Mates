@@ -124,4 +124,32 @@ async function userLogout(req, res, next){
     }
 }
 
-module.exports = {getAllUsers, userSignUp, userLogin, verifyUser, userLogout};
+async function savePreferences(req, res, next) {
+    try {
+        const userId = res.locals.jwtData.id;
+        const { cleanliness, sleepTime, smoking, alcohol, roomType, building, occupancy } = req.body;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        user.preferences = {
+            cleanliness,
+            sleepTime,
+            smoking,
+            alcohol,
+            roomType,
+            building,
+            occupancy 
+        };
+
+        await user.save();
+        return res.status(200).json({ message: "Preferences saved successfully" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Error saving preferences", cause: error.message });
+    }
+}
+
+module.exports = {getAllUsers, userSignUp, userLogin, verifyUser, userLogout, savePreferences};
