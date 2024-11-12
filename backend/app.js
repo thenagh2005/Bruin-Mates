@@ -5,10 +5,9 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { connectToDB } = require('./db/connection');
 const appRouter = require('./routes/index.js');
+const User = require('./models/User');
 
 dotenv.config();
-
-console.log("COOKIE_SECRET: ", process.env.JWT_SECRET);  // Debugging line
 
 app.use(cors());
 app.use(express.json());
@@ -21,6 +20,12 @@ app.use("/api/v1", appRouter);
 app.get('/set-cookie', function(req, res) {
     res.cookie('cookie1', 'This is my first cookie', { signed : true });
     res.send(req.signedCookies.cookie1);
+})
+
+app.get('/:_id', async (req, res) => {
+    const username = await User.findById(req.params._id);
+    res.send("bleh bleh");
+    res.json({username});
 })
 
 app.get('/', (req, res) => {

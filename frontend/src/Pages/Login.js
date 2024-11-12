@@ -6,7 +6,7 @@ import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-    const [username, setUsername] = useState('');
+    const [email, setUsername] = useState('');
     const [password, setPW] = useState('');
     const [userClicked, setUNClicked] = useState(false);
     const [pwClicked, setPWClicked] = useState(false);
@@ -16,21 +16,9 @@ function Login() {
     const { login } = useAuth();
 
     const navigate = useNavigate();
-    
-
-    const inputted = (e, text) => {
-        if(text === 'username' && username.trim() !== ''){
-            setUsername(e.target.value);
-            setUNError('');
-        }
-        if(text === 'password' && password.trim() !== ''){
-            setPW(e.target.value);
-            setPWError('');
-        }
-    };
 
     const handleBlur = (text) => {
-        if(text === 'username' && username.trim() === ''){
+        if(text === 'email' && email.trim() === ''){
             setUNClicked(true);
             setUNError('This field is required.');
         }
@@ -40,18 +28,20 @@ function Login() {
         }
     };
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
+        
+        const response = await fetch('http://localhost:4000/api/v1/user/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
 
-        const success = login();
-
-        if (success) {
+        if (response.status === 200) {
             navigate("/view-profile");
         }
 
-        console.log(`${username}`);
-        console.log(`${password}`);
-        if(username.trim() === ''){
+        if(email.trim() === ''){
             setUNError('This field is required.');
         }
         else if(password.trim() === ''){

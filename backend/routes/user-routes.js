@@ -4,7 +4,6 @@ const { getAllUsers, userLogin, userLogout, userSignUp, verifyUser } = require("
 const {validate, loginValidator, signUpValidator } = require("../utils/validators.js");
 const { verifyToken } = require("../utils/token-manager.js");
 
-
 router.get('/', getAllUsers);
 router.post('/signup', validate(signUpValidator), userSignUp);
 router.post('/login', validate(loginValidator), userLogin);
