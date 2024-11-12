@@ -14,21 +14,6 @@ function SignUp() {
     const [pwError, setPWError] = useState();
     const [emailError, setEmailError] = useState();
 
-    const inputted = (e, text) => {
-        if (text === 'username' && username.trim() !== '') {
-            setUsername(e.target.value);
-            setUNError('');
-        }
-        if (text === 'password' && password.trim() !== '') {
-            setPW(e.target.value);
-            setPWError('');
-        }
-        if (text === 'email' && email.trim() !== '') {
-            setEmail(e.target.value);
-            setEmailError('');
-        }
-    };
-
     const handleBlur = (text) => {
         if (text === 'username' && username.trim() === '') {
             setUNClicked(true);
