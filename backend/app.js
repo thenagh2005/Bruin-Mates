@@ -8,11 +8,11 @@ const appRouter = require('./routes/index.js');
 
 dotenv.config();
 
-console.log("COOKIE_SECRET: ", process.env.COOKIE_SECRET);  // Debugging line
+console.log("COOKIE_SECRET: ", process.env.JWT_SECRET);  // Debugging line
 
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser(process.env.COOKIE_SECRET))
+app.use(cookieParser(process.env.JWT_SECRET))
 
 connectToDB();
 
