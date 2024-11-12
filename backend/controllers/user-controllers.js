@@ -19,7 +19,7 @@ async function userSignUp(req, res, next) {
         const {name, email, password} = req.body;
         const existingUser = await User.findOne({email});
         if(existingUser){
-            return res.status(401).send("User already registered");
+            return res.status(401).send({error: "User already registered"});
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({name, email, password: hashedPassword});
