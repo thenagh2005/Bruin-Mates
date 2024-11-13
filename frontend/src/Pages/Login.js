@@ -34,8 +34,10 @@ function Login() {
         const response = await fetch('http://localhost:4000/api/v1/user/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: "include",
             body: JSON.stringify({ email, password }),
         });
+        console.log(JSON.stringify(response));
 
         if (response.status === 200) {
             login();

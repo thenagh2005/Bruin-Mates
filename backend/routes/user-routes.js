@@ -9,5 +9,8 @@ router.post('/signup', validate(signUpValidator), userSignUp);
 router.post('/login', validate(loginValidator), userLogin);
 router.get("/auth-status", verifyToken, verifyUser);
 router.get("/logout", verifyToken, userLogout);
+router.post("/preferences", verifyToken, (req, res) => {
+    res.json(req.body);
+});
 
 module.exports = router;
