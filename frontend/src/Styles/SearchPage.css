@@ -51,3 +51,36 @@
     border-radius: 4px;
     background-color: #fafafa;
 }
+
+.user-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin: 16px auto;
+  }
+
+  .user-card:hover {
+    transform: scaleY(1.1); /* Expand vertically */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .user-info {
+    text-align: left;
+  }
+  
+  .user-info h2 {
+    margin: 0 0 8px;
+    color: #333;
+  }
+  
+  .user-info p {
+    margin: 4px 0;
+    color: #555;
+  }
+  
+  .user-info strong {
+    color: #000;
+  }
