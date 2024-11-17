@@ -33,6 +33,10 @@ function FindPeople() {
         fetchUsers();
     }, []);
 
+    const handleSeeMore = () => {
+        setVisibleCount((prev) => prev + 5);
+    };
+
 
 
     const handleSearch = () => {
@@ -45,6 +49,8 @@ function FindPeople() {
     };
 
     return (
+        <>
+        <h1 className="header">Search for a user</h1>
         <div className="container">
             {/* Search Bar Section */}
             <div className="search-bar">
@@ -60,23 +66,25 @@ function FindPeople() {
             {/* Results Section */}
             <div className="results">
 
-                {results.map((user) => (
+                {results.slice(0, visiblecount).map((user) => (
 
                     <div className="user-card">
                         <div className="user-info">
                             <h2>{user.name}</h2>
                             <p><strong>Email:</strong> {user.email}</p>
 
+                            <p className='tooltip'>More information hahahahahaha</p>
+
                         </div>
                     </div>
-
-
-
-
                 ))}
+                {visiblecount < results.length && (
+                    <button onClick={handleSeeMore}>See more</button>
+                )}
 
             </div>
         </div>
+        </>
     );
 }
 
