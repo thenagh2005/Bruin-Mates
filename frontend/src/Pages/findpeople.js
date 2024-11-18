@@ -66,18 +66,26 @@ function FindPeople() {
             {/* Results Section */}
             <div className="results">
 
-                {results.slice(0, visiblecount).map((user) => (
+                {
+                
+                
+                results.length === 0 ? (
+                    <p>No users found</p>
+                  ) : (results.slice(0, visiblecount).map((user) => (
 
                     <div className="user-card">
                         <div className="user-info">
                             <h2>{user.name}</h2>
                             <p><strong>Email:</strong> {user.email}</p>
 
-                            <p className='tooltip'>More information hahahahahaha</p>
+                            <div className='tooltip'>
+                                <button>View {user.name}'s page</button>
+                            </div>
+                            
 
                         </div>
                     </div>
-                ))}
+                )))}
                 {visiblecount < results.length && (
                     <button onClick={handleSeeMore}>See more</button>
                 )}
