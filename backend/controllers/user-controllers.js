@@ -30,9 +30,11 @@ async function userSignUp(req, res, next) {
             httpOnly: true,
             domain: "localhost",
             path: "/",
+            sameSite: "None",
             signed: true
         });
         const token = createToken(user._id.toString(), user.email, "7d")
+        console.log("Generated token signup: " + token);
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         res.cookie("auth_token", token, {
@@ -40,13 +42,16 @@ async function userSignUp(req, res, next) {
             domain: "localhost", 
             expires,
             httpOnly: true,
+            secure: false,
+            sameSite: "None",
             signed: true
         });
+        console.log("Cookie signup: " + res.getHeaders()['set-cookie']);
 
         return res.status(200).json({message: 'OK', id: user._id.toString()});
     } catch(error) {
         console.log(error);
-        return res.status(200).json({message: 'ERROR', cause: error.message});
+        return res.status(500).json({message: 'ERROR', cause: error.message});
     }
 }
 
@@ -66,6 +71,7 @@ async function userLogin(req, res, next) {
             httpOnly: true,
             domain: "localhost",
             path: "/",
+            sameSite: "None",
             signed: true
         });
         const token = createToken(user._id.toString(), user.email, "7d")
@@ -76,13 +82,15 @@ async function userLogin(req, res, next) {
             domain: "localhost", 
             expires,
             httpOnly: true,
+            sameSite: "None",
             signed: true
         });
+        console.log("Cookie: " + res.getHeaders()['set-cookie']);
 
         return res.status(200).json({message: 'OK', id: user._id.toString()});
     } catch(error) {
         console.log(error);
-        return res.status(200).json({message: 'OK', cause: error.message});
+        return res.status(500).json({message: 'OK', cause: error.message});
     }
 }
 
@@ -98,8 +106,22 @@ async function verifyUser(req, res, next){
         return res.status(200).json({ message: "OK", name: user.name, email: user.email });
     } catch(error){
         console.log(error);
-        return res.status(200).json({ message: "ERROR", cause: error.message });
+        return res.status(500).json({ message: "ERROR", cause: error.message });
     }
+}
+
+async function getUserProfile (req, res, next) {
+    const user = await User.findOneById(req.user.id);
+    res.status(200).json({
+        success: true,
+        user
+    });
+
+    if (!user){
+        return res.status(404).json({message: "User not found."});
+    }
+
+    res.json(user);
 }
 
 async function userLogout(req, res, next){
@@ -115,13 +137,14 @@ async function userLogout(req, res, next){
             httpOnly: true,
             domain: "localhost",
             signed: true,
+            sameSite: "None",
             path: "/",
         });
         return res.status(200).json({ message: "OK", name: user.name, email: user.email });
     } catch(error){
         console.log(error);
-        return res.status(200).json({ message: "ERROR", cause: error.message });
+        return res.status(500).json({ message: "ERROR", cause: error.message });
     }
 }
 
-module.exports = {getAllUsers, userSignUp, userLogin, verifyUser, userLogout};
+module.exports = {getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getUserProfile};

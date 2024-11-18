@@ -46,6 +46,7 @@ function SignUp() {
         const response = await fetch('http://localhost:4000/api/v1/user/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify({ name:username, email, password }),
         });
     
@@ -60,9 +61,11 @@ function SignUp() {
                 </>
             );
         } else if (response.status === 401) {
+            console.log("BEEP");
             setSignUpError("This username is taken.");
         }
         else if (response.status === 409){
+            console.log("BOOP");
             setSignUpError("This email is already in use.");
         }        
     }

@@ -10,6 +10,7 @@ function NavBar() {
     const handleLogout = (e) => {
         e.preventDefault();
         logout();
+        console.log("logged out!");
     };
     
     return (
