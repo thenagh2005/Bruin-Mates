@@ -23,9 +23,15 @@ function Login() {
             setUNClicked(true);
             setUNError('This field is required.');
         }
+        else if(text === 'email'){
+            setUNError('');
+        }
         if(text === 'password' && password.trim() === ''){
             setPWClicked(true);
             setPWError('This field is required.');
+        }
+        else if(text === 'password'){
+            setPWError('');
         }
     };
 
@@ -72,7 +78,7 @@ function Login() {
                     </div>
                     <div className='inputs'>
                         <div className = 'input'>
-                            <input type="text" placeholder='Email*' onChange={(e) => setUsername(e.target.value)} onBlur={() => handleBlur('username')} required/>
+                            <input type="text" placeholder='Email*' onChange={(e) => setUsername(e.target.value)} onBlur={() => handleBlur('email')} required/>
                             {userClicked && userError && <p className='error'>{userError}</p>}
                         </div>
                         <div className = 'input'>
