@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
+import axios from 'axios'
 
 import '../Styles/Login.css'
 //import { userSignUp } from '../../backend/controllers/user-controllers';
@@ -13,6 +16,9 @@ function SignUp() {
     const [userError, setUNError] = useState();
     const [pwError, setPWError] = useState();
     const [emailError, setEmailError] = useState();
+
+    const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleBlur = (text) => {
         if (text === 'username' && username.trim() === '') {
@@ -31,24 +37,31 @@ function SignUp() {
 
     const submit = async (e) => {
         e.preventDefault();
-
-        const response = await fetch('http://localhost:4000/api/v1/user/signup', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name:username, email, password }),
-        });
-    
-        if (response.ok) {
-            const data = await response.json();
-            console.log('Signup successful', data);
-        } else {
-            console.log("Something went wrong");
-            console.log(response.json());
+        try {
+            const response = await axios.post('http://localhost:4000/api/v1/user/signup', {
+                name: username,
+                email,
+                password,
+            });
+            if (response.status === 200) {
+                console.log('Signup successful', response.data);
+                login();
+                navigate("/profile-form"); 
+            }
+            
+        } catch (err) {
+            if (err.response) {
+                // Server responded with a status other than 2xx
+                console.error('Error response:', err.response.data);
+            } else if (err.request) {
+                // Request was made but no response received
+                console.error('Error request:', err.request);
+            } else {
+                // Something else went wrong
+                console.error('Error message:', err.message);
+            }
         }
-
-        console.log(username);
-        
-    }
+    };
 
     return (
         <>

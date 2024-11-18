@@ -34,7 +34,7 @@ const Home = () => {
                         <button className="cta-button" onClick={scrollToFeatures}>Get Started</button>
                     </div>
                     <div className="info-card">
-                        <h2>Explore More</h2>
+                        <h2>Explore More</h2>``
                         <p>Discover resources, connect with mentors, and join a thriving community.</p>
                         <button className="info-card-button">Learn More</button>
                     </div>

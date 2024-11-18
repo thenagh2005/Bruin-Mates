@@ -127,7 +127,26 @@ async function userLogout(req, res, next){
 async function savePreferences(req, res, next) {
     try {
         const userId = res.locals.jwtData.id;
-        const { cleanliness, sleepTime, smoking, alcohol, roomType, building, occupancy } = req.body;
+
+
+        const { cleanliness, sleepTime, smoking, alcohol, roomType, building, occupancy, age } = req.body;
+
+        // Check if all required fields are provided
+        if (
+            cleanliness == null ||
+            sleepTime == null ||
+            smoking == null ||
+            alcohol == null ||
+            !roomType ||
+            !building ||
+            !occupancy ||
+            !age
+        ) {
+            return res.status(400).json({ 
+                message: "All preferences are required", 
+                missingFields: { cleanliness, sleepTime, smoking, alcohol, roomType, building, occupancy, age } 
+            });
+        }
 
         const user = await User.findById(userId);
         if (!user) {
@@ -141,7 +160,8 @@ async function savePreferences(req, res, next) {
             alcohol,
             roomType,
             building,
-            occupancy 
+            occupancy,
+            age
         };
 
         await user.save();
@@ -151,5 +171,6 @@ async function savePreferences(req, res, next) {
         return res.status(500).json({ message: "Error saving preferences", cause: error.message });
     }
 }
+
 
 module.exports = {getAllUsers, userSignUp, userLogin, verifyUser, userLogout, savePreferences};

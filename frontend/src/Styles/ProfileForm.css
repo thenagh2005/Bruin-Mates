@@ -17,10 +17,20 @@ h2 {
     margin-bottom: 10px;
 }
 
+.inline-group {
+    display: flex;
+    gap: 10px; 
+    justify-content: flex-start; 
+    align-items: center; 
+}
+
 .radio-group {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    gap: 20px;
     margin-bottom: 20px;
+    align-items: center;
 }
 
 label {

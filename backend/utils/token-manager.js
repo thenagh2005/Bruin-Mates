@@ -7,23 +7,31 @@ function createToken(id, email, expiresIn){
     return token;
 }
 
-function verifyToken(req, res, next){
+function verifyToken(req, res, next) {
     const token = req.signedCookies[`${COOKIE_NAME}`];
-    if(!token || token.trim() === ""){
-        return res.status(401).json({message: "Token not received"})
+
+    console.log("verifyToken Middleware Called");
+    console.log("Token Received:", token);
+
+    if (!token || token.trim() === "") {
+        console.log("Token not received or empty");
+        return res.status(401).json({ message: "Token not received" });
     }
-    return new Promise((resolve, reject) => {
-        return jwt.verify(token, process.env.JWT_SECRET, (err, success) => {
-            if(err){
-                reject(err.message);
-                return res.status(401).json({ message: "Token Expired" });
-            } else {
-                resolve();
-                res.locals.jwtData = success;
-                return next();
-            }
-        })
-    })
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            console.error("Token verification error:", err.message);
+            return res.status(401).json({ message: "Token Expired or Invalid" });
+        }
+
+        console.log("Token verified successfully:", decoded);
+
+        console.log("Decoded JWT data:", decoded);
+
+        res.locals.jwtData = decoded;
+        next();
+    });
 }
+
 
 module.exports = {createToken, verifyToken}

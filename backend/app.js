@@ -9,7 +9,11 @@ const User = require('./models/User');
 
 dotenv.config();
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000', // Allow requests from your frontend
+    credentials: true // Allow cookies and other credentials
+}));
+
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET))
 

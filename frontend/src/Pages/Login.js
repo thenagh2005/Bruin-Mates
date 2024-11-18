@@ -30,29 +30,52 @@ function Login() {
 
     const submit = async (e) => {
         e.preventDefault();
-        
-        const response = await fetch('http://localhost:4000/api/v1/user/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
-
-        if (response.status === 200) {
-            login();
-            navigate("/view-profile");
-        }
-
-        if(email.trim() === ''){
+    
+        // changed ordering logic so you validate email and password before making the API call
+        if (email.trim() === '') {
             setUNError('This field is required.');
+            return;
         }
-        else if(password.trim() === ''){
-            setUNError('This field is required.');
+        if (password.trim() === '') {
+            setPWError('This field is required.');
+            return;
         }
-        else{
-            console.log("Signed up successfully!");
+    
+        try {
+            // Make the API call
+            const response = await fetch('http://localhost:4000/api/v1/user/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
+    
+            switch (response.status) {
+                case 200:
+                    // Login successful
+                    login();
+                    navigate('/view-profile');
+                    console.log('Signed in successfully!');
+                    break;
+                case 401:
+                    // Unauthorized (wrong email or password)
+                    console.error('Invalid email or password. Please try again.');
+                    setUNError('Invalid email or password. Please try again.');
+                    setPWError('Invalid email or password. Please try again.');
+                    break;
+                default:
+                    // Any other unexpected status
+                    console.error('Unexpected error:', response.statusText);
+                    setUNError('An error occurred. Please try again.');
+                    setPWError('An error occurred. Please try again.');
+                    break;
+            }
+        } catch (error) {
+            // Network or server error
+            console.error('Fetch error:', error.message);
+            setUNError('Network error. Please try again later.');
+            setPWError('Network error. Please try again later.');
         }
-    }
-
+    };
     return (
         <>
             <form onSubmit={submit}>
