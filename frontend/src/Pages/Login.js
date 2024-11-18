@@ -12,6 +12,7 @@ function Login() {
     const [pwClicked, setPWClicked] = useState(false);
     const [userError, setUNError] = useState();
     const [pwError, setPWError] = useState();
+    const [loginError, setLoginError] = useState("");
 
     const { login } = useAuth();
 
@@ -39,24 +40,29 @@ function Login() {
         });
         console.log(JSON.stringify(response));
 
-        if (response.status === 200) {
-            login();
-            navigate("/view-profile");
-        }
-
         if(email.trim() === ''){
             setUNError('This field is required.');
         }
         else if(password.trim() === ''){
             setUNError('This field is required.');
         }
-        else{
-            console.log("Signed up successfully!");
+
+        if (response.status === 200) {
+            setLoginError("");
+            login();
+            navigate("/view-profile");
+        }
+        else if(response.status === 422){
+            setLoginError("Please enter a valid email.");
+        }
+        else if(response.status !== 200){
+            setLoginError("Invalid email or password.");
         }
     }
 
     return (
-        <>
+        <div>{loginError && <div className="login-error"> <img src="https://cdn.iconscout.com/icon/free/png-512/free-critical-icon-download-in-svg-png-gif-file-formats--alert-warning-error-user-interface-pack-icons-2598224.png?f=webp&w=256" alt="Error sign!"></img><span>{loginError}</span>
+            </div>}
             <form onSubmit={submit}>
                 <div className='container'>
                     <div className='header'>
@@ -79,7 +85,7 @@ function Login() {
                     </div>
                 </div>
             </form>
-        </>
+        </div>
     )
 }
 
