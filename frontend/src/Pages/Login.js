@@ -67,7 +67,9 @@ function Login() {
     }
 
     return (
-        <div>{loginError && <div className="login-error"> <img src="https://cdn.iconscout.com/icon/free/png-512/free-critical-icon-download-in-svg-png-gif-file-formats--alert-warning-error-user-interface-pack-icons-2598224.png?f=webp&w=256" alt="Error sign!"></img><span>{loginError}</span>
+        <div>{loginError && <div className="login-error signup-error"> <img className="login-error-image" 
+        src="https://cdn.iconscout.com/icon/free/png-512/free-critical-icon-download-in-svg-png-gif-file-formats--alert-warning-error-user-interface-pack-icons-2598224.png?f=webp&w=256" 
+        alt="Error sign!"></img><span>{loginError}</span>
             </div>}
             <form onSubmit={submit}>
                 <div className='container'>

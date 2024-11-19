@@ -166,3 +166,14 @@
 .signup-success a:hover{
     color: rgb(53, 89, 136);
 }
+
+.login-error-image{
+    height: 100px;
+}
+
+.login-error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
