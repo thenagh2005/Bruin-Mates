@@ -42,6 +42,7 @@ function NavBar() {
         }
 
         logout();
+        console.log("logged out!");
     };
     
     return (
