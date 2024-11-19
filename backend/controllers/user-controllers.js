@@ -10,7 +10,7 @@ async function getAllUsers(req, res, next) {
         return res.status(200).json({message: 'OK', users});
     } catch(error) {
         console.log(error);
-        return res.status(200).json({message: 'ERROR', cause: error.message});
+        return res.status(500).json({message: 'ERROR', cause: error.message});
     }
 }
 
@@ -50,7 +50,7 @@ async function userSignUp(req, res, next) {
         return res.status(200).json({message: 'OK', id: user._id.toString()});
     } catch(error) {
         console.log(error);
-        return res.status(200).json({message: 'ERROR', cause: error.message});
+        return res.status(500).json({message: 'ERROR', cause: error.message});
     }
 }
 
@@ -89,7 +89,7 @@ async function userLogin(req, res, next) {
         return res.status(200).json({message: 'OK', id: user._id.toString()});
     } catch(error) {
         console.log(error);
-        return res.status(500).json({message: 'OK', cause: error.message});
+        return res.status(500).json({message: 'ERROR', cause: error.message});
     }
 }
 
