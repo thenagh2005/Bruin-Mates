@@ -1,23 +1,36 @@
 import React, {useEffect, useState} from 'react';
 import '../Styles/Profile.css'
 
-function ViewProfile() {
-    const[username, setUN] = useState('');
-    
+const ViewProfile = () => {
+    const [profile, setProfile] = useState("");
+
     useEffect(() => {
-        fetch('/api/user/:id')
-        .then(data => {
-            setUN(data.name);
-            console.log(data.name);
+        fetch('http://localhost:4000/api/v1/user/view-profile', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include", // Ensures cookies are sent
         })
-    })
+        .then(res =>{
+            return res.json();
+        })
+        .then(result =>{
+            console.log(result);
+            setProfile(result.user);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }, []);
+
     return (
         <>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gridGap: 20, padding: 20}}>
             <div>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{width: '5vw', minWidth: '100px'}} alt="pfp" />
                 <h1>Name</h1>
-                <h2>@username</h2>
+                <h2>{profile}</h2>
                 <p>Insert bio here.</p>
             </div>
             <div>

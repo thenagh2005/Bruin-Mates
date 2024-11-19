@@ -10,27 +10,23 @@ const User = require('./models/User');
 dotenv.config();
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow requests from your frontend
-    credentials: true // Allow cookies and other credentials
+    credentials: true,
+    origin: "http://localhost:3000",
+    exposedHeaders: ["Set-Cookie"]
 }));
-
 app.use(express.json());
-app.use(cookieParser(process.env.JWT_SECRET))
+app.use(cookieParser(process.env.JWT_SECRET));
 
 connectToDB();
 
 app.use("/api/v1", appRouter);
 
-app.get('/set-cookie', function(req, res) {
-    res.cookie('cookie1', 'This is my first cookie', { signed : true });
-    res.send(req.signedCookies.cookie1);
-})
+// app.get('/set-cookie', function(req, res) {
+//     res.cookie('cookie1', 'This is my first cookie', { signed : true });
+//     res.send(req.signedCookies.auth_token);
+// })
 
-app.get('/:_id', async (req, res) => {
-    const username = await User.findById(req.params._id);
-    res.send("bleh bleh");
-    res.json({username});
-})
+// app.post('/login', userLogin);
 
 app.get('/', (req, res) => {
     res.send("Hello from the backend server!");

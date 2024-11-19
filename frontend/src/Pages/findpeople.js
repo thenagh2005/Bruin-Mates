@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import "../Styles/SearchPage.css";
+
+import axios from "axios";
 
 const sampleData = [
     "Result 1: Lorem ipsum dolor sit amet",
@@ -12,16 +14,43 @@ const sampleData = [
 
 function FindPeople() {
     const [query, setQuery] = useState('');
+    const [allusers, setAllUsers] = useState([]);
     const [results, setResults] = useState([]);
 
+    const [visiblecount, setVisibleCount] = useState(5);
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get("http://localhost:4000/api/v1/user/");
+                setAllUsers(response.data.users); // Set the full user list
+                setResults(response.data.users); // Initially display all users
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
+        };
+
+        fetchUsers();
+    }, []);
+
+    const handleSeeMore = () => {
+        setVisibleCount((prev) => prev + 5);
+    };
+
+
+
     const handleSearch = () => {
-        const filteredResults = sampleData.filter(item =>
-            item.toLowerCase().includes(query.toLowerCase())
+        // Filter users by name
+        setResults((results) =>
+            allusers.filter((user) =>
+                user.name.toLowerCase().includes(query.toLowerCase())
+            )
         );
-        setResults(filteredResults);
     };
 
     return (
+        <>
+        <h1 className="header">Search for a user</h1>
         <div className="container">
             {/* Search Bar Section */}
             <div className="search-bar">
@@ -36,17 +65,34 @@ function FindPeople() {
 
             {/* Results Section */}
             <div className="results">
-                {results.length > 0 ? (
-                    results.map((result, index) => (
-                        <div key={index} className="result-item">
-                            {result}
+
+                {
+                
+                
+                results.length === 0 ? (
+                    <p>No users found</p>
+                  ) : (results.slice(0, visiblecount).map((user) => (
+
+                    <div className="user-card">
+                        <div className="user-info">
+                            <h2>{user.name}</h2>
+                            <p><strong>Email:</strong> {user.email}</p>
+
+                            <div className='tooltip'>
+                                <button>View {user.name}'s page</button>
+                            </div>
+                            
+
                         </div>
-                    ))
-                ) : (
-                    <p>No results found</p>
+                    </div>
+                )))}
+                {visiblecount < results.length && (
+                    <button onClick={handleSeeMore}>See more</button>
                 )}
+
             </div>
         </div>
+        </>
     );
 }
 

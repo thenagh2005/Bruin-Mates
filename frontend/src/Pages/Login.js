@@ -12,6 +12,7 @@ function Login() {
     const [pwClicked, setPWClicked] = useState(false);
     const [userError, setUNError] = useState();
     const [pwError, setPWError] = useState();
+    const [loginError, setLoginError] = useState("");
 
     const { login } = useAuth();
 
@@ -22,17 +23,30 @@ function Login() {
             setUNClicked(true);
             setUNError('This field is required.');
         }
+        else if(text === 'email'){
+            setUNError('');
+        }
         if(text === 'password' && password.trim() === ''){
             setPWClicked(true);
             setPWError('This field is required.');
+        }
+        else if(text === 'password'){
+            setPWError('');
         }
     };
 
     const submit = async (e) => {
         e.preventDefault();
-    
-        // changed ordering logic so you validate email and password before making the API call
-        if (email.trim() === '') {
+        
+        const response = await fetch('http://localhost:4000/api/v1/user/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: "include",
+            body: JSON.stringify({ email, password }),
+        });
+        console.log(JSON.stringify(response));
+
+        if(email.trim() === ''){
             setUNError('This field is required.');
             return;
         }
@@ -40,44 +54,24 @@ function Login() {
             setPWError('This field is required.');
             return;
         }
-    
-        try {
-            // Make the API call
-            const response = await fetch('http://localhost:4000/api/v1/user/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password }),
-            });
-    
-            switch (response.status) {
-                case 200:
-                    // Login successful
-                    login();
-                    navigate('/view-profile');
-                    console.log('Signed in successfully!');
-                    break;
-                case 401:
-                    // Unauthorized (wrong email or password)
-                    console.error('Invalid email or password. Please try again.');
-                    setUNError('Invalid email or password. Please try again.');
-                    setPWError('Invalid email or password. Please try again.');
-                    break;
-                default:
-                    // Any other unexpected status
-                    console.error('Unexpected error:', response.statusText);
-                    setUNError('An error occurred. Please try again.');
-                    setPWError('An error occurred. Please try again.');
-                    break;
-            }
-        } catch (error) {
-            // Network or server error
-            console.error('Fetch error:', error.message);
-            setUNError('Network error. Please try again later.');
-            setPWError('Network error. Please try again later.');
+
+        if (response.status === 200) {
+            setLoginError("");
+            login();
+            navigate("/view-profile");
+        }
+        else if(response.status === 422){
+            setLoginError("Please enter a valid email.");
+        }
+        else if(response.status !== 200){
+            setLoginError("Invalid email or password.");
         }
     };
     return (
-        <>
+        <div>{loginError && <div className="login-error signup-error"> <img className="login-error-image" 
+        src="https://cdn.iconscout.com/icon/free/png-512/free-critical-icon-download-in-svg-png-gif-file-formats--alert-warning-error-user-interface-pack-icons-2598224.png?f=webp&w=256" 
+        alt="Error sign!"></img><span>{loginError}</span>
+            </div>}
             <form onSubmit={submit}>
                 <div className='container'>
                     <div className='header'>
@@ -87,7 +81,7 @@ function Login() {
                     </div>
                     <div className='inputs'>
                         <div className = 'input'>
-                            <input type="text" placeholder='Email*' onChange={(e) => setUsername(e.target.value)} onBlur={() => handleBlur('username')} required/>
+                            <input type="text" placeholder='Email*' onChange={(e) => setUsername(e.target.value)} onBlur={() => handleBlur('email')} required/>
                             {userClicked && userError && <p className='error'>{userError}</p>}
                         </div>
                         <div className = 'input'>
@@ -100,7 +94,7 @@ function Login() {
                     </div>
                 </div>
             </form>
-        </>
+        </div>
     )
 }
 

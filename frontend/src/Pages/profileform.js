@@ -20,9 +20,9 @@ function ProfileForm() {
     const [buildingOptions, setBuildingOptions] = useState([]);
 
     const roomTypes = {
-        Classic: ['Sproul', 'Rieber', 'Hedrick', 'Dykstra'],
-        Deluxe: ['Holly', 'Gardenia', 'Cove', 'Landing', 'Olympic', 'Centennial'],
-        Plaza: [
+        classic: ['Sproul', 'Rieber', 'Hedrick', 'Dykstra'],
+        deluxe: ['Holly', 'Gardenia', 'Cove', 'Landing', 'Olympic', 'Centennial'],
+        plaza: [
             'Sunset Village',
             'Rieber Terrace',
             'Rieber Vista',
@@ -36,8 +36,8 @@ function ProfileForm() {
             'De Neve Plaza - Gardenia',
             'De Neve Plaza - Holly'
         ],
-        Suite: ['Saxon', 'Hitch'],
-        'University Apartments': [
+        suite: ['Saxon', 'Hitch'],
+        universityApartments: [
             'Gayley Court',
             'Gayley Towers',
             'Glenrock',
