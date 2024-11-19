@@ -112,8 +112,8 @@ async function userLogout(req, res, next){
         if(!user){
             return res.status(401).send("User not registered OR Token malfunctioned");
         }
-        if(user._id !== res.locals.jwtData.id){
-            console.log(user);
+ 
+        if(user[0]._id.toString() !== res.locals.jwtData.id){
             return res.status(401).send("Permissions didn't match");
         }
         res.clearCookie("auth_token", {
