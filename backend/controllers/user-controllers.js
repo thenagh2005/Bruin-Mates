@@ -17,9 +17,13 @@ async function getAllUsers(req, res, next) {
 async function userSignUp(req, res, next) {
     try {
         const {name, email, password} = req.body;
-        const existingUser = await User.findOne({email});
+        const existingUser = await User.findOne({name});
+        const existingEmail = await User.findOne({email});
         if(existingUser){
             return res.status(401).send({error: "User already registered"});
+        }
+        if(existingEmail){
+            return res.status(409).send({error: "Email already registered"});
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({name, email, password: hashedPassword});
@@ -30,11 +34,9 @@ async function userSignUp(req, res, next) {
             httpOnly: true,
             domain: "localhost",
             path: "/",
-            sameSite: "None",
             signed: true
         });
         const token = createToken(user._id.toString(), user.email, "7d")
-        console.log("Generated token signup: " + token);
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         res.cookie("auth_token", token, {
@@ -42,16 +44,13 @@ async function userSignUp(req, res, next) {
             domain: "localhost", 
             expires,
             httpOnly: true,
-            secure: false,
-            sameSite: "None",
             signed: true
         });
-        console.log("Cookie signup: " + res.getHeaders()['set-cookie']);
 
         return res.status(200).json({message: 'OK', id: user._id.toString()});
     } catch(error) {
         console.log(error);
-        return res.status(500).json({message: 'ERROR', cause: error.message});
+        return res.status(200).json({message: 'ERROR', cause: error.message});
     }
 }
 
