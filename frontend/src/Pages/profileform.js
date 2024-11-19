@@ -9,8 +9,8 @@ function ProfileForm() {
     const [formData, setFormData] = useState({
         cleanliness: null,
         sleepTime: null,
-        smoking: false,
-        alcohol: false,
+        smoking: null,
+        alcohol: null,
         roomType: '',
         building: '',
         occupancy: '',
