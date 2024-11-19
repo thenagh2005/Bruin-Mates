@@ -108,11 +108,12 @@ async function verifyUser(req, res, next){
 
 async function userLogout(req, res, next){
     try {
-        const user = await User.findOneById(res.locals.jwtData.id);
+        const user = await User.find({_id: res.locals.jwtData.id});
         if(!user){
             return res.status(401).send("User not registered OR Token malfunctioned");
         }
-        if(user._id.toString() !== res.locals.jwtData.id){
+        if(user._id !== res.locals.jwtData.id){
+            console.log(user);
             return res.status(401).send("Permissions didn't match");
         }
         res.clearCookie("auth_token", {
