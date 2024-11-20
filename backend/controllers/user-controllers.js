@@ -2,31 +2,31 @@ const express = require('express');
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 
-const {createToken} = require('../utils/token-manager.js')
+const { createToken } = require('../utils/token-manager.js')
 
 async function getAllUsers(req, res, next) {
     try {
         const users = await User.find();
-        return res.status(200).json({message: 'OK', users});
-    } catch(error) {
+        return res.status(200).json({ message: 'OK', users });
+    } catch (error) {
         console.log(error);
-        return res.status(500).json({message: 'ERROR', cause: error.message});
+        return res.status(500).json({ message: 'ERROR', cause: error.message });
     }
 }
 
 async function userSignUp(req, res, next) {
     try {
-        const {name, email, password} = req.body;
-        const existingUser = await User.findOne({name});
-        const existingEmail = await User.findOne({email});
-        if(existingUser){
-            return res.status(401).send({error: "User already registered"});
+        const { name, email, password } = req.body;
+        const existingUser = await User.findOne({ name });
+        const existingEmail = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(401).send({ error: "User already registered" });
         }
-        if(existingEmail){
-            return res.status(409).send({error: "Email already registered"});
+        if (existingEmail) {
+            return res.status(409).send({ error: "Email already registered" });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({name, email, password: hashedPassword});
+        const user = new User({ name, email, password: hashedPassword });
         await user.save();
 
         // create token and save cookie
@@ -40,8 +40,8 @@ async function userSignUp(req, res, next) {
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         res.cookie("auth_token", token, {
-            path: "/", 
-            domain: "localhost", 
+            path: "/",
+            domain: "localhost",
             expires,
             httpOnly: true,
             sameSite: "strict",
@@ -49,22 +49,22 @@ async function userSignUp(req, res, next) {
             secure: true
         });
 
-        return res.status(200).json({message: 'OK', id: user._id.toString()});
-    } catch(error) {
+        return res.status(200).json({ message: 'OK', id: user._id.toString() });
+    } catch (error) {
         console.log(error);
-        return res.status(500).json({message: 'ERROR', cause: error.message});
+        return res.status(500).json({ message: 'ERROR', cause: error.message });
     }
 }
 
 async function userLogin(req, res, next) {
     try {
-        const {email, password} = req.body;
-        const user = await User.findOne({email});
-        if(!user){
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
+        if (!user) {
             return res.status(401).send("User not registered");
         }
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
-        if(!isPasswordCorrect){
+        if (!isPasswordCorrect) {
             return res.status(403).send("Incorrect Password");
         }
         // create token and save cookie
@@ -79,8 +79,8 @@ async function userLogin(req, res, next) {
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         res.cookie("auth_token", token, {
-            path: "/", 
-            domain: "localhost", 
+            path: "/",
+            domain: "localhost",
             expires,
             httpOnly: true,
             sameSite: "strict",
@@ -90,51 +90,51 @@ async function userLogin(req, res, next) {
 
         console.log("Cookie: " + res.getHeaders()['set-cookie']);
 
-        return res.status(200).json({message: 'OK', id: user._id.toString()});
-    } catch(error) {
+        return res.status(200).json({ message: 'OK', id: user._id.toString() });
+    } catch (error) {
         console.log(error);
-        return res.status(500).json({message: 'ERROR', cause: error.message});
+        return res.status(500).json({ message: 'ERROR', cause: error.message });
     }
 }
 
-async function verifyUser(req, res, next){
+async function verifyUser(req, res, next) {
     try {
         const user = await User.findOneById(res.locals.jwtData.id);
-        if(!user){
+        if (!user) {
             return res.status(401).send("User not registered OR Token malfunctioned");
         }
-        if(user._id.toString() !== res.locals.jwtData.id){
+        if (user._id.toString() !== res.locals.jwtData.id) {
             return res.status(401).send("Permissions didn't match");
         }
         return res.status(200).json({ message: "OK", name: user.name, email: user.email });
-    } catch(error){
+    } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "ERROR", cause: error.message });
     }
 }
 
-async function getUserProfile (req, res, next) {
+async function getUserProfile(req, res, next) {
     const user = await User.findOneById(req.user.id);
     res.status(200).json({
         success: true,
         user
     });
 
-    if (!user){
-        return res.status(404).json({message: "User not found."});
+    if (!user) {
+        return res.status(404).json({ message: "User not found." });
     }
 
     res.json(user);
 }
 
-async function userLogout(req, res, next){
+async function userLogout(req, res, next) {
     try {
-        const user = await User.find({_id: res.locals.jwtData.id});
-        if(!user){
+        const user = await User.find({ _id: res.locals.jwtData.id });
+        if (!user) {
             return res.status(401).send("User not registered OR Token malfunctioned");
         }
- 
-        if(user[0]._id.toString() !== res.locals.jwtData.id){
+
+        if (user[0]._id.toString() !== res.locals.jwtData.id) {
             return res.status(401).send("Permissions didn't match");
         }
         res.clearCookie("auth_token", {
@@ -145,9 +145,27 @@ async function userLogout(req, res, next){
             path: "/",
         });
         return res.status(200).json({ message: "OK", name: user.name, email: user.email });
-    } catch(error){
+    } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "ERROR", cause: error.message });
+    }
+}
+
+async function getCurrUserInfo(req, res, next) {
+    try {
+        const userId = res.locals.jwtData.id;
+
+        // Check if all required fields are provided
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        return res.status(200).json({ message: 'OK', user });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Error saving preferences", cause: error.message });
     }
 }
 
@@ -169,9 +187,9 @@ async function savePreferences(req, res, next) {
             !occupancy ||
             !age
         ) {
-            return res.status(400).json({ 
-                message: "All preferences are required", 
-                missingFields: { cleanliness, sleepTime, smoking, alcohol, roomType, building, occupancy, age } 
+            return res.status(400).json({
+                message: "All preferences are required",
+                missingFields: { cleanliness, sleepTime, smoking, alcohol, roomType, building, occupancy, age }
             });
         }
 
@@ -200,4 +218,4 @@ async function savePreferences(req, res, next) {
 }
 
 
-module.exports = {getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getUserProfile, savePreferences};
+module.exports = { getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getCurrUserInfo, getUserProfile, savePreferences };
