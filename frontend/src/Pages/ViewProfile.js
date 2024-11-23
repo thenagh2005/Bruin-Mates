@@ -13,14 +13,19 @@ const ViewProfile = () => {
     const [profile, setProfile] = useState("");
 
     const [currUser, setCurrUser] = useState([]);
-    const [age, setAge] = useState("");
     const [cleanliness, setCleanliness] = useState("");
     const [sleepTime, setSleepTime] = useState("");
     const [smoking, setSmoking] = useState(false);
     const [alcohol, setAlcohol] = useState(false);
+    const [genderInclusivity, setGenderInclusivity] = useState(false);
     const [roomType, setRoomType] = useState("");
     const [building, setBuilding] = useState("");
     const [occupancy, setOccupancy] = useState("");
+
+    const [age, setAge] = useState("");
+    const [biography, setBiography] = useState("");
+    const [gender, setGender] = useState("");
+    const [pronouns, setPronouns] = useState("");
     
     /*
     useEffect(() => {
@@ -53,12 +58,17 @@ const ViewProfile = () => {
                 setCurrUser(response.data.user);
                 setCleanliness(response.data.user.preferences.cleanliness);
                 setSleepTime(sleepyTimes[parseInt(response.data.user.preferences.sleepTime, 10)-1]);
-                setAge(response.data.user.preferences.age);
                 setSmoking(response.data.user.preferences.smoking);
                 setAlcohol(response.data.user.preferences.alcohol);
+                setGenderInclusivity(response.data.user.preferences.genderInclusivity);
                 setRoomType(response.data.user.preferences.roomType);
                 setBuilding(response.data.user.preferences.building);
                 setOccupancy(response.data.user.preferences.occupancy);
+                setAge(response.data.user.profileInfo.age);
+                setBiography(response.data.user.profileInfo.biography);
+                setGender(response.data.user.profileInfo.gender);
+                setPronouns(response.data.user.profileInfo.pronouns);
+
 
                 localStorage.setItem("username", response.data.user.name);
             } catch (error) {
@@ -78,7 +88,14 @@ const ViewProfile = () => {
                     <h2>{currUser.name}</h2>
                     <h2>Age:</h2>
                     <p>{age}</p>
-                    <p>Insert bio here.</p>
+                    <h2>Biography:</h2>
+                    <p>{biography}</p>
+                    <h2>Gender:</h2>
+                    <p>{gender}</p>
+                    <h2>Preferred Pronouns:</h2>
+                    <p>{pronouns}</p>
+
+
                 </div>
                 <div>
                     <h1>Preferences</h1>
@@ -94,6 +111,9 @@ const ViewProfile = () => {
 
                     <h2>Alcohol:</h2>
                     <p>{alcohol ? "Yes" : "No"}</p>
+
+                    <h2>Gender Inclusivity:</h2>
+                    <p>{genderInclusivity ? "Yes" : "No"} </p>
 
                     <h2>Room Type:</h2>
                     <p>{roomType}</p>

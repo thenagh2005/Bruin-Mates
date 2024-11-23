@@ -169,27 +169,41 @@ async function getCurrUserInfo(req, res, next) {
     }
 }
 
-async function savePreferences(req, res, next) {
+async function updateProfile(req, res, next) {
     try {
         const userId = res.locals.jwtData.id;
 
+        const { preferences, profileInfo } = req.body;
 
-        const { cleanliness, sleepTime, smoking, alcohol, roomType, building, occupancy, age } = req.body;
-
-        // Check if all required fields are provided
+        // Validate preferences (if they are required)
         if (
-            cleanliness == null ||
-            sleepTime == null ||
-            smoking == null ||
-            alcohol == null ||
-            !roomType ||
-            !building ||
-            !occupancy ||
-            !age
+            !preferences ||
+            preferences.cleanliness == null ||
+            preferences.sleepTime == null ||
+            preferences.smoking == null ||
+            preferences.alcohol == null ||
+            preferences.genderInclusivity == null ||
+            !preferences.roomType ||
+            !preferences.building ||
+            !preferences.occupancy
         ) {
             return res.status(400).json({
                 message: "All preferences are required",
-                missingFields: { cleanliness, sleepTime, smoking, alcohol, roomType, building, occupancy, age }
+                missingFields: preferences
+            });
+        }
+
+        // Validate profileInfo (if they are required)
+        if (
+            !profileInfo ||
+            !profileInfo.biography ||
+            !profileInfo.gender ||
+            !profileInfo.pronouns ||
+            !profileInfo.age
+        ) {
+            return res.status(400).json({
+                message: "All profile info fields are required",
+                missingFields: profileInfo
             });
         }
 
@@ -198,24 +212,19 @@ async function savePreferences(req, res, next) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        user.preferences = {
-            cleanliness,
-            sleepTime,
-            smoking,
-            alcohol,
-            roomType,
-            building,
-            occupancy,
-            age
-        };
+        // Update preferences and profile info
+        user.preferences = preferences;
+        user.profileInfo = profileInfo;
 
         await user.save();
-        return res.status(200).json({ message: "Preferences saved successfully" });
+        return res.status(200).json({ message: "Profile updated successfully" });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Error saving preferences", cause: error.message });
+        return res.status(500).json({ message: "Error updating profile", cause: error.message });
     }
 }
 
 
-module.exports = { getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getCurrUserInfo, getUserProfile, savePreferences };
+
+
+module.exports = { getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getCurrUserInfo, getUserProfile, updateProfile };
