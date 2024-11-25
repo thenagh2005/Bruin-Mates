@@ -12,15 +12,7 @@
     width: 1000px;
 }
 
-<<<<<<< HEAD
-.profile-header{
-    text-decoration: underline;
-    margin-bottom: 20px;
-}
-
-=======
 /* Header styling */
->>>>>>> a778209 (Minor profile form edit)
 h2 {
     font-size: 1.2em;
     margin-bottom: 10px;
@@ -29,16 +21,9 @@ h2 {
 /* Inline group for horizontal alignment */
 .inline-group {
     display: flex;
-<<<<<<< HEAD
-    gap: 20px; 
-    justify-content: flex-start; 
-    align-items: center; 
-    margin-bottom: 20px;
-=======
     gap: 10px;
     justify-content: flex-start;
     align-items: center;
->>>>>>> a778209 (Minor profile form edit)
 }
 
 /* Radio button group styling */
@@ -51,14 +36,10 @@ h2 {
     align-items: center;
 }
 
-<<<<<<< HEAD
 .pronoun-text-box {
     width: 100px;
 }
 
-=======
-/* Label styling */
->>>>>>> a778209 (Minor profile form edit)
 label {
     font-size: 1em;
 }
