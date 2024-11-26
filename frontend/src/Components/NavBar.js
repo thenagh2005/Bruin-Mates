@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './Styles/NavBar.css'
+import '../Styles/NavBar.css'
 
-import { useAuth } from './AuthContext';
+import { useAuth } from '../AuthContext';
 
 import axios from "axios";
 
