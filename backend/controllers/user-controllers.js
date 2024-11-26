@@ -199,5 +199,59 @@ async function savePreferences(req, res, next) {
     }
 }
 
+//The following routes are generic routes to be either used as helper functions or for API testing 
+async function updateAndGetUser(req, res, next){
+    try {
+        const id = req.params._id;
+    
+        const user = await User.findByIdAndUpdate(id, req.body);
+    
+        if (!user) {
+            return res.status(401).send("User not found in database");
+          }
+    
+        const updatedUser = await User.findById(id);
+        res.status(200).json(updatedUser);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+}
 
-module.exports = {getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getUserProfile, savePreferences};
+const getUserById = async (req, res, next) => {
+    
+    try {
+      const id = req.params._id;
+      const user = await User.findById( id );
+      if (!user) {
+        return res.status(401).send("User not found in database");
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+const deleteUser = async (req, res, next) => {
+    
+    try {
+      const id = req.params._id;
+      const user = await User.findByIdAndDelete( id );
+      if (!user) {
+        return res.status(401).send("User not found in database OR Token malfunctioned");
+      }
+      res.clearCookie("auth_token", {
+        httpOnly: true,
+        domain: "localhost",
+        signed: true,
+        path: "/",
+      });
+
+      res.status(200).json({ message: "User deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+
+
+module.exports = {getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getUserProfile, savePreferences, getUserById, updateAndGetUser, deleteUser};
