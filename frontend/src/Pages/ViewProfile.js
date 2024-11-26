@@ -1,9 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import '../Styles/Profile.css'
 
+import { useAuth } from '../AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+
 const ViewProfile = () => {
     const [profile, setProfile] = useState("");
+    const { isLoggedIn } = useAuth();
+    const navigate = useNavigate();
 
+    // Redirects user if not logged in
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate("/login");
+        }
+    }, [isLoggedIn, navigate]);
+
+    // Gets profile data
     useEffect(() => {
         fetch('http://localhost:4000/api/v1/user/view-profile', {
             method: "GET",
@@ -21,7 +35,17 @@ const ViewProfile = () => {
         .catch(error => {
             console.log(error);
         });
-    }, []);
+    }, [isLoggedIn]);
+
+    // Render nothing while redirecting from useEffect()
+    if (!isLoggedIn) {
+        return null;
+    }
+
+
+    if (!isLoggedIn) {
+        return null;
+    }
 
     return (
         <>
