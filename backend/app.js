@@ -21,13 +21,6 @@ connectToDB();
 
 app.use("/api/v1", appRouter);
 
-// app.get('/set-cookie', function(req, res) {
-//     res.cookie('cookie1', 'This is my first cookie', { signed : true });
-//     res.send(req.signedCookies.auth_token);
-// })
-
-// app.post('/login', userLogin);
-
 app.get('/', (req, res) => {
     res.send("Hello from the backend server!");
 })

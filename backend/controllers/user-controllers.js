@@ -113,18 +113,19 @@ async function verifyUser(req, res, next){
     }
 }
 
-async function getUserProfile (req, res, next) {
-    const user = await User.findOneById(req.user.id);
-    res.status(200).json({
-        success: true,
-        user
-    });
+async function getUserProfile (req, res) {
+    try{
+        const UID = res.locals.jwtData.id;
+        const user = await User.findById(UID);
 
-    if (!user){
-        return res.status(404).json({message: "User not found."});
+        if(!user){
+            return res.status(404).json({message: "User not found."});
+        }
+        return res.status(200).json(user);
+    } catch (error){
+        console.log(error);
+        return res.status(500).json({ message: "ERROR", cause: error.message });
     }
-
-    res.json(user);
 }
 
 async function userLogout(req, res, next){

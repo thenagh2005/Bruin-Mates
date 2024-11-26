@@ -16,8 +16,7 @@ const ViewProfile = () => {
             return res.json();
         })
         .then(result =>{
-            console.log(result);
-            setProfile(result.user);
+            setProfile(result);
         })
         .catch(error => {
             console.log(error);
@@ -30,7 +29,7 @@ const ViewProfile = () => {
             <div>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{width: '5vw', minWidth: '100px'}} alt="pfp" />
                 <h1>Name</h1>
-                <h2>{profile}</h2>
+                <h2>{profile.name ? `@${profile.name}` : ""}</h2>
                 <p>Insert bio here.</p>
             </div>
             <div>

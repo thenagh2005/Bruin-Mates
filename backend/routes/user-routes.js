@@ -9,7 +9,7 @@ router.post('/signup', validate(signUpValidator), userSignUp);
 router.post('/login', validate(loginValidator), userLogin);
 router.get("/auth-status", verifyToken, verifyUser);
 router.post("/logout", verifyToken, userLogout);
-router.get("/view-profile", verifyToken, isAuthenticated, getUserProfile);
+router.get("/view-profile", verifyToken, getUserProfile);
 router.post("/preferences", verifyToken, savePreferences);
 
 module.exports = router;
