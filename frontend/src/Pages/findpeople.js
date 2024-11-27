@@ -13,6 +13,36 @@ const sampleData = [
 ];
 
 function FindPeople() {
+    const buildings = ['Sproul', 'Rieber', 'Hedrick', 'Dykstra',
+        'Holly', 'Gardenia', 'Cove', 'Landing', 'Olympic', 'Centennial',
+
+        'Sunset Village',
+        'Rieber Terrace',
+        'Rieber Vista',
+        'Hedrick Summit',
+        'De Neve Plaza - Acacia',
+        'De Neve Plaza - Birch',
+        'De Neve Plaza - Cedar',
+        'De Neve Plaza - Dogwood',
+        'De Neve Plaza - Evergreen',
+        'De Neve Plaza - Fir',
+        'De Neve Plaza - Gardenia',
+        'De Neve Plaza - Holly'
+        ,
+        'Saxon', 'Hitch',
+
+        'Gayley Court',
+        'Gayley Towers',
+        'Glenrock',
+        'Glenrock West',
+        'Landfair',
+        'Landfair Vista',
+        'Levering Terrace',
+        'Westwood Chateau',
+        'Westwood Palm'
+    ]
+
+
     const [query, setQuery] = useState('');
     const [allusers, setAllUsers] = useState([]);
     const [smokes, setSmokes] = useState('');
@@ -58,7 +88,7 @@ function FindPeople() {
                 user.name.toLowerCase().includes(query.toLowerCase())
                 && `${user.preferences.alcohol}`.includes(alcohol)
                 && `${user.preferences.smoking}`.includes(smokes)
-                && `${user.preferences.smoking}`.includes(building)
+                && `${user.preferences.building}`.includes(building)
 
             )
         );
@@ -109,10 +139,15 @@ function FindPeople() {
                         <label htmlFor="building">Building:</label>
                         <select
                             id="building"
+                            value={building}
+                            onChange={(e) => setBuilding(e.target.value)}
                         >
-                            <option value="">Any</option>
-                            <option value="true">Yes</option>
-                            <option value="false">No</option>
+                            <option value=""></option>
+                            {buildings.map((option, index) => (
+                                <option key={index} value={option}>
+                                    {option}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </div>
@@ -131,10 +166,10 @@ function FindPeople() {
                                 <div className="user-info">
                                     <h2>{user.name}</h2>
                                     <p><strong>Email:</strong> {user.email}</p>
-                                    <p>More info</p>
+
                                     <p>Even more info</p>
 
-                                    
+
 
 
                                 </div>
