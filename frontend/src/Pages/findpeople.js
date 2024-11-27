@@ -162,7 +162,7 @@ function FindPeople() {
                             <p>No users found</p>
                         ) : (results.slice(0, visiblecount).map((user) => (
 
-                            <div className="user-card">
+                            <div key={user._id} className="user-card">
                                 <div className="user-info">
                                     <h2>{user.name}</h2>
                                     <p><strong>Email:</strong> {user.email}</p>
