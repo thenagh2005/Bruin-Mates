@@ -15,8 +15,8 @@ const sampleData = [
 function FindPeople() {
     const [query, setQuery] = useState('');
     const [allusers, setAllUsers] = useState([]);
-    const [smokes, setSmokes] = useState(false);
-    const [alcohol, setAlcohol] = useState(false);
+    const [smokes, setSmokes] = useState('');
+    const [alcohol, setAlcohol] = useState('');
     const [building, setBuilding] = useState('');
 
     const [results, setResults] = useState([]);
@@ -28,7 +28,7 @@ function FindPeople() {
             try {
                 const response = await axios.get("http://localhost:4000/api/v1/user/");
 
-                const filtered = response.data.users.filter((item) => item.name !== localStorage.getItem('username'));
+                const filtered = response.data.users.filter((item) => item.name !== localStorage.getItem('username') && "preferences" in item);
 
                 //setAllUsers(response.data.users); // Set the full user list
                 //setResults(response.data.users); // Initially display all users
@@ -53,10 +53,13 @@ function FindPeople() {
         console.log(smokes);
         // Filter users by name
         setResults((results) =>
-            
+
             allusers.filter((user) =>
-                (user.name.toLowerCase().includes(query.toLowerCase())
-                )
+                user.name.toLowerCase().includes(query.toLowerCase())
+                && `${user.preferences.alcohol}`.includes(alcohol)
+                && `${user.preferences.smoking}`.includes(smokes)
+                && `${user.preferences.smoking}`.includes(building)
+
             )
         );
     };
@@ -80,10 +83,10 @@ function FindPeople() {
                         <label htmlFor="smokes">Smoking Preference:</label>
                         <select
                             id="smokes"
-                            value = {smokes}
+                            value={smokes}
                             onChange={(e) => setSmokes(e.target.value)}
-                            >
-                            <option value="">Any</option>
+                        >
+                            <option value=""></option>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
                         </select>
@@ -93,10 +96,10 @@ function FindPeople() {
                         <label htmlFor="alcohol">Alcohol Preference:</label>
                         <select
                             id="alcohol"
-                            value = {alcohol}
+                            value={alcohol}
                             onChange={(e) => setAlcohol(e.target.value)}
-                            >
-                            <option value="">Any</option>
+                        >
+                            <option value=""></option>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
                         </select>
@@ -106,7 +109,7 @@ function FindPeople() {
                         <label htmlFor="building">Building:</label>
                         <select
                             id="building"
-                            >
+                        >
                             <option value="">Any</option>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
@@ -128,10 +131,10 @@ function FindPeople() {
                                 <div className="user-info">
                                     <h2>{user.name}</h2>
                                     <p><strong>Email:</strong> {user.email}</p>
+                                    <p>More info</p>
+                                    <p>Even more info</p>
 
-                                    <div className='tooltip'>
-                                        <button>View {user.name}'s page</button>
-                                    </div>
+                                    
 
 
                                 </div>
