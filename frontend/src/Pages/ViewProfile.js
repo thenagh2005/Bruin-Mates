@@ -3,6 +3,7 @@ import '../Styles/Profile.css'
 
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
+import VerifyLoggedIn from '../Components/VerifyLoggedIn.js';
 
 
 const ViewProfile = () => {
@@ -49,17 +50,19 @@ const ViewProfile = () => {
 
     return (
         <>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gridGap: 20, padding: 20}}>
-            <div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{width: '5vw', minWidth: '100px'}} alt="pfp" />
-                <h1>Name</h1>
-                <h2>{profile.name ? `@${profile.name}` : ""}</h2>
-                <p>Insert bio here.</p>
+        <VerifyLoggedIn>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gridGap: 20, padding: 20}}>
+                <div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{width: '5vw', minWidth: '100px'}} alt="pfp" />
+                    <h1>Name</h1>
+                    <h2>{profile.name ? `@${profile.name}` : ""}</h2>
+                    <p>Insert bio here.</p>
+                </div>
+                <div>
+                    <h1>Preferences</h1>
+                </div>
             </div>
-            <div>
-                <h1>Preferences</h1>
-            </div>
-        </div>
+        </VerifyLoggedIn>
         </>
     )
 }
