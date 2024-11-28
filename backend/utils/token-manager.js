@@ -41,10 +41,11 @@ async function isAuthenticated (req, res, next){
     }
 
     try{
+        console.log("We got here hahahah");
         req.user = await User.findById(res.locals.jwtData.id);
         next();
     } catch (error){
-        return res.status(401).json({message: "You must be logged in!"});
+        return res.status(401).json({message: error.message});
     }
 }
 

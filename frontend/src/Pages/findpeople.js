@@ -23,8 +23,14 @@ function FindPeople() {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get("http://localhost:4000/api/v1/user/");
-                setAllUsers(response.data.users); // Set the full user list
-                setResults(response.data.users); // Initially display all users
+
+                const filtered = response.data.users.filter((item) => item.name !== localStorage.getItem('username'));
+
+                //setAllUsers(response.data.users); // Set the full user list
+                //setResults(response.data.users); // Initially display all users
+
+                setAllUsers(filtered);
+                setResults(filtered);
             } catch (error) {
                 console.error("Error fetching users:", error);
             }
