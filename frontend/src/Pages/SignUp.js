@@ -7,15 +7,22 @@ import '../Styles/Login.css'
 //import { userSignUp } from '../../backend/controllers/user-controllers';
 
 function SignUp() {
+    const [name, setName] = useState('');
+    // const [userClicked, setUNClicked] = useState(false);
+    // const [userError, setUNError] = useState();
+
     const [username, setUsername] = useState('');
-    const [password, setPW] = useState('');
-    const [email, setEmail] = useState('');
     const [userClicked, setUNClicked] = useState(false);
-    const [pwClicked, setPWClicked] = useState(false);
-    const [emailClicked, setEmailClicked] = useState(false);
     const [userError, setUNError] = useState();
+    
+    const [password, setPW] = useState('');
+    const [pwClicked, setPWClicked] = useState(false);
     const [pwError, setPWError] = useState();
+
+    const [email, setEmail] = useState('');
+    const [emailClicked, setEmailClicked] = useState(false);
     const [emailError, setEmailError] = useState();
+
     const [signUpSuccess, setSignUpSuccess] = useState();
     const [signUpError, setSignUpError] = useState();
 

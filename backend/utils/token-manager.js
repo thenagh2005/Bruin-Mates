@@ -33,19 +33,4 @@ function verifyToken(req, res, next) {
     });
 }
 
-
-async function isAuthenticated (req, res, next){
-    const token = req.cookies;
-    if(!token){
-        return res.status(401).json({message: "You must be logged in."});
-    }
-
-    try{
-        req.user = await User.findById(res.locals.jwtData.id);
-        next();
-    } catch (error){
-        return res.status(401).json({message: "You must be logged in!"});
-    }
-}
-
 module.exports = {createToken, verifyToken, isAuthenticated}
