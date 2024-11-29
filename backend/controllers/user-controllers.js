@@ -113,7 +113,7 @@ async function verifyUser(req, res, next) {
     }
 }
 
-async function getUserProfile(req, res, next) {
+async function getUserProfile(req, res) {
     const user = await User.findOneById(req.user.id);
     res.status(200).json({
         success: true,
