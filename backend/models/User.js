@@ -16,11 +16,17 @@ const userSchema = new mongoose.Schema({
         },
         building: { type: String, required: false },
         occupancy: { type: String, required: false },
-        age: { 
+        genderInclusivity: { type: Boolean, required: false }
+    },
+    profileInfo: {
+        biography: { type: String, required: false }, 
+        age: { type: String, required: false },
+        gender: {
             type: String, 
-            enum: ['under 18', '18', '19', '20', '21', '22', '23+'], 
-            required: false 
-        }
+            enum: ['Male', 'Female', 'Non-binary', 'Prefer not to say'], 
+            required: false
+        },
+        pronouns: { type: String, required: false }
     }
 });
 

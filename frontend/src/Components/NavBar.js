@@ -51,6 +51,8 @@ function NavBar() {
 
                 {isLoggedIn ? (
                     <>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
                         <li><a href="/view-profile">Messages</a></li>
                         <li><a href="/view-profile">Profile</a></li>
                         <li><a href="/find">Find People</a></li>

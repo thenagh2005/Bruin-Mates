@@ -21,6 +21,6 @@
   - **Handler**: `userLogout`
   - **Middleware**: `verifyToken`
 
-- **POST** `http://localhost:4000/api/v1/user/preferences` - Set user preferences
+- **POST** `http://localhost:4000/api/v1/user/update-profile` - Update user profile
   - **Handler**: Inline response with `req.body`
   - **Middleware**: `verifyToken`
