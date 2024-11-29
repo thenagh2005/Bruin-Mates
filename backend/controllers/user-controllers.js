@@ -222,7 +222,20 @@ async function updateProfile(req, res, next) {
     }
 }
 
+async function getUserInfo(req, res) {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            console.log("Coudn't find user");
+          return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(user);
+      } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+      }
+}
 
 
 
-module.exports = { getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getCurrUserInfo, getUserProfile, updateProfile };
+
+module.exports = { getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getCurrUserInfo, getUserProfile, updateProfile, getUserInfo };

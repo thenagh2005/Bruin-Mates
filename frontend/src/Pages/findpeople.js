@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import "../Styles/SearchPage.css";
 
 import axios from "axios";
@@ -169,7 +171,7 @@ function FindPeople() {
                                     <h2>{user.name}</h2>
                                     <p><strong>Email:</strong> {user.email}</p>
 
-                                    <p>Even more info</p>
+                                    <Link to={`/users/${user._id}`}>{user.name}</Link>
 
 
 

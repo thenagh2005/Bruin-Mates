@@ -11,6 +11,7 @@ import SignUp from './Pages/SignUp';
 import ProfileForm from './Pages/profileform'
 import ViewProfile from './Pages/ViewProfile';
 import FindPeople from './Pages/findpeople';
+import UserInfo from './Pages/userinfo';
 
 import { AuthProvider } from './AuthContext';
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/profile-form" element={<ProfileForm />} />
             <Route path="/view-profile" element={<ViewProfile />} />
             <Route path="/find" element={<FindPeople />} />
+            <Route path="/users/:id" element={<UserInfo />} />
           </Routes>
         
       </AuthProvider>
