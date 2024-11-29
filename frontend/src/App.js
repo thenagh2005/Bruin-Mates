@@ -1,5 +1,5 @@
 
-import './App.css';
+import './Styles/App.css';
 import NavBar from './Components/NavBar';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -13,14 +13,15 @@ import ViewProfile from './Pages/ViewProfile';
 import FindPeople from './Pages/findpeople';
 
 import { AuthProvider } from './AuthContext';
+import { ThemeProvider } from './Components/ThemeContext';
 
 function App() {
   return (
     <>
       <Router>
       <AuthProvider>
-        <NavBar />
-        
+        <ThemeProvider>
+          <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -30,7 +31,7 @@ function App() {
             <Route path="/view-profile" element={<ViewProfile />} />
             <Route path="/find" element={<FindPeople />} />
           </Routes>
-        
+        </ThemeProvider>
       </AuthProvider>
       </Router>
     </>
