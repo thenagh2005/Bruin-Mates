@@ -1,5 +1,5 @@
 
-import './App.css';
+import './Styles/App.css';
 import NavBar from './Components/NavBar';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -14,14 +14,15 @@ import FindPeople from './Pages/findpeople';
 import UserInfo from './Pages/userinfo';
 
 import { AuthProvider } from './AuthContext';
+import { ThemeProvider } from './Components/ThemeContext';
 
 function App() {
   return (
     <>
       <Router>
       <AuthProvider>
-        <NavBar />
-        
+        <ThemeProvider>
+          <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -32,7 +33,7 @@ function App() {
             <Route path="/find" element={<FindPeople />} />
             <Route path="/users/:id" element={<UserInfo />} />
           </Routes>
-        
+        </ThemeProvider>
       </AuthProvider>
       </Router>
     </>

@@ -1,85 +1,122 @@
 .header {
   text-align: center;
+  color: var(--text-color);
 }
 
 .container {
   width: 90%;
   max-width: 600px;
-  background-color: #ffffff;
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--default-shadow);
   overflow: hidden;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .search-bar {
   display: flex;
   padding: 16px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--card-border-color);
 }
 
 .search-bar input {
   flex: 1;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--card-border-color);
   border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .search-bar button {
   margin-left: 10px;
   width: 100px;
-  padding: 8px 8px;
+  padding: 8px;
   font-size: 16px;
-  background-color: #007bff;
-  color: #ffffff;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .search-bar button:hover {
-  background-color: #0056b3;
+  background-color: var(--button-hover-bg-color);
 }
 
 .results {
   padding: 16px;
+  color: var(--text-color);
 }
 
 .result-item {
   padding: 12px;
   margin-bottom: 8px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--card-border-color);
   border-radius: 4px;
-  background-color: #fafafa;
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .user-card {
-  border: 1px solid #ccc;
+  border: 1px solid var(--card-border-color);
   border-radius: 8px;
   padding: 16px;
   width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  height: 100px;
+  box-shadow: var(--default-shadow);
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
   margin: 16px auto;
-  transition: height 0.5s ease;
+  transition: height 0.5s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  color: var(--text-color);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.user-card:hover {
+  /* Expand vertically */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: 200px;
+}
+
+.user-card:hover .tooltip {
+  /* Expand vertically */
+  visibility: visible;
+  opacity: 1;
+}
+
+.user-card .tooltip:not(:hover) {
+  transition-delay: 0s, 0.3s; /* Delay hiding to allow fade-out */
 }
 
 .user-info {
   text-align: left;
+  color: var(--text-color);
 }
 
 .user-info h2 {
   margin: 0 0 8px;
-  color: #333;
+  color: var(--text-color);
 }
 
 .user-info p {
   margin: 4px 0;
-  color: #555;
+  color: var(--info-card-text);
 }
 
 .user-info strong {
-  color: #000;
+  color: var(--text-color);
 }
 
 /* Style the filter options container */
