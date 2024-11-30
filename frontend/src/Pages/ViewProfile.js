@@ -81,52 +81,54 @@ const ViewProfile = () => {
 
     return (
         <>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gridGap: 20, padding: 20 }}>
-                <div>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
-                    <h1>Name</h1>
-                    <h2>{currUser.name}</h2>
-                    <h2>Age:</h2>
-                    <p>{age}</p>
-                    <h2>Biography:</h2>
-                    <p>{biography}</p>
-                    <h2>Gender:</h2>
-                    <p>{gender}</p>
-                    <h2>Preferred Pronouns:</h2>
-                    <p>{pronouns}</p>
+            {/* <VerifyLoggedIn> */}
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gridGap: 20, padding: 20 }}>
+                    <div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
+                        <h1>Name</h1>
+                        <h2>{currUser.name ? `@${currUser.name}` : ""}</h2>
+                        <h2>{age ? "Age:" : ""}</h2>
+                        <p>{age}</p>
+                        <h2>{biography ? "Biography:" : ""}</h2>
+                        <p>{biography}</p>
+                        <h2>{gender ? "Gender:" : ""}</h2>
+                        <p>{gender}</p>
+                        <h2>{pronouns ? "Preferred Pronouns:" : ""}</h2>
+                        <p>{pronouns}</p>
 
 
                 </div>
                 <div>
                     <h1>Preferences</h1>
                     
-                    <h2>Cleanliness:</h2>
+                    <h2>{cleanliness ? "Cleanliness:" : ""}</h2>
                     <p>{cleanliness}</p>
 
-                    <h2>Preferred Sleeping Time:</h2>
+                    <h2>{sleepTime ? "Preferred Sleeping Time:" : ""}</h2>
                     <p>{sleepTime}</p>
 
-                    <h2>Smoking:</h2>
-                    <p>{smoking ? "Yes" : "No"}</p>
+                    <h2>{smoking != null ? "Smoking:" : ""}</h2>
+                    <p>{smoking != null ? (smoking ? "Yes" : "No") : ""}</p>
 
-                    <h2>Alcohol:</h2>
-                    <p>{alcohol ? "Yes" : "No"}</p>
+                    <h2>{alcohol != null ? "Alcohol:" : ""}</h2>
+                    <p>{alcohol != null ? (alcohol ? "Yes" : "No") : ""}</p>
 
-                    <h2>Gender Inclusivity:</h2>
-                    <p>{genderInclusivity ? "Yes" : "No"} </p>
+                    <h2>{genderInclusivity != null ? "Gender-Inclusive Housing:" : ""}</h2>
+                    <p>{genderInclusivity != null ? (genderInclusivity ? "Yes" : "No") : ""} </p>
 
-                    <h2>Room Type:</h2>
+                    <h2>{roomType ? "Room Type:" : ""}</h2>
                     <p>{roomType}</p>
 
-                    <h2>Building:</h2>
+                    <h2>{building ? "Building:" : ""}</h2>
                     <p>{building}</p>
 
-                    <h2>Occupancy:</h2>
+                    <h2>{occupancy ? "Occupancy:" : ""}</h2>
                     <p>{occupancy}</p>
                     
                     <a href="/profile-form">Edit your profile</a>
                 </div>
             </div>
+            {/* </VerifyLoggedIn> */}
         </>
     )
 }
