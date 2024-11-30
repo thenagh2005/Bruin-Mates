@@ -1,107 +1,125 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 50px;
-    background: white;
-    padding-bottom: 30px;
-    width: 600px;
-    border-radius: 10px;
-    transition: width 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-.container:hover {
-    width: 700px;
-}
 
-.header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 9px;
-    width: 100%;
-    margin-top: 30px;
-}
-
-.text {
-    color: #55435E;
-    font-size: 48px;
-    font-weight: 700;
-}
-
-.underline {
-    width: 500px;
-    height: 6px;
-    background: black;
-    border-radius: 9px;
-}
-
-.inputs {
-    margin-top: 55px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.input {
-    display: block;
-    align-items: center;
-    margin: auto;
-    width: 480px;
-    height: 80px;
-    background: #f1f1f1;
-    border: none;
-    border-radius: 6px;
+.super-container {
+    font-family: 'Roboto', sans-serif;
+    
+    margin: 0;
     padding: 20px;
-}
-
-.input input {
-    margin-top: -5px;
-    height: 50px;
-    width: 400px;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #313131;
-    font-size: 19px;
-    font: italic normal 19px/1 "Calibri", sans-serif;
-}
-
-.submit-container {
-    display: flex;
-    gap: 30px;
-    margin: 60px auto;
-}
-
-.submit {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 220px;
-    height: 50px;
-    color: white;
-    border-radius: 5px;
-    font-size: 19px;
-    font-weight: 700;
-    padding: 10px 15px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    min-height: 100vh;
 }
 
-.submit:hover {
-    background-color: #DED32F;
-    color: #5E5D43;
+/* Main container with side-to-side layout */
+.info-container {
+    display: flex;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    width: 90%;
+    max-width: 1000px;
 }
 
-.error {
-    color: red;
-    display: block;
-    font-size: 14px;
-    margin-top: 10px;
+/* Profile Info Section (left side) */
+.profile-info {
+    flex: 1;
+    background: #95aff1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid #dee2e6;
+    position: relative;
+    text-align: center;
+}
+
+.profile-info img {
+    border-radius: 50%;
+    border: 5px solid #dee2e6;
+    width: 150px; /* Width for the image */
+    height: auto; /* Maintains aspect ratio */
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    object-fit: cover; /* Ensures the image fills the shape properly */
+}
+
+.profile-info img:hover {
+    transform: scale(1.1); /* Subtle zoom effect on hover */
+}
+
+.profile-info h1 {
+    font-size: 1.8rem;
+    color: #374785;
     margin-bottom: 10px;
-    line-height: 2.5;
+}
+
+.profile-info h2,
+.profile-info p {
+    color: #495057;
+    margin: 5px 0;
+}
+
+/* Preferences Section (right side) */
+.prefs {
+    flex: 2;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.prefs h1 {
+    font-size: 1.8rem;
+    color: #374785;
+    border-bottom: 3px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.prefs h2 {
+    font-size: 1.2rem;
+    color: #5a6782;
+    margin-bottom: 5px;
+}
+
+.prefs p {
+    font-size: 1rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+/* Divider Styling */
+.profile-info::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 10%;
+    height: 80%;
+    width: 2px;
+    background: linear-gradient(to bottom, #374785, transparent);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .info-container {
+        flex-direction: column; /* Stacks sections vertically */
+    }
+
+    .profile-info {
+        border-right: none;
+        border-bottom: 2px solid #dee2e6;
+        padding: 20px;
+    }
+
+    .profile-info::after {
+        display: none;
+    }
+
+    .prefs {
+        padding: 20px;
+    }
 }

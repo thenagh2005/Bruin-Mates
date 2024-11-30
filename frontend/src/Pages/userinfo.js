@@ -8,7 +8,7 @@ function UserInfo() {
     '8 PM - 10 PM',
     '10 PM - 12 AM',
     '12 AM - 2 AM',
-    "I'm Nocturnal HAHAHAHAHAHAHA" ];
+    "I'm Nocturnal HAHAHAHAHAHAHA"];
 
   const { id } = useParams();
   const [user, setUsers] = useState([]);
@@ -26,6 +26,10 @@ function UserInfo() {
   const [biography, setBiography] = useState("");
   const [gender, setGender] = useState("");
   const [pronouns, setPronouns] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+}, []);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -61,54 +65,57 @@ function UserInfo() {
 
   return (
     <>
-      <h1>User Info goes here</h1>
+    <div className='super-container'>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gridGap: 20, padding: 20 }}>
-                    <div>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
-                        <h1>Name</h1>
-                        <h2>{user.name}</h2>
-                        <h2>Age:</h2>
-                        <p>{age}</p>
-                        <h2>Biography:</h2>
-                        <p>{biography}</p>
-                        <h2>Gender:</h2>
-                        <p>{gender}</p>
-                        <h2>Preferred Pronouns:</h2>
-                        <p>{pronouns}</p>
+    <div className='info-container'>
+      <div className='profile-info'>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
+        <h1>Name</h1>
+        <h2>{user.name}</h2>
+        <h2>Age: {age}</h2>
+        <p></p>
+        <h2>Biography:</h2>
+        <p>{biography}</p>
+        <h2>Gender: {gender}</h2>
+        <p></p>
+        <h2>Preferred Pronouns: {pronouns}</h2>
+        <p></p>
 
 
-                    </div>
-                    <div>
-                        <h1>Preferences</h1>
-                        
-                        <h2>Cleanliness:</h2>
-                        <p>{cleanliness}</p>
+      </div>
+      <div className='prefs'>
+        <h1>Preferences</h1>
 
-                        <h2>Preferred Sleeping Time:</h2>
-                        <p>{sleepTime}</p>
+        <h2>Cleanliness: {cleanliness}</h2>
+        <p></p>
 
-                        <h2>Smoking:</h2>
-                        <p>{smoking ? "Yes" : "No"}</p>
+        <h2>Preferred Sleeping Time: {sleepTime}</h2>
+        <p></p>
 
-                        <h2>Alcohol:</h2>
-                        <p>{alcohol ? "Yes" : "No"}</p>
+        <h2>Smoking: {smoking ? "Yes" : "No"}</h2>
+        <p></p>
 
-                        <h2>Gender Inclusivity:</h2>
-                        <p>{genderInclusivity ? "Yes" : "No"} </p>
+        <h2>Alcohol: {alcohol ? "Yes" : "No"}</h2>
+        <p></p>
 
-                        <h2>Room Type:</h2>
-                        <p>{roomType}</p>
+        <h2>Gender Inclusivity: {genderInclusivity ? "Yes" : "No"}</h2>
+        <p> </p>
 
-                        <h2>Building:</h2>
-                        <p>{building}</p>
+        <h2>Room Type: {roomType}</h2>
+        <p></p>
 
-                        <h2>Occupancy:</h2>
-                        <p>{occupancy}</p>
-                        
-                        
-                    </div>
-                </div>
+        <h2>Building: {building}</h2>
+        <p></p>
+
+        <h2>Occupancy: {occupancy}</h2>
+        <p></p>
+
+
+      </div>
+    </div>
+
+    </div>
+
     </>
   )
 }
