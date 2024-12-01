@@ -99,6 +99,24 @@
   flex-direction: column;
   gap: var(--filter-options-gap);
   margin: var(--filter-options-margin);
+  
+}
+
+.toggle-container {
+  text-align: center;
+
+}
+
+.filter-options .toggle {
+  
+  color: lightblue;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline;
+  margin: 0;
+  padding: 0;
+    
+  
 }
 
 /* Style individual filter containers */

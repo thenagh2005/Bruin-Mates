@@ -119,7 +119,7 @@ function ProfileForm() {
                     <h1 className="profile-header">Preferences:</h1>
 
                     {/* Cleanliness */}
-                    <h2>How important is cleanliness to you?</h2>
+                    <h2>How important is cleanliness to you? (1 is not important at all, 5 is very important)</h2>
                     <div className="radio-group">
                         {[1, 2, 3, 4, 5].map((val) => (
                             <label key={val}>

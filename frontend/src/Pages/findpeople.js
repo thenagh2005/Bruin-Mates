@@ -46,12 +46,25 @@ function FindPeople() {
         'Westwood Palm'
     ]
 
+    const [showAdvanced, setShowAdvanced] = useState(false);
+
+    const toggleAdvancedSearch = () => {
+        setShowAdvanced(!showAdvanced);
+        setSmokes('');
+        setAlcohol('');
+        setBuilding('');
+        setCleanliness('');
+        setGender('');
+    };
 
     const [query, setQuery] = useState('');
     const [allusers, setAllUsers] = useState([]);
     const [smokes, setSmokes] = useState('');
     const [alcohol, setAlcohol] = useState('');
     const [building, setBuilding] = useState('');
+    const [cleanliness, setCleanliness] = useState('');
+
+    const [gender, setGender] = useState('');
 
     const [results, setResults] = useState([]);
 
@@ -62,7 +75,7 @@ function FindPeople() {
             try {
                 const response = await axios.get("http://localhost:4000/api/v1/user/");
 
-                const filtered = response.data.users.filter((item) => item.name !== localStorage.getItem('username') && "preferences" in item);
+                const filtered = response.data.users.filter((item) => item.name !== localStorage.getItem('username') && "preferences" in item && "profileInfo" in item);
 
                 //setAllUsers(response.data.users); // Set the full user list
                 //setResults(response.data.users); // Initially display all users
@@ -93,6 +106,8 @@ function FindPeople() {
                 && `${user.preferences.alcohol}`.includes(alcohol)
                 && `${user.preferences.smoking}`.includes(smokes)
                 && `${user.preferences.building}`.includes(building)
+                && `${user.profileInfo.gender}`.includes(gender)
+                && `${user.preferences.cleanliness}`.includes(cleanliness)
 
             )
         );
@@ -112,8 +127,20 @@ function FindPeople() {
                     />
                     <button onClick={handleSearch}>Search</button>
                 </div>
+
                 <div className="filter-options">
-                    <div className="filter">
+                    <div className='toggle-container'>
+                        <span className="toggle" onClick={toggleAdvancedSearch}>
+                            {
+                                showAdvanced ?
+                                ("Hide") : ("Show Advanced")
+                            }
+                        </span>
+                    </div>
+
+                    {showAdvanced && (
+                        <>
+                        <div className="filter">
                         <label htmlFor="smokes">Smoking Preference:</label>
                         <select
                             id="smokes"
@@ -154,6 +181,36 @@ function FindPeople() {
                             ))}
                         </select>
                     </div>
+                    <div className="filter">
+                        <label htmlFor="gender">Gender:</label>
+                        <select
+                            id="gender"
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                        >
+                            <option value=""></option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Non-binary">Non-binary</option>
+                        </select>
+                    </div>
+                    <div className="filter">
+                        <label htmlFor="cleanliness">Cleanliness:</label>
+                        <select
+                            id="cleanliness"
+                            value={cleanliness}
+                            onChange={(e) => setCleanliness(e.target.value)}
+                        >
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    </>
+                    )}
                 </div>
 
                 {/* Results Section */}
