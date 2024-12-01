@@ -171,7 +171,7 @@ function FindPeople() {
                                     <h2>{user.name}</h2>
                                     <p><strong>Email:</strong> {user.email}</p>
 
-                                    <Link to={`/users/${user._id}`}>{user.name}</Link>
+                                    <Link to={`/users/${user._id}`}> See {user.name}'s profile </Link>
 
 
 

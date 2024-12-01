@@ -1,7 +1,9 @@
 /* Light Mode (Default) */
 :root {
   /* General Background and Text */
-  --background-color: #ffffff;
+  --background-color: #e7e7e7;
+
+  --find-user-background: #ffffff;
   --text-color: #333333;
   --secondary-text-color: #777777;
   --disabled-text-color: #cccccc;
@@ -45,7 +47,7 @@
 
   /* Shadows and Borders */
   --default-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  --focused-border-color: #0056b3;
+  /*--focused-border-color: #0056b3;*/
 
   /* Filter Options */
   --filter-options-gap: 15px;
@@ -67,7 +69,8 @@
 /* Dark Mode */
 [data-theme="dark"] {
   /* General Background and Text */
-  --background-color: #121212;
+  --background-color: black;
+  --find-user-background: #121212;
   --text-color: #ffffff;
   --secondary-text-color: #aaaaaa;
   --disabled-text-color: #555555;
@@ -75,7 +78,7 @@
   /* Navbar */
   --navbar-background-color: #1f1f1f;
   --navbar-text-color: #e0e0e0;
-  --navbar-hover-color: #bb86fc;
+  --navbar-hover-color: #0056b3;
   --navbar-hover-text-color: #ffffff;
   --navbar-border-color: #444444;
 
@@ -92,8 +95,8 @@
   --info-card-border-color: #444444;
 
   /* Buttons */
-  --button-bg-color: #bb86fc;
-  --button-hover-bg-color: #3700b3;
+  --button-bg-color: #007bff;
+  --button-hover-bg-color: #0056b3;
   --button-bg-color-2: #FEB2E0;
   --button-hover-bg-color-2: #E44C9A;
   --button-text-color: #ffffff;
@@ -101,8 +104,8 @@
   --button-disabled-text-color: #777777;
 
   /* Links */
-  --link-color: #FEB2E0;
-  --link-hover-color: #E44C9A;
+  --link-color: #007bff;
+  --link-hover-color: #0056b3;
 
   /* Cards */
   --card-bg-color: #1f1f1f;
@@ -111,7 +114,7 @@
 
   /* Shadows and Borders */
   --default-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
-  --focused-border-color: #bb86fc;
+  /*--focused-border-color: #1f08f4;*/
 
   /* Filter Options */
   --filter-options-gap: 15px;
@@ -167,10 +170,11 @@ a:hover {
   color: var(--link-hover-color);
 }
 
+.prefs,
 .container,
 .card,
 .modal-content {
-  background-color: var(--background-color) !important;
+  background-color: var(--find-user-background) !important;
   color: var(--text-color) !important;
   transition: background-color 0.3s ease, color 0.3s ease;
   border: none;

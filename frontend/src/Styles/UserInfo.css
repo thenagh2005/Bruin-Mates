@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    
 }
 
 /* Main container with side-to-side layout */
@@ -20,6 +21,7 @@
     overflow: hidden;
     width: 90%;
     max-width: 1000px;
+    
 }
 
 /* Profile Info Section (left side) */
@@ -74,7 +76,7 @@
 
 .prefs h1 {
     font-size: 1.8rem;
-    color: #374785;
+    /*color: #374785;*/
     border-bottom: 3px solid #dee2e6;
     padding-bottom: 10px;
     margin-bottom: 20px;
@@ -82,13 +84,13 @@
 
 .prefs h2 {
     font-size: 1.2rem;
-    color: #5a6782;
+    /*color: #5a6782;*/
     margin-bottom: 5px;
 }
 
 .prefs p {
     font-size: 1rem;
-    color: #6c757d;
+    /*color: #6c757d;*/
     margin: 0;
 }
 
@@ -122,4 +124,9 @@
     .prefs {
         padding: 20px;
     }
+}
+
+.connect-button-container {
+    margin-top: none;
+    background-color: white;
 }

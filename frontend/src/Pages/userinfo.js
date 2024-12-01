@@ -29,7 +29,7 @@ function UserInfo() {
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page
-}, []);
+  }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -65,56 +65,61 @@ function UserInfo() {
 
   return (
     <>
-    <div className='super-container'>
+      <div className='super-container'>
 
-    <div className='info-container'>
-      <div className='profile-info'>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
-        <h1>Name</h1>
-        <h2>{user.name}</h2>
-        <h2>Age: {age}</h2>
-        <p></p>
-        <h2>Biography:</h2>
-        <p>{biography}</p>
-        <h2>Gender: {gender}</h2>
-        <p></p>
-        <h2>Preferred Pronouns: {pronouns}</h2>
-        <p></p>
+        <div className='info-container'>
+          <div className='profile-info'>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
+            <h1>Name</h1>
+            <h2>{user.name}</h2>
+            <h2>Age: {age}</h2>
+            <p></p>
+            <h2>Biography:</h2>
+            <p>{biography}</p>
+            <h2>Gender: {gender}</h2>
+            <p></p>
+            <h2>Preferred Pronouns: {pronouns}</h2>
+            <p></p>
 
+            <button>Connect</button>
+
+
+          </div>
+          <div className='prefs'>
+            <h1>Preferences</h1>
+
+            <h2>Cleanliness: {cleanliness}</h2>
+            <p></p>
+
+            <h2>Preferred Sleeping Time: {sleepTime}</h2>
+            <p></p>
+
+            <h2>Smoking: {smoking ? "Yes" : "No"}</h2>
+            <p></p>
+
+            <h2>Alcohol: {alcohol ? "Yes" : "No"}</h2>
+            <p></p>
+
+            <h2>Gender Inclusivity: {genderInclusivity ? "Yes" : "No"}</h2>
+            <p> </p>
+
+            <h2>Room Type: {roomType}</h2>
+            <p></p>
+
+            <h2>Building: {building}</h2>
+            <p></p>
+
+            <h2>Occupancy: {occupancy}</h2>
+            <p></p>
+
+
+          </div>
+          
+        </div>
+        
 
       </div>
-      <div className='prefs'>
-        <h1>Preferences</h1>
-
-        <h2>Cleanliness: {cleanliness}</h2>
-        <p></p>
-
-        <h2>Preferred Sleeping Time: {sleepTime}</h2>
-        <p></p>
-
-        <h2>Smoking: {smoking ? "Yes" : "No"}</h2>
-        <p></p>
-
-        <h2>Alcohol: {alcohol ? "Yes" : "No"}</h2>
-        <p></p>
-
-        <h2>Gender Inclusivity: {genderInclusivity ? "Yes" : "No"}</h2>
-        <p> </p>
-
-        <h2>Room Type: {roomType}</h2>
-        <p></p>
-
-        <h2>Building: {building}</h2>
-        <p></p>
-
-        <h2>Occupancy: {occupancy}</h2>
-        <p></p>
-
-
-      </div>
-    </div>
-
-    </div>
+      
 
     </>
   )
