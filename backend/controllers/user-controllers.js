@@ -192,19 +192,13 @@ async function updateProfile(req, res, next) {
             });
         }
 
-        console.log("ProfileInfo" + username.profileInfo);
-        console.log("ProfileInfo" + username.biography);
-        console.log("ProfileInfo" + username.gender);
-        console.log("ProfileInfo" + username.pronouns);
-        console.log("ProfileInfo" + username.age);
-
         // Validate profileInfo (if they are required)
         if (
             (!profileInfo && !username.profileInfo) ||
-            (!profileInfo.biography && !username.biography) ||
-            (!profileInfo.gender && !username.gender) ||
-            (!profileInfo.pronouns && !username.pronouns) ||
-            (!profileInfo.age && !username.age)
+            (!profileInfo.biography && !username.profileInfo.biography) ||
+            (!profileInfo.gender && !username.profileInfo.gender) ||
+            (!profileInfo.pronouns && !username.profileInfo.pronouns) ||
+            (!profileInfo.age && !username.profileInfo.age)
         ) {
             return res.status(400).json({
                 message: "All profile info fields are required",
