@@ -107,13 +107,8 @@ const ViewProfile = () => {
                     <h2>{sleepTime ? "Preferred Sleeping Time:" : ""}</h2>
                     <p>{sleepTime}</p>
 
-                    {smoking !== null && (
-                        <>
-                            <h2>Smoking:</h2>
-                            <p>{smoking ? "Yes" : "No"}</p>
-                        </>
-                    )}
-                
+                    <h2>{smoking != null ? "Smoking:" : ""}</h2>
+                    <p>{smoking != null ? (smoking ? "Yes" : "No") : ""}</p>
 
                     <h2>{alcohol != null ? "Alcohol:" : ""}</h2>
                     <p>{alcohol != null ? (alcohol ? "Yes" : "No") : ""}</p>

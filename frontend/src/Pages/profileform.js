@@ -45,9 +45,8 @@ function ProfileForm() {
             'De Neve Plaza - Holly'
         ],
         suite: ['Saxon', 'Hitch'],
-        'University Apartments': [
+        universityApartments: [
             'Gayley Court',
-            'Gayley Heights',
             'Gayley Towers',
             'Glenrock',
             'Glenrock West',
@@ -272,7 +271,7 @@ function ProfileForm() {
                         {/* Occupancy */}
                         <h2>Occupancy</h2>
                         <div className="inline-group">
-                            {(formData.preferences.roomType === 'University Apartments'
+                            {(formData.preferences.roomType === 'universityApartments'
                                 ? [
                                       { label: '4/4 Unit', value: '4/4' },
                                       { label: '4/8 Unit', value: '4/8' }

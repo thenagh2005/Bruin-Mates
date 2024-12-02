@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
         alcohol: { type: Boolean, required: false },
         roomType: { 
             type: String, 
-            enum: ['classic', 'deluxe', 'plaza', 'suite', 'University Apartments'], 
+            enum: ['classic', 'deluxe', 'plaza', 'suite', 'universityApartments'], 
             required: false 
         },
         building: { type: String, required: false },
