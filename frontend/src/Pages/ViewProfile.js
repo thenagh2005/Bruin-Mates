@@ -29,9 +29,9 @@ const ViewProfile = () => {
     const [currUser, setCurrUser] = useState([]);
     const [cleanliness, setCleanliness] = useState("");
     const [sleepTime, setSleepTime] = useState("");
-    const [smoking, setSmoking] = useState(false);
-    const [alcohol, setAlcohol] = useState(false);
-    const [genderInclusivity, setGenderInclusivity] = useState(false);
+    const [smoking, setSmoking] = useState(null);
+    const [alcohol, setAlcohol] = useState(null);
+    const [genderInclusivity, setGenderInclusivity] = useState(null);
     const [roomType, setRoomType] = useState("");
     const [building, setBuilding] = useState("");
     const [occupancy, setOccupancy] = useState("");
@@ -98,7 +98,7 @@ const ViewProfile = () => {
                         <p>{cleanliness}</p>
 
                         <h2>{sleepTime ? "Preferred Sleeping Time:" : ""}</h2>
-                        <p>{sleepTime}</p>
+                        <p>{sleepTime ? sleepTime : ""}</p>
 
                         <h2>{smoking != null ? "Smoking:" : ""}</h2>
                         <p>{smoking != null ? (smoking ? "Yes" : "No") : ""}</p>

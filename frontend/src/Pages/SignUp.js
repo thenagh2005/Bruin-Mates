@@ -104,12 +104,12 @@ function SignUp() {
 
                         </div>
                         <div className='input'>
-                            <input type="password" placeholder='Password*' onChange={(e) => setPW(e.target.value)} onBlur={() => handleBlur('password')} required />
-                            {pwClicked && pwError && <p className='error'>{pwError}</p>}
-                        </div>
-                        <div className='input'>
                             <input type="email" placeholder='Email*' onChange={(e) => setEmail(e.target.value)} onBlur={() => handleBlur('email')} required />
                             {emailClicked && emailError && <p className='error'>{emailError}</p>}
+                        </div>
+                        <div className='input'>
+                            <input type="password" placeholder='Password*' onChange={(e) => setPW(e.target.value)} onBlur={() => handleBlur('password')} required />
+                            {pwClicked && pwError && <p className='error'>{pwError}</p>}
                         </div>
                     </div>
                     <div className='submit-container'>
