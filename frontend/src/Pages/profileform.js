@@ -295,6 +295,33 @@ function ProfileForm() {
                         </div>
                     </>
                 )}
+                            {/* Occupancy */}
+                            <h2>Occupancy</h2>
+                            <div className="inline-group">
+                                {(formData.preferences.roomType === 'University Apartments'
+                                    ? [
+                                        { label: '4/4 Unit', value: '4/4' },
+                                        { label: '4/8 Unit', value: '4/8' }
+                                    ]
+                                    : [
+                                        { label: 'Double', value: 'double' },
+                                        { label: 'Triple', value: 'triple' }
+                                    ]
+                                ).map(({ label, value }) => (
+                                    <label key={value}>
+                                        <input
+                                            type="radio"
+                                            name="occupancy"
+                                            value={value}
+                                            checked={formData.preferences.occupancy === value}
+                                            onChange={(e) => handleChange(e, "preferences")}
+                                        />
+                                        {label}
+                                    </label>
+                                ))}
+                            </div>
+                        </>
+                    )}
 
                 <h1 className="profile-header">About yourself:</h1>
 
