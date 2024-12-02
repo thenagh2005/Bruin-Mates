@@ -67,14 +67,6 @@ async function userLogin(req, res, next) {
         if (!isPasswordCorrect) {
             return res.status(403).send("Incorrect Password");
         }
-        // create token and save cookie
-        // res.clearCookie("auth_token", {
-        //     httpOnly: true,
-        //     domain: "localhost",
-        //     path: "/",
-        //     sameSite: "None",
-        //     signed: true
-        // });
         const token = createToken(user._id.toString(), user.email, "7d")
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
