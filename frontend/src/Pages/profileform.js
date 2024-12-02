@@ -155,7 +155,7 @@ function ProfileForm() {
                                     ? '10 PM - 12 AM'
                                     : val === '4'
                                     ? '12 AM - 2 AM'
-                                    : "I'm Nocturnal HAHAHAHAHAHAHA"}
+                                    : "Other"}
                             </label>
                         ))}
                     </div>
