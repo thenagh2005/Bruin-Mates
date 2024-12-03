@@ -15,7 +15,7 @@ const sampleData = [
 ];
 
 function FindPeople() {
-    
+
 
     const buildings = ['Sproul', 'Rieber', 'Hedrick', 'Dykstra',
         'Holly', 'Gardenia', 'Cove', 'Landing', 'Olympic', 'Centennial',
@@ -55,6 +55,8 @@ function FindPeople() {
         setBuilding('');
         setCleanliness('');
         setGender('');
+        setRoomType('');
+        setSleepTime('');
     };
 
     const [query, setQuery] = useState('');
@@ -122,129 +124,134 @@ function FindPeople() {
             <h1 className="header">Search for a user</h1>
             <div className="container">
                 {/* Search Bar Section */}
-                <div className="search-bar">
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                    />
-                    <button onClick={handleSearch}>Search</button>
-                </div>
+                
+                    <div className="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                        />
+                        <button onClick={handleSearch}>Search</button>
+                    </div>
 
-                <div className="filter-options">
                     <div className='toggle-container'>
-                        <span className="toggle" onClick={toggleAdvancedSearch}>
-                            {
-                                showAdvanced ?
-                                ("Hide") : ("Show Advanced")
-                            }
-                        </span>
-                    </div>
+                            <span className="toggle" onClick={toggleAdvancedSearch}>
+                                {
+                                    showAdvanced ?
+                                        ("Hide") : ("Show Advanced")
+                                }
+                            </span>
+                        </div>
 
-                    {showAdvanced && (
-                        <>
-                        <div className="filter">
-                        <label htmlFor="smokes">Smoking Preference:</label>
-                        <select
-                            id="smokes"
-                            value={smokes}
-                            onChange={(e) => setSmokes(e.target.value)}
-                        >
-                            <option value=""></option>
-                            <option value="true">Yes</option>
-                            <option value="false">No</option>
-                        </select>
-                    </div>
+                    <div className="filter-options">
+                        
 
-                    <div className="filter">
-                        <label htmlFor="alcohol">Alcohol Preference:</label>
-                        <select
-                            id="alcohol"
-                            value={alcohol}
-                            onChange={(e) => setAlcohol(e.target.value)}
-                        >
-                            <option value=""></option>
-                            <option value="true">Yes</option>
-                            <option value="false">No</option>
-                        </select>
-                    </div>
+                        {showAdvanced && (
+                            <>
+                                <div className="filter">
+                                    <label htmlFor="smokes">Smoking Preference:</label>
+                                    <select
+                                        id="smokes"
+                                        value={smokes}
+                                        onChange={(e) => setSmokes(e.target.value)}
+                                    >
+                                        <option value=""></option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
 
-                    <div className="filter">
-                        <label htmlFor="building">Building:</label>
-                        <select
-                            id="building"
-                            value={building}
-                            onChange={(e) => setBuilding(e.target.value)}
-                        >
-                            <option value=""></option>
-                            {buildings.map((option, index) => (
-                                <option key={index} value={option}>
-                                    {option}
-                                </option>
-                            ))}
-                        </select>
+                                <div className="filter">
+                                    <label htmlFor="alcohol">Alcohol Preference:</label>
+                                    <select
+                                        id="alcohol"
+                                        value={alcohol}
+                                        onChange={(e) => setAlcohol(e.target.value)}
+                                    >
+                                        <option value=""></option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+
+                                <div className="filter">
+                                    <label htmlFor="building">Building:</label>
+                                    <select
+                                        id="building"
+                                        value={building}
+                                        onChange={(e) => setBuilding(e.target.value)}
+                                    >
+                                        <option value=""></option>
+                                        {buildings.map((option, index) => (
+                                            <option key={index} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="filter">
+                                    <label htmlFor="roomtype">Room Type:</label>
+                                    <select
+                                        id="roomtype"
+                                        value={roomType}
+                                        onChange={(e) => setRoomType(e.target.value)}
+                                    >
+                                        <option value=""></option>
+                                        <option value="classic">Classic</option>
+                                        <option value="deluxe">Deluxe</option>
+                                        <option value="plaza">Plaza</option>
+                                        <option value="suite">Suite</option>
+                                        <option value="University Apartments">University Apartments</option>
+                                    </select>
+                                </div>
+                                <div className="filter">
+                                    <label htmlFor="gender">Gender:</label>
+                                    <select
+                                        id="gender"
+                                        value={gender}
+                                        onChange={(e) => setGender(e.target.value)}
+                                    >
+                                        <option value=""></option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Non-binary">Non-binary</option>
+                                    </select>
+                                </div>
+                                <div className="filter">
+                                    <label htmlFor="cleanliness">Cleanliness:</label>
+                                    <select
+                                        id="cleanliness"
+                                        value={cleanliness}
+                                        onChange={(e) => setCleanliness(e.target.value)}
+                                    >
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                                <div className="filter">
+                                    <label htmlFor="sleeptime">Sleeping Time:</label>
+                                    <select
+                                        id="sleeptime"
+                                        value={sleepTime}
+                                        onChange={(e) => setSleepTime(e.target.value)}
+                                    >
+                                        <option value=""></option>
+                                        <option value="1">6 PM - 8 PM</option>
+                                        <option value="2">8 PM - 10 PM</option>
+                                        <option value="3">10 PM - 12 AM</option>
+                                        <option value="4">12 AM - 2 AM</option>
+                                        <option value="5">Other</option>
+                                    </select>
+                                </div>
+                            </>
+                        )}
                     </div>
-                    <div className="filter">
-                        <label htmlFor="roomtype">Room Type:</label>
-                        <select
-                            id="roomtype"
-                            value={roomType}
-                            onChange={(e) => setRoomType(e.target.value)}
-                        >
-                            <option value=""></option>
-                            <option value="classic">Classic</option>
-                            <option value="deluxe">Deluxe</option>
-                            <option value="plaza">Plaza</option>
-                            <option value="suite">Suite</option>
-                        </select>
-                    </div>
-                    <div className="filter">
-                        <label htmlFor="gender">Gender:</label>
-                        <select
-                            id="gender"
-                            value={gender}
-                            onChange={(e) => setGender(e.target.value)}
-                        >
-                            <option value=""></option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Non-binary">Non-binary</option>
-                        </select>
-                    </div>
-                    <div className="filter">
-                        <label htmlFor="cleanliness">Cleanliness:</label>
-                        <select
-                            id="cleanliness"
-                            value={cleanliness}
-                            onChange={(e) => setCleanliness(e.target.value)}
-                        >
-                            <option value=""></option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                    <div className="filter">
-                        <label htmlFor="sleeptime">Sleeping Time:</label>
-                        <select
-                            id="sleeptime"
-                            value={sleepTime}
-                            onChange={(e) => setSleepTime(e.target.value)}
-                        >
-                            <option value=""></option>
-                            <option value="1">6 PM - 8 PM</option>
-                            <option value="2">8 PM - 10 PM</option>
-                            <option value="3">10 PM - 12 AM</option>
-                            <option value="4">12 AM - 2 AM</option>
-                            <option value="5">Other</option>
-                        </select>
-                    </div>
-                    </>
-                    )}
-                </div>
+                
 
                 {/* Results Section */}
                 <div className="results">
