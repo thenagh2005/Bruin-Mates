@@ -1,4 +1,4 @@
-.container {
+/* .container {
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -14,7 +14,7 @@
 
 .container:hover {
     width: 700px;
-}
+} */
 
 .header {
     display: flex;
@@ -25,7 +25,7 @@
     margin-top: 30px;
 }
 
-.text {
+/* .text {
     color: var(--text-color);
     font-size: 48px;
     font-weight: 700;
@@ -36,74 +36,72 @@
     height: 6px;
     background: var(--text-color);
     border-radius: 9px;
-}
+} */
 
-.inputs {
-    margin-top: 55px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.input {
+body{
     display: block;
+    justify-content: center;
     align-items: center;
-    margin: auto;
-    width: 480px;
-    height: 80px;
-    background: var(--background-color);
-    border: 1px solid var(--card-border-color);
-    border-radius: 6px;
+}
+/* Card and container css adapted from https://www.w3schools.com/howto/howto_css_cards.asp */
+.super-container {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
     padding: 20px;
-    color: var(--text-color);
-}
-
-.input input {
-    margin-top: -5px;
-    height: 50px;
-    width: 400px;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--text-color);
-    font-size: 19px;
-    font: italic normal 19px/1 "Calibri", sans-serif;
-}
-
-.submit-container {
-    display: flex;
-    gap: 30px;
-    margin: 60px auto;
-}
-
-.submit {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 220px;
-    height: 50px;
-    color: var(--button-text-color);
-    border-radius: 5px;
-    font-size: 19px;
-    font-weight: 700;
-    padding: 10px 15px;
-    background-color: var(--button-bg-color);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    perspective: 1000px;
 }
 
-.submit:hover {
-    background-color: var(--navbar-hover-color);
-    color: #5E5D43; /* Optional override for hover text color */
+.prof-card {
+    will-change: auto;
+    transform-style: preserve-3d;
+    position: absolute;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    min-width: 35%;
+    max-width: 65%;
+    height: auto;
+    max-width: 1000px;
+    padding: 2px 16px;
+    text-align: center;
+    padding: 20px;
+    transition: all 0.3s ease;
 }
 
-.error {
-    color: red; /* Keeping this red for visibility */
-    display: block;
-    font-size: 14px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    line-height: 2.5;
+.prof-card:hover{
+    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+    padding: 30px;
+}
+
+.prof-card.clicked{
+    transform: rotateY(180deg);
+}
+
+.front{
+
+}
+
+.preferences{
+    transform: rotateY(180deg);
+}
+
+img {
+    border-radius: 50%;
+    border: 5px solid #dee2e6;
+    width: 150px; /* Width for the image */
+    height: auto; /* Maintains aspect ratio */
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    object-fit: cover; /* Ensures the image fills the shape properly */
+}
+
+img:hover {
+    transform: scale(1.1); /* Subtle zoom effect on hover */
 }

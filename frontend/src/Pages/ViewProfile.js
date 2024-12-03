@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import '../Styles/Profile.css'
-
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
 import VerifyLoggedIn from '../Components/VerifyLoggedIn.js';
@@ -41,6 +40,8 @@ const ViewProfile = () => {
     const [gender, setGender] = useState("");
     const [pronouns, setPronouns] = useState("");
 
+    const [clicked, setClicked] = useState(false);
+
     useEffect(() => {
         const getCurrUser = async () => {
             try {
@@ -75,23 +76,24 @@ const ViewProfile = () => {
     return (
         <>
             <VerifyLoggedIn>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gridGap: 20, padding: 20 }}>
-                    <div>
+                <div className='super-container'>
+                    <div 
+                    onClick={() => setClicked(!clicked)}
+                    className={`prof-card ${clicked ? '.clicked' : ''}`}>
+                    <div className='front'>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
-                        <h1>Name</h1>
-                        <h2>{currUser.name ? `@${currUser.name}` : ""}</h2>
-                        <h2>{age ? "Age:" : ""}</h2>
-                        <p>{age}</p>
-                        <h2>{biography ? "Biography:" : ""}</h2>
-                        <p>{biography}</p>
-                        <h2>{gender ? "Gender:" : ""}</h2>
-                        <p>{gender}</p>
-                        <h2>{pronouns ? "Preferred Pronouns:" : ""}</h2>
-                        <p>{pronouns}</p>
-
-
+                            <h1>Name</h1>
+                            <h2>{currUser.name ? `@${currUser.name}` : ""}</h2>
+                            <h2>{age ? "Age:" : ""}</h2>
+                            <p>{age}</p>
+                            <h2>{biography ? "Biography:" : ""}</h2>
+                            <p>{biography}</p>
+                            <h2>{gender ? "Gender:" : ""}</h2>
+                            <p>{gender}</p>
+                            <h2>{pronouns ? "Preferred Pronouns:" : ""}</h2>
+                            <p>{pronouns}</p>
                     </div>
-                    <div>
+                    <div className='preferences'>
                         <h1>Preferences</h1>
                         
                         <h2>{cleanliness ? "Cleanliness:" : ""}</h2>
@@ -119,6 +121,7 @@ const ViewProfile = () => {
                         <p>{occupancy}</p>
                         
                         <a href="/profile-form">Edit your profile</a>
+                    </div>
                     </div>
                 </div>
             </VerifyLoggedIn>
