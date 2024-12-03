@@ -19,44 +19,75 @@ async function processMatchRequest(req, res, next){
         }
         const response = await MatchRequest.create(matchRequest);
 
-        let smtpTransport = nodemailer.createTransport({
-            service: "Gmail",
-            secure: false,
-            auth: {
-                user: process.env.GMAILACC,
-                pass: process.env.GMAILAPPPW,
-            },
-        });
-        let mailOptions = {
-            to: sendingMatchToUser.email,
-            from: '"Bruin Mates" bruinmates1919@gmail.com',
-            subject: "Someone wants to match with you!",
-            text:
-                " SOMEONE WANTS TO CONNECT WITH YOU\n" +
+        // let smtpTransport = nodemailer.createTransport({
+        //     service: "Gmail",
+        //     secure: false,
+        //     auth: {
+        //         user: process.env.GMAILACC,
+        //         pass: process.env.GMAILAPPPW,
+        //     },
+        // });
+        // let mailOptions = {
+        //     to: sendingMatchToUser.email,
+        //     from: '"Bruin Mates" bruinmates1919@gmail.com',
+        //     subject: "Someone wants to match with you!",
+        //     text:
+        //         " SOMEONE WANTS TO CONNECT WITH YOU\n" +
 
-                // insert link here
-                "You can also view this message request  \n\n" +
-                "Regards, \n" +
-                "Bruin Mates",
-        };
-        smtpTransport.sendMail(mailOptions, (err) => {
-            if(err){
-                console.log('error sending mail' + err);
-            } else {
-                console.log("mail sent");
-                console.log(
-                    "An e-mail has been sent to " +
-                    sendingMatchToUser.email +
-                    " with further instructions."
-                );
-            }
-        });
+        //         // insert link here
+        //         "You can also view this message request  \n\n" +
+        //         "Regards, \n" +
+        //         "Bruin Mates",
+        // };
+        // smtpTransport.sendMail(mailOptions, (err) => {
+        //     if(err){
+        //         console.log('error sending mail' + err);
+        //     } else {
+        //         console.log("mail sent");
+        //         console.log(
+        //             "An e-mail has been sent to " +
+        //             sendingMatchToUser.email +
+        //             " with further instructions."
+        //         );
+        //     }
+        // });
         return res.status(200).json({ message: 'OK'})
     } catch(error){
         console.log(error);
         return res.status(500).json({ message: 'ERROR', cause: error.message });
     }
 }
+
+async function acceptMatchRequest(req, res, next){
+    try {
+        recipient_id = res.locals.jwtData.id;
+        requester_id = req.params.id;
+    
+        const request = await Match.findOne({recipient_id: recipient_id, requester_id: requester_id});
+        request.status = 'accepted';
+        request.save();
+        return res.status(200).json({message: 'OK'});
+    } catch(error){
+        console.log(error);
+        return res.status(500).json({ message: 'ERROR', cause: error.message });
+    }
+}
+
+async function rejectMatchRequest(req, res, next){
+    try {
+        recipient_id = res.locals.jwtData.id;
+        requester_id = req.params.id;
+    
+        const request = await Match.findOne({recipient_id: recipient_id, requester_id: requester_id});
+        request.status = 'rejected';
+        request.save();
+        return res.status(200).json({message: 'OK'});
+    } catch(error){
+        console.log(error);
+        return res.status(500).json({ message: 'ERROR', cause: error.message });
+    }
+}
+
 
 async function getAllPendingMatches(res, res, next){
     console.log('HIT')
@@ -88,4 +119,4 @@ async function getAllAcceptedMatches(res, res, next){
     }
 }
 
-module.exports = {getAllAcceptedMatches, getAllPendingMatches, processMatchRequest};
+module.exports = {getAllAcceptedMatches, getAllPendingMatches, processMatchRequest, acceptMatchRequest, rejectMatchRequest};
