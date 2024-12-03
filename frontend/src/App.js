@@ -8,10 +8,10 @@ import Home from './Pages/Home';
 import About from './Pages/About';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
-import ProfileForm from './Pages/profileform'
+import ProfileForm from './Pages/ProfileForm'
 import ViewProfile from './Pages/ViewProfile';
-import FindPeople from './Pages/findpeople';
-import UserInfo from './Pages/userinfo';
+import FindPeople from './Pages/FindPeople';
+import UserInfo from './Pages/UserInfo';
 
 import { AuthProvider } from './AuthContext';
 import { ThemeProvider } from './Components/ThemeContext';
