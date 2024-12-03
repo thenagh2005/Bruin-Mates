@@ -57,6 +57,7 @@ function FindPeople() {
         setGender('');
         setRoomType('');
         setSleepTime('');
+        setAge('');
     };
 
     const [query, setQuery] = useState('');
@@ -69,6 +70,7 @@ function FindPeople() {
     const [sleepTime, setSleepTime] = useState('');
 
     const [gender, setGender] = useState('');
+    const [age, setAge] = useState('');
 
     const [results, setResults] = useState([]);
 
@@ -114,6 +116,8 @@ function FindPeople() {
                 && `${user.preferences.cleanliness}`.includes(cleanliness)
                 && `${user.preferences.sleepTime}`.includes(sleepTime)
                 && `${user.preferences.roomType}`.includes(roomType)
+                && `${user.profileInfo.age}`.includes(age)
+                
 
             )
         );
@@ -246,6 +250,23 @@ function FindPeople() {
                                         <option value="3">10 PM - 12 AM</option>
                                         <option value="4">12 AM - 2 AM</option>
                                         <option value="5">Other</option>
+                                    </select>
+                                </div>
+                                <div className="filter">
+                                    <label htmlFor="age">Age:</label>
+                                    <select
+                                        id="age"
+                                        value={age}
+                                        onChange={(e) => setAge(e.target.value)}
+                                    >
+                                        <option value=""></option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        
+                                        
                                     </select>
                                 </div>
                             </>
