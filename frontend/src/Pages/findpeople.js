@@ -23,13 +23,13 @@ function FindPeople() {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get("http://localhost:4000/api/v1/user/");
+                const test = await axios.post("http://localhost:4000/api/v1/matching/")
                 setAllUsers(response.data.users); // Set the full user list
                 setResults(response.data.users); // Initially display all users
             } catch (error) {
                 console.error("Error fetching users:", error);
             }
         };
-
         fetchUsers();
     }, []);
 

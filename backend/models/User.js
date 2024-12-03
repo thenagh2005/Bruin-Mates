@@ -21,7 +21,11 @@ const userSchema = new mongoose.Schema({
             enum: ['under 18', '18', '19', '20', '21', '22', '23+'], 
             required: false 
         }
-    }
+    },
+    matches: [{
+        user_id: {type: String},
+        hasAccepted: {type: Boolean, default: false}
+    }]
 });
 
 module.exports = mongoose.model("User", userSchema);

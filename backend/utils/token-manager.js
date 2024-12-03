@@ -10,8 +10,8 @@ function createToken(id, email, expiresIn){
 function verifyToken(req, res, next) {
     const token = req.signedCookies[`${COOKIE_NAME}`];
 
-    console.log("verifyToken Middleware Called");
-    console.log("Token Received:", token);
+    // console.log("verifyToken Middleware Called");
+    // console.log("Token Received:", token);
 
     if (!token || token.trim() === "") {
         console.log("Token not received or empty");
@@ -24,9 +24,9 @@ function verifyToken(req, res, next) {
             return res.status(401).json({ message: "Token Expired or Invalid" });
         }
 
-        console.log("Token verified successfully:", decoded);
+        // console.log("Token verified successfully:", decoded);
 
-        console.log("Decoded JWT data:", decoded);
+        // console.log("Decoded JWT data:", decoded);
 
         res.locals.jwtData = decoded;
         next();
