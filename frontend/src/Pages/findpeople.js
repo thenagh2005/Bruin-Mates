@@ -202,6 +202,7 @@ function FindPeople() {
                                         <option value="deluxe">Deluxe</option>
                                         <option value="plaza">Plaza</option>
                                         <option value="suite">Suite</option>
+                                        <option value="University Apartments">University Apartments</option>
                                     </select>
                                 </div>
                                 <div className="filter">

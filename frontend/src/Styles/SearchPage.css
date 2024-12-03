@@ -71,7 +71,12 @@
   background-color: var(--card-bg-color);
   color: var(--text-color);
   margin: 16px auto;
-  transition: height 0.5s ease, background-color 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-card:hover {
+  transform: scale(1.05); /* Slightly increases size */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds a more prominent shadow */
 }
 
 .user-info {
