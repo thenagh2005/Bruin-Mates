@@ -1,15 +1,13 @@
-
-
 .super-container {
     font-family: 'Roboto', sans-serif;
-    
+
     margin: 0;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    
+
 }
 
 /* Main container with side-to-side layout */
@@ -21,13 +19,22 @@
     overflow: hidden;
     width: 90%;
     max-width: 1000px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.info-container:hover {
+
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     
+
 }
 
 /* Profile Info Section (left side) */
 .profile-info {
     flex: 1;
-    background: #95aff1;
+    background: #5fa9f8;
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -41,16 +48,20 @@
 .profile-info img {
     border-radius: 50%;
     border: 5px solid #dee2e6;
-    width: 150px; /* Width for the image */
-    height: auto; /* Maintains aspect ratio */
+    width: 150px;
+    /* Width for the image */
+    height: auto;
+    /* Maintains aspect ratio */
     margin-bottom: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    object-fit: cover; /* Ensures the image fills the shape properly */
+    object-fit: cover;
+    /* Ensures the image fills the shape properly */
 }
 
 .profile-info img:hover {
-    transform: scale(1.1); /* Subtle zoom effect on hover */
+    transform: scale(1.1);
+    /* Subtle zoom effect on hover */
 }
 
 .profile-info h1 {
@@ -108,7 +119,8 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .info-container {
-        flex-direction: column; /* Stacks sections vertically */
+        flex-direction: column;
+        /* Stacks sections vertically */
     }
 
     .profile-info {

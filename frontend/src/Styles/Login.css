@@ -7,14 +7,14 @@
     padding-bottom: 30px;
     width: 600px;
     border-radius: 10px;
-    transition: width 0.3s;
+    
     box-shadow: var(--default-shadow);
     outline: 2px solid var(--focused-border-color);
+
+    
 }
 
-.container:hover {
-    width: 700px;
-}
+
 
 .header {
     display: flex;
