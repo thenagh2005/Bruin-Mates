@@ -27,7 +27,12 @@ const userSchema = new mongoose.Schema({
             required: false
         },
         pronouns: { type: String, required: false }
-    }
+    },
+    matches: [{
+        user_id: {type: String},
+        hasAccepted: {type: Boolean, default: false},
+        pending: {type: Boolean, default: true}
+    }]
 });
 
 module.exports = mongoose.model("User", userSchema);
