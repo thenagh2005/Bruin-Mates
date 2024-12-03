@@ -189,7 +189,7 @@ async function updateProfile(req, res, next) {
             (!profileInfo && !username.profileInfo) ||
             (!profileInfo.biography && !username.profileInfo.biography) ||
             (!profileInfo.gender && !username.profileInfo.gender) ||
-            (!profileInfo.pronouns && !username.profileInfo.pronouns) ||
+            // (!profileInfo.pronouns && !username.profileInfo.pronouns) ||
             (!profileInfo.age && !username.profileInfo.age)
         ) {
             return res.status(400).json({

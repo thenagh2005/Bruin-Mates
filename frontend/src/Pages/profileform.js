@@ -120,7 +120,7 @@ function ProfileForm() {
                     <h1 className="profile-header">Preferences:</h1>
 
                     {/* Cleanliness */}
-                    <h2>How important is cleanliness to you? (1 is not important at all, 5 is very important)</h2>
+                    <h2>How important is cleanliness to you? (1 is not important at all, 5 is very important)*</h2>
                     <div className="radio-group">
                         {[1, 2, 3, 4, 5].map((val) => (
                             <label key={val}>
@@ -137,7 +137,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Sleep Time */}
-                    <h2>What time do you prefer to sleep?</h2>
+                    <h2>What time do you prefer to sleep?*</h2>
                     <div className="radio-group">
                         {['1', '2', '3', '4', '5'].map((val, idx) => (
                             <label key={idx}>
@@ -162,7 +162,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Smoking */}
-                    <h2>Are you okay with smoking (any kind)?</h2>
+                    <h2>Are you okay with smoking (any kind)?*</h2>
                     <div className="inline-group">
                         <label>
                             <input
@@ -187,7 +187,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Alcohol */}
-                    <h2>Are you okay with alcohol consumption?</h2>
+                    <h2>Are you okay with alcohol consumption?*</h2>
                     <div className="inline-group">
                         <label>
                             <input
@@ -212,7 +212,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Gender Inclusivity */}
-                    <h2>Are you looking for Gender Inclusive Housing?</h2>
+                    <h2>Are you looking for Gender Inclusive Housing?*</h2>
                     <div className="inline-group">
                         <label>
                             <input
@@ -237,7 +237,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Room Type */}
-                    <h2>Please select your room type</h2>
+                    <h2>Please select your room type*</h2>
                     <div className="radio-group">
                         {Object.keys(roomTypes).map((type) => (
                             <label key={type}>
@@ -256,7 +256,7 @@ function ProfileForm() {
                     {formData.preferences.roomType && (
                         <>
                             {/* Building */}
-                            <h2>Please select your building</h2>
+                            <h2>Please select your building*</h2>
                             <div className="inline-group radio-group">
                                 <select
                                     name="building"
@@ -273,7 +273,7 @@ function ProfileForm() {
                             </div>
 
                         {/* Occupancy */}
-                        <h2>Occupancy</h2>
+                        <h2>Occupancy*</h2>
                         <div className="inline-group">
                             {(formData.preferences.roomType === 'University Apartments'
                                 ? [
@@ -303,7 +303,7 @@ function ProfileForm() {
                     <h1 className="profile-header">About yourself:</h1>
 
                     {/* Biography */}
-                    <h2>Tell us about yourself</h2>
+                    <h2>Tell us about yourself*</h2>
                     <div className="inline-group radio-group">
                         <textarea
                             name="biography"
@@ -316,7 +316,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Age */}
-                    <h2>What is your age?</h2>
+                    <h2>What is your age?*</h2>
                     <div className="inline-group radio-group">
                         <textarea
                             name="age"
@@ -328,7 +328,7 @@ function ProfileForm() {
                         />
                     </div>
                     {/* Gender */}
-                    <h2>Gender</h2>
+                    <h2>Gender*</h2>
                     <div className="inline-group radio-group">
                         <select
                             name="gender"
@@ -358,6 +358,10 @@ function ProfileForm() {
                     
                     {/* Submit */}
                     <button type="submit">Submit</button>
+
+                    <div>
+                        <p>Questions marked with * are required.</p>
+                    </div>
                 </form>
             </div>
         </VerifyLoggedIn>
