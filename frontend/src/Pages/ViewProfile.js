@@ -41,6 +41,7 @@ const ViewProfile = () => {
     const [pronouns, setPronouns] = useState("");
 
     const [clicked, setClicked] = useState(false);
+    const [flipped, setFlipped] = useState(false);
 
     useEffect(() => {
         const getCurrUser = async () => {
@@ -76,11 +77,12 @@ const ViewProfile = () => {
     return (
         <>
             <VerifyLoggedIn>
-                <div className='super-container'>
-                    <div 
-                    onClick={() => setClicked(!clicked)}
-                    className={`prof-card ${clicked ? '.clicked' : ''}`}>
-                    <div className='front'>
+                <div className='prof-container'>
+                    <div onClick={() => {
+                        setClicked(!clicked);
+                        setFlipped(!flipped);
+                        }} className={`prof-card ${clicked ? 'clicked' : ''}`}>
+                    {!clicked && <div className='front'>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
                             <h1>Name</h1>
                             <h2>{currUser.name ? `@${currUser.name}` : ""}</h2>
@@ -92,8 +94,8 @@ const ViewProfile = () => {
                             <p>{gender}</p>
                             <h2>{pronouns ? "Preferred Pronouns:" : ""}</h2>
                             <p>{pronouns}</p>
-                    </div>
-                    <div className='preferences'>
+                    </div>}
+                    {clicked && <div className='preferences'>
                         <h1>Preferences</h1>
                         
                         <h2>{cleanliness ? "Cleanliness:" : ""}</h2>
@@ -121,7 +123,7 @@ const ViewProfile = () => {
                         <p>{occupancy}</p>
                         
                         <a href="/profile-form">Edit your profile</a>
-                    </div>
+                    </div>}
                     </div>
                 </div>
             </VerifyLoggedIn>
