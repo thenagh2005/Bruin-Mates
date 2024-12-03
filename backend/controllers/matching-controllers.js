@@ -1,64 +1,57 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const async = require('async');
+const nodemailer = require('nodemailer');
 const User = require('../models/User.js');
 const MatchRequest = require('../models/MatchRequest.js')
 
-// WILL WORK ON THIS
 async function processMatchRequest(req, res, next){
     console.log('HIT PROCESS MATCH REQUEST')
     try {
-        const { sendingMatchToUserId } = req.body;
+        const sendingMatchToUserId = req.params.id;
         const currUserId = res.locals.jwtData.id;
-        const currUser = await User.findById(userId);
+        const currUser = await User.findById(currUserId);
         const sendingMatchToUser = await User.findById(sendingMatchToUserId);
 
-        async.waterfall(
-            [
-                function (done) {
-                    crypto.randomBytes(20, (err, buf) => {
-                        var token = buf.toString("hex");
-                        done(err, token);
-                    });
-                },
-                function (token, done) {
-                    // add code here to add matches to the users data
-                },
-                function (token, user, done) {
-                    let smtpTransport = nodemailer.createTransport({
-                        service: "Gmail",
-                        auth: {
-                            user: process.env.GMAILACC,
-                            pass: process.env.GMAILAPPPW,
-                        },
-                    });
-                    let mailOptions = {
-                        to: sendingMatchToUser.email,
-                        from: '"Bruin Mates" bruinmates1919@gmail.com',
-                        subject: "Someone wants to match with you!",
-                        text:
-                            " SOMEONE WANTS TO CONNECT WITH YOU\n" +
+        let matchRequest = {
+            requester_id: currUserId,
+            recipient_id: sendingMatchToUserId
+        }
+        const response = await MatchRequest.create(matchRequest);
 
-                            // insert link here
-                            "You can also view this message request  \n\n" +
-                            "Regards, \n" +
-                            "Bruin Mates",
-                    };
-                    smtpTransport.sendMail(mailOptions, (err) => {
-                        console.log("mail sent");
-                        console.log(
-                            "An e-mail has been sent to " +
-                            sendingMatchToUser.email +
-                            " with further instructions."
-                        );
-                        done(err, "done");
-                    });
-                },
-            ],
-            function (err) {
-                // error handling
+        let smtpTransport = nodemailer.createTransport({
+            service: "Gmail",
+            secure: false,
+            auth: {
+                user: process.env.GMAILACC,
+                pass: process.env.GMAILAPPPW,
+            },
+        });
+        let mailOptions = {
+            to: sendingMatchToUser.email,
+            from: '"Bruin Mates" bruinmates1919@gmail.com',
+            subject: "Someone wants to match with you!",
+            text:
+                " SOMEONE WANTS TO CONNECT WITH YOU\n" +
+
+                // insert link here
+                "You can also view this message request  \n\n" +
+                "Regards, \n" +
+                "Bruin Mates",
+        };
+        smtpTransport.sendMail(mailOptions, (err) => {
+            if(err){
+                console.log('error sending mail' + err);
+            } else {
+                console.log("mail sent");
+                console.log(
+                    "An e-mail has been sent to " +
+                    sendingMatchToUser.email +
+                    " with further instructions."
+                );
             }
-        );
-
+        });
+        return res.status(200).json({ message: 'OK'})
     } catch(error){
         console.log(error);
         return res.status(500).json({ message: 'ERROR', cause: error.message });

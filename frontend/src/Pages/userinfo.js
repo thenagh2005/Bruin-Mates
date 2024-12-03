@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import "../Styles/UserInfo.css";
+import axios from "axios";
 
 function UserInfo() {
   const sleepyTimes = ['6 PM - 8 PM',
@@ -63,6 +64,17 @@ function UserInfo() {
     fetchUser();
   }, [id]);
 
+  const sendConnectionRequest = async () => {
+      try {
+        const match_response = await axios.get(`http://localhost:4000/api/v1/matching/process-match/${id}`, {
+          withCredentials: true
+        });
+        alert('Connection request sent!');
+      } catch (err) { 
+
+      }
+  }
+
   return (
     <>
       <div className='super-container'>
@@ -81,7 +93,7 @@ function UserInfo() {
             <h2>Preferred Pronouns: {pronouns}</h2>
             <p></p>
 
-            <button>Connect</button>
+            <button onClick={sendConnectionRequest}>Connect</button>
 
 
           </div>
