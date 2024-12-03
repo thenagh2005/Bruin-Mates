@@ -95,9 +95,15 @@
 
 /* Style the filter options container */
 .filter-options {
+  /*
   display: flex;
   flex-direction: column;
   gap: var(--filter-options-gap);
+  margin: var(--filter-options-margin);*/
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
+  gap: var(--filter-options-gap); /* Space between items */
   margin: var(--filter-options-margin);
   
 }
@@ -107,7 +113,7 @@
 
 }
 
-.filter-options .toggle {
+.toggle {
   
   color: lightblue;
   cursor: pointer;
@@ -125,6 +131,8 @@
   flex-direction: column;
   font-size: var(--filter-font-size);
   color: var(--text-color);
+  flex: 1 1 calc(50% - var(--filter-options-gap)); /* Take 50% of the width minus the gap */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
 }
 
 /* Style the label */
