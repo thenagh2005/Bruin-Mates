@@ -31,7 +31,7 @@ body{
     transform-style: preserve-3d; /* Maintains 3D hierarchy */
     transition: all 0.3s ease-in-out;
     display: inline-block;
-    background: #ffffff;
+    background: var(--card-bg-color);
     min-width: 35%;
     min-height: 65%;
     height: auto;
