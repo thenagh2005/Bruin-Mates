@@ -1,16 +1,15 @@
-
-
 .container {
     display: flex;
     flex-direction: column;
     margin: auto;
     margin-top: 50px;
-    background: white;
+    background: var(--card-bg-color);
     padding-bottom: 30px;
     width: 600px;
     border-radius: 10px;
     transition: width 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--default-shadow);
+    outline: 2px solid var(--focused-border-color);
 }
 
 .container:hover {
@@ -27,7 +26,7 @@
 }
 
 .text {
-    color: #55435E;
+    color: var(--text-color);
     font-size: 48px;
     font-weight: 700;
 }
@@ -35,7 +34,7 @@
 .underline {
     width: 500px;
     height: 6px;
-    background: black;
+    background: var(--text-color);
     border-radius: 9px;
 }
 
@@ -52,8 +51,8 @@
     margin: auto;
     width: 480px;
     height: 80px;
-    background: #f1f1f1;
-    border: none;
+    background: var(--background-color);
+    border: 1px solid var(--card-border-color);
     border-radius: 6px;
     padding: 20px;
 }
@@ -65,7 +64,7 @@
     background: transparent;
     border: none;
     outline: none;
-    color: #313131;
+    color: var(--text-color);
     font-size: 19px;
     font: italic normal 19px/1 "Calibri", sans-serif;
 }
@@ -82,20 +81,18 @@
     align-items: center;
     width: 220px;
     height: 50px;
-    color: white;
-    border-radius: 5px;
+    color: var(--button-text-color);
     font-size: 19px;
     font-weight: 700;
-    padding: 10px 15px;
-    background-color: #007bff;
+    background-color: var(--button-bg-color);
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .submit:hover {
-    background-color: #DED32F;
+    background-color: var(--navbar-hover-color);
     color: #5E5D43;
 }
 
@@ -133,7 +130,7 @@
     display: flex;
 }
 
-.signup-success{
+.signup-success {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -151,7 +148,6 @@
     color: rgb(40, 162, 85);
     font-weight: 700;
     border-radius: 20px;
-    
 }
 
 .signup-success img {
@@ -159,19 +155,19 @@
     display: flex;
 }
 
-.signup-success a{
+.signup-success a {
     color: rgb(75, 111, 183);
 }
 
-.signup-success a:hover{
+.signup-success a:hover {
     color: rgb(53, 89, 136);
 }
 
-.login-error-image{
+.login-error-image {
     height: 100px;
 }
 
-.login-error{
+.login-error {
     display: flex;
     justify-content: center;
     align-items: center;

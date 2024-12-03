@@ -3,8 +3,8 @@ ul {
     padding: 0;
     list-style-type: none;
     overflow: hidden;
-    background-color: #007bff;
-    
+    background-color: var(--navbar-background-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 li {
@@ -12,22 +12,32 @@ li {
     
 }
 
-li a {
-    background-color: #007bff;
+li a, .link-button {
+    background-color: var(--navbar-background-color);
     display: block;
-    color: white;
+    color: var(--navbar-text-color);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
+    border-radius: 0;
   }
 
-li a:hover {
+li a:hover, .link-button:hover {
     text-decoration: none;
-    background-color: #DED32F;
-    color: #5E5D43;
+    background-color: var(--navbar-hover-color);
+    color: var(--navbar-hover-text-color);
 }
 
 .align-right{
     float: right;
+}
+
+.link-button:focus {
+    outline: none;
+}
+
+
+.dark-mode {
+    color: var(--navbar-text-color); 
 }

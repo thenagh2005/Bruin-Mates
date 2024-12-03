@@ -32,6 +32,7 @@ export const AuthProvider = ({ children }) => {
     
     setIsLoggedIn(false);
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('username');
 
     navigate("/");
   };

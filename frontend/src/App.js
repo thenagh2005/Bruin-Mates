@@ -1,6 +1,6 @@
 
-import './App.css';
-import NavBar from './NavBar';
+import './Styles/App.css';
+import NavBar from './Components/NavBar';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -11,16 +11,18 @@ import SignUp from './Pages/SignUp';
 import ProfileForm from './Pages/profileform'
 import ViewProfile from './Pages/ViewProfile';
 import FindPeople from './Pages/findpeople';
+import UserInfo from './Pages/userinfo';
 
 import { AuthProvider } from './AuthContext';
+import { ThemeProvider } from './Components/ThemeContext';
 
 function App() {
   return (
     <>
       <Router>
       <AuthProvider>
-        <NavBar />
-        
+        <ThemeProvider>
+          <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -29,8 +31,9 @@ function App() {
             <Route path="/profile-form" element={<ProfileForm />} />
             <Route path="/view-profile" element={<ViewProfile />} />
             <Route path="/find" element={<FindPeople />} />
+            <Route path="/users/:id" element={<UserInfo />} />
           </Routes>
-        
+        </ThemeProvider>
       </AuthProvider>
       </Router>
     </>

@@ -2,7 +2,6 @@
 
 ## Backend
 Run 'npm install' in the terminal in backend directory
-Run 'npm install axios' to install the axios library.
 Create a '.env' file
 Create a MongoDB Atlas account and share your account details with Saatvik
 Once you have the MongoDB Cluster connection url, add a variable called MONGO_CONNECTION_URL in your .env file and set it equal to your connection url. Make sure you replace the <db-password> field in the connection url with your actual password. Additionally, make sure to add a variable called JWT_SECRET to the .env file (not vital, but prevents the cookie errors).

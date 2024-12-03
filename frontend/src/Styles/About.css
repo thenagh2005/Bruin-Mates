@@ -1,0 +1,200 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.about-hero {
+    background: var(--hero-bg-gradient),
+      url('https://upload.wikimedia.org/wikipedia/commons/7/71/Royce_Hall_UCLA.jpg') center/cover no-repeat;
+    color: var(--text-color);
+    padding: 0 5%;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 40vh;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-content {
+max-width: 50%; 
+text-align: left; 
+font-size: 1.5rem;
+color: var(--hero-text-color);
+}
+
+.abstract-shapes {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 0;
+}
+
+.abstract-shapes .circle {
+position: absolute;
+top: 20%;
+left: 60%;
+width: 150px;
+height: 150px;
+background-color: var(--hero-shape-circle-color);
+border-radius: 50%;
+}
+
+.abstract-shapes .triangle {
+position: absolute;
+top: 60%;
+left: 80%;
+width: 0;
+height: 0;
+border-left: 80px solid transparent;
+border-right: 80px solid transparent;
+border-bottom: 140px solid var(--hero-shape-triangle-color);
+transform: rotate(-20deg);
+}
+
+.abstract-shapes .rectangle {
+position: absolute;
+top: 40%;
+left: 50%;
+width: 120px;
+height: 60px;
+background-color: var(--hero-shape-rectangle-color);
+}
+
+.welcome-message {
+background-color: var(--background-color);
+color: var(--text-color);
+padding: 40px 20px;
+text-align: center;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.welcome-header h1 {
+font-size: 2.5rem;
+margin-bottom: 20px;
+color: var(--text-color);
+}
+
+.welcome-header p {
+font-size: 1.2rem;
+color: var(--info-card-text);
+line-height: 1.6;
+}
+
+.why-choose-us {
+background-color: var(--card-bg-color);
+color: var(--text-color);
+padding: 40px 20px;
+margin: 40px auto;
+border: 1px solid var(--card-border-color);
+border-radius: 8px;
+text-align: center;
+max-width: 1000px;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.why-choose-us-header h1 {
+font-size: 2.5rem;
+margin-bottom: 20px;
+color: var(--text-color);
+}
+
+.why-choose-us-header p {
+font-size: 1.2rem;
+color: var(--info-card-text);
+margin-bottom: 20px;
+}
+
+.list-group {
+list-style: none; /* Ensure no default browser list styles */
+padding: 0;
+margin: 20px 0;
+background-color: var(--card-bg-color); /* Consistent background for the list group */
+border: 1px solid var(--card-border-color); /* Match list group container with items */
+border-radius: 4px; /* Match individual item rounding */
+box-shadow: var(--default-shadow); /* Optional: Add shadow for visual hierarchy */
+}
+
+.list-group-item {
+display: flex;
+align-items: center;
+background-color: var(--card-bg-color);
+color: var(--text-color);
+padding: 10px 15px; /* Adjust padding for better spacing */
+border: none; /* Remove Bootstrap default border */
+border-bottom: 1px solid var(--card-border-color); /* Add consistent separators */
+transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.list-group-item:last-child {
+border-bottom: none; /* Remove the border from the last item */
+}
+
+.list-group-item:hover {
+background-color: var(--button-bg-color);
+color: var(--button-text-color); 
+transform: scale(1.05); 
+}
+
+.list-group-item-icon {
+font-size: 1.5rem;
+padding-left: 25px;
+margin-right: 10px;
+color: var(--button-bg-color); /* Use button background color for the icon */
+}
+
+
+.team-intro {
+background-color: var(--background-color);
+color: var(--text-color);
+padding: 40px 20px;
+text-align: center;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.team-header h1 {
+font-size: 2.5rem;
+margin-bottom: 20px;
+color: var(--text-color);
+}
+
+.team-header p {
+font-size: 1.2rem;
+color: var(--info-card-text);
+margin-bottom: 20px;
+}
+
+.team-members {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
+}
+
+.team-card {
+    background-color: var(--card-bg-color);
+    color: var(--text-color); 
+    padding: 20px;
+    border: 1px solid var(--card-border-color);
+    border-radius: 8px;
+    text-align: center;
+    flex: 1 1 calc(25% - 20px);
+    max-width: 250px;
+    transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
+}
+
+.team-card:hover {
+    background-color: var(--button-bg-color); 
+    color: var(--button-text-color); 
+    transform: scale(1.05);
+ }
+
+ .team-card:hover h2, 
+.team-card:hover p {
+    color: var(--button-text-color);
+}

@@ -11,21 +11,23 @@ const userSchema = new mongoose.Schema({
         alcohol: { type: Boolean, required: false },
         roomType: { 
             type: String, 
-            enum: ['classic', 'deluxe', 'plaza', 'suite', 'universityApartments'], 
+            enum: ['classic', 'deluxe', 'plaza', 'suite', 'University Apartments'], 
             required: false 
         },
         building: { type: String, required: false },
         occupancy: { type: String, required: false },
-        age: { 
-            type: String, 
-            enum: ['under 18', '18', '19', '20', '21', '22', '23+'], 
-            required: false 
-        }
+        genderInclusivity: { type: Boolean, required: false }
     },
-    matches: [{
-        user_id: {type: String},
-        hasAccepted: {type: Boolean, default: false}
-    }]
+    profileInfo: {
+        biography: { type: String, required: false }, 
+        age: { type: String, required: false },
+        gender: {
+            type: String, 
+            enum: ['Male', 'Female', 'Non-binary', 'Prefer not to say'], 
+            required: false
+        },
+        pronouns: { type: String, required: false }
+    }
 });
 
 module.exports = mongoose.model("User", userSchema);
