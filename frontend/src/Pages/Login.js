@@ -4,6 +4,7 @@ import '../Styles/Login.css';
 
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
+import NotLoggedIn from '../Components/NotLoggedIn.js';
 
 function Login() {
     const [email, setUsername] = useState('');
@@ -68,33 +69,37 @@ function Login() {
         }
     };
     return (
-        <div>{loginError && <div className="login-error signup-error"> <img className="login-error-image" 
-        src="https://cdn.iconscout.com/icon/free/png-512/free-critical-icon-download-in-svg-png-gif-file-formats--alert-warning-error-user-interface-pack-icons-2598224.png?f=webp&w=256" 
-        alt="Error sign!"></img><span>{loginError}</span>
-            </div>}
-            <form onSubmit={submit}>
-                <div className='container'>
-                    <div className='header'>
-                        <div className='text'>Login</div>
-                        <div className='underline'></div>
-                        
-                    </div>
-                    <div className='inputs'>
-                        <div className = 'input'>
-                            <input type="text" placeholder='Email*' onChange={(e) => setUsername(e.target.value)} onBlur={() => handleBlur('email')} required/>
-                            {userClicked && userError && <p className='error'>{userError}</p>}
+        <>
+        <NotLoggedIn>
+            <div>{loginError && <div className="login-error signup-error"> <img className="login-error-image" 
+            src="https://cdn.iconscout.com/icon/free/png-512/free-critical-icon-download-in-svg-png-gif-file-formats--alert-warning-error-user-interface-pack-icons-2598224.png?f=webp&w=256" 
+            alt="Error sign!"></img><span>{loginError}</span>
+                </div>}
+                <form onSubmit={submit}>
+                    <div className='container'>
+                        <div className='header'>
+                            <div className='text'>Login</div>
+                            <div className='underline'></div>
+                            
                         </div>
-                        <div className = 'input'>
-                            <input type="password" placeholder='Password*' onChange={(e) => setPW(e.target.value)} onBlur={() => handleBlur('password')} required/>
-                            {pwClicked && pwError && <p className='error'>{pwError}</p>}
+                        <div className='inputs'>
+                            <div className = 'input'>
+                                <input type="text" placeholder='Email*' onChange={(e) => setUsername(e.target.value)} onBlur={() => handleBlur('email')} required/>
+                                {userClicked && userError && <p className='error'>{userError}</p>}
+                            </div>
+                            <div className = 'input'>
+                                <input type="password" placeholder='Password*' onChange={(e) => setPW(e.target.value)} onBlur={() => handleBlur('password')} required/>
+                                {pwClicked && pwError && <p className='error'>{pwError}</p>}
+                            </div>
+                        </div>
+                        <div className='submit-container'>
+                            <button type="login" className="submit">Login</button>
                         </div>
                     </div>
-                    <div className='submit-container'>
-                        <button type="login" className="submit">Login</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+        </NotLoggedIn>
+        </>
     )
 }
 

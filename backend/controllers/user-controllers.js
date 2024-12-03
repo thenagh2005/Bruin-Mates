@@ -67,14 +67,6 @@ async function userLogin(req, res, next) {
         if (!isPasswordCorrect) {
             return res.status(403).send("Incorrect Password");
         }
-        // create token and save cookie
-        // res.clearCookie("auth_token", {
-        //     httpOnly: true,
-        //     domain: "localhost",
-        //     path: "/",
-        //     sameSite: "None",
-        //     signed: true
-        // });
         const token = createToken(user._id.toString(), user.email, "7d")
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
@@ -170,20 +162,21 @@ async function getCurrUserInfo(req, res, next) {
 async function updateProfile(req, res, next) {
     try {
         const userId = res.locals.jwtData.id;
+        const username = await User.findById(userId);
 
         const { preferences, profileInfo } = req.body;
 
         // Validate preferences (if they are required)
         if (
-            !preferences ||
-            preferences.cleanliness == null ||
-            preferences.sleepTime == null ||
-            preferences.smoking == null ||
-            preferences.alcohol == null ||
-            preferences.genderInclusivity == null ||
-            !preferences.roomType ||
-            !preferences.building ||
-            !preferences.occupancy
+            (!preferences && !username.preferences) ||
+            (preferences.cleanliness == null && username.preferences.cleanliness == null) ||
+            (preferences.sleepTime == null  && username.preferences.sleepTime == null) ||
+            (preferences.smoking == null && username.preferences.smoking == null) ||
+            (preferences.alcohol == null  && username.preferences.alcohol == null)||
+            (preferences.genderInclusivity == null && username.preferences.cleanliness == null) ||
+            (!preferences.roomType && !username.preferences.roomType) ||
+            (!preferences.building && !username.preferences.building) ||
+            (!preferences.occupancy && !username.preferences.occupancy)
         ) {
             return res.status(400).json({
                 message: "All preferences are required",
@@ -193,11 +186,11 @@ async function updateProfile(req, res, next) {
 
         // Validate profileInfo (if they are required)
         if (
-            !profileInfo ||
-            !profileInfo.biography ||
-            !profileInfo.gender ||
-            !profileInfo.pronouns ||
-            !profileInfo.age
+            (!profileInfo && !username.profileInfo) ||
+            (!profileInfo.biography && !username.profileInfo.biography) ||
+            (!profileInfo.gender && !username.profileInfo.gender) ||
+            (!profileInfo.pronouns && !username.profileInfo.pronouns) ||
+            (!profileInfo.age && !username.profileInfo.age)
         ) {
             return res.status(400).json({
                 message: "All profile info fields are required",
@@ -211,8 +204,16 @@ async function updateProfile(req, res, next) {
         }
 
         // Update preferences and profile info
-        user.preferences = preferences;
-        user.profileInfo = profileInfo;
+        for(const key of Object.keys(preferences)){
+            if(preferences[key] != null && preferences[key] !== ''){
+                user.preferences[key] = preferences[key];
+            }
+        }
+        for(const key of Object.keys(profileInfo)){
+            if(profileInfo[key] != null && profileInfo[key] !== ''){
+                user.profileInfo[key] = profileInfo[key];
+            }
+        }
 
         await user.save();
         return res.status(200).json({ message: "Profile updated successfully" });
