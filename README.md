@@ -6,13 +6,13 @@ Open the project on your desired code editor, navigate to terminal and cd into t
 Now its time to set up the APIs.
 
 ## Cloudinary
-Cloudinary allows users to upload and process image files by into the cloudinary database using a url. We use cloudinary for uploading profile pictures.
-To avoid locally storing image files, we will utilize Cloudinary keys to process them. 
-First make an account at https://cloudinary.com/ and access dashboard to find your personal API keys. Your .env file should have this:
+Cloudinary allows users to upload and process image files by into the cloudinary database using a url. We use cloudinary for uploading profile pictures rather than storing images locally. 
+First create an account at https://cloudinary.com/ and access your dashboard, which should list your "cloud name". There should be a button that says "Go to API Keys", which should list your API Key and API Secret.
+After finding this information, add it to your .env file like so:
 
-cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-api_key: process.env.CLOUDINARY_API_KEY,
-api_secret: process.env.CLOUDINARY_API_SECRET
+CLOUDINARY_CLOUD_NAME=\
+CLOUDINARY_API_KEY=\
+CLOUDINARY_API_SECRET=
 
 ## Backend
 Run 'npm install' in the terminal in backend directory
