@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import "../Styles/Profile.css";
+import "../Styles/UserInfo.css";
 
 function UserInfo() {
   const sleepyTimes = ['6 PM - 8 PM',
@@ -26,7 +26,6 @@ function UserInfo() {
   const [biography, setBiography] = useState("");
   const [gender, setGender] = useState("");
   const [pronouns, setPronouns] = useState("");
-  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page
@@ -66,11 +65,9 @@ function UserInfo() {
 
   return (
     <>
-      <div className='prof-container'>
-        <div onClick={() => {
-            setClicked(!clicked);}}
-            className={`prof-card ${clicked ? 'clicked' : ''}`}>
-          {!clicked && <div className='front'>
+      <div className='super-container'>
+        <div className='info-container'>
+          <div className='profile-info'>
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
             <h1>Name</h1>
             <h2>{user.name}</h2>
@@ -83,12 +80,9 @@ function UserInfo() {
             <h2>Preferred Pronouns: {pronouns}</h2>
             <p></p>
 
-            <button onClick={(e) => {
-                e.stopPropagation();
-                setClicked(false);
-            }}>Connect</button>
-          </div>}
-          {clicked && <div className='preferences'>
+            <button>Connect</button>
+          </div>
+         <div className='prefs'>
             <h1>Preferences</h1>
 
             <h2>Cleanliness: {cleanliness}</h2>
@@ -114,7 +108,7 @@ function UserInfo() {
 
             <h2>Occupancy: {occupancy}</h2>
             <p></p>
-          </div>}
+          </div>
           
         </div>
         
