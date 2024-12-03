@@ -80,7 +80,12 @@ const ViewProfile = () => {
                         setClicked(!clicked);}}
                         className={`prof-card ${clicked ? 'clicked' : ''}`}>
                     {!clicked && <div className='front'>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
+                        <img src={
+                                currUser.profilePicture ||
+                                'https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png'
+                            }
+                            // style={{ width: '5vw', minWidth: '100px' }} alt="pfp" 
+                            />
                             <h1>Name</h1>
                             <h2>{currUser.name ? `@${currUser.name}` : ""}</h2>
                             <h2>{age ? "Age:" : ""}</h2>

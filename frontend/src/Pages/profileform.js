@@ -68,8 +68,8 @@ function ProfileForm() {
             ...prevData,
             [category]: {
                 ...prevData[category],
-                [name]: type === "checkbox" ? checked : value
-            }
+                [name]: type === 'checkbox' ? checked : value,
+            },
         }));
     };
 
@@ -79,26 +79,57 @@ function ProfileForm() {
             ...prevData,
             preferences: {
                 ...prevData.preferences,
-                roomType: selectedRoomType
-            }
+                roomType: selectedRoomType,
+            },
         }));
         setBuildingOptions(roomTypes[selectedRoomType] || []);
     };
 
+    const handleProfilePictureChange = (e) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            profilePicture: e.target.files[0], // Set the file object
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log('Form Data:', formData);
-
+    
         try {
-            const response = await axios.post('http://localhost:4000/api/v1/user/update-profile', formData, {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
-            });
-
+            const formDataToSend = new FormData();
+    
+            // Append profile picture
+            if (formData.profilePicture) {
+                formDataToSend.append('profilePicture', formData.profilePicture);
+            }
+    
+            // Append preferences
+            for (const key in formData.preferences) {
+                if (formData.preferences[key] !== null && formData.preferences[key] !== '') {
+                    formDataToSend.append(`preferences[${key}]`, formData.preferences[key]);
+                }
+            }
+    
+            // Append profile info
+            for (const key in formData.profileInfo) {
+                if (formData.profileInfo[key] !== null && formData.profileInfo[key] !== '') {
+                    formDataToSend.append(`profileInfo[${key}]`, formData.profileInfo[key]);
+                }
+            }
+    
+            // Send the request
+            const response = await axios.post(
+                'http://localhost:4000/api/v1/user/update-profile',
+                formDataToSend,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    withCredentials: true,
+                }
+            );
+    
             if (response.status === 200) {
-                navigate("/view-profile");
-                console.log('Preferences saved successfully!');
+                navigate('/view-profile');
+                console.log('Profile updated successfully!');
             }
         } catch (error) {
             if (error.response) {
@@ -112,11 +143,14 @@ function ProfileForm() {
             }
         }
     };
+    
+    
+    
 
     return (
         <VerifyLoggedIn>
             <div className="form-container">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <h1 className="profile-header">Preferences:</h1>
 
                     {/* Cleanliness */}
@@ -355,7 +389,17 @@ function ProfileForm() {
                             cols="25"
                         />
                     </div>
-                    
+                    {/* Profile Picture */}
+                    <h2>Upload Profile Picture</h2>
+                    <div className="radio-group">
+                        <input
+                            type="file"
+                            name="profilePicture"
+                            accept="image/*"
+                            onChange={handleProfilePictureChange}
+                        />
+                    </div>
+
                     {/* Submit */}
                     <button type="submit">Submit</button>
 
