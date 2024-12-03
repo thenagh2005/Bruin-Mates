@@ -27,6 +27,8 @@ function UserInfo() {
   const [gender, setGender] = useState("");
   const [pronouns, setPronouns] = useState("");
 
+  const [profilePicture, setProfilePicture] = useState(null);
+
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page
   }, []);
@@ -53,7 +55,10 @@ function UserInfo() {
         setBiography(data.profileInfo.biography);
         setGender(data.profileInfo.gender);
         setPronouns(data.profileInfo.pronouns);
-      } catch (err) {
+        setProfilePicture(
+          data.profilePicture || 
+          "https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png"
+        );
 
       } finally {
 
@@ -69,7 +74,7 @@ function UserInfo() {
 
         <div className='info-container'>
           <div className='profile-info'>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
+            <img src={profilePicture} style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
             <h1>Name</h1>
             <h2>{user.name}</h2>
             <h2>Age: {age}</h2>

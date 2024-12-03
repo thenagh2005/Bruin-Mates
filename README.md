@@ -1,5 +1,19 @@
 # Bruin-Mates
 
+## GUIDE
+Download the repo by doing git clone https://github.com/thenagh2005/Bruin-Mates.git
+Open the project on your desired code editor, navigate to terminal and cd into the Bruin-Mates directory.
+Now its time to set up the APIs.
+
+## Cloudinary
+Cloudinary allows users to upload and process image files by into the cloudinary database using a url. We use cloudinary for uploading profile pictures.
+To avoid locally storing image files, we will utilize Cloudinary keys to process them. 
+First make an account at https://cloudinary.com/ and access dashboard to find your personal API keys. Your .env file should have this:
+
+cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+api_key: process.env.CLOUDINARY_API_KEY,
+api_secret: process.env.CLOUDINARY_API_SECRET
+
 ## Backend
 Run 'npm install' in the terminal in backend directory
 Create a '.env' file
