@@ -62,7 +62,9 @@ function FindPeople() {
     const [smokes, setSmokes] = useState('');
     const [alcohol, setAlcohol] = useState('');
     const [building, setBuilding] = useState('');
+    const [roomType, setRoomType] = useState('');
     const [cleanliness, setCleanliness] = useState('');
+    const [sleepTime, setSleepTime] = useState('');
 
     const [gender, setGender] = useState('');
 
@@ -108,6 +110,8 @@ function FindPeople() {
                 && `${user.preferences.building}`.includes(building)
                 && `${user.profileInfo.gender}`.includes(gender)
                 && `${user.preferences.cleanliness}`.includes(cleanliness)
+                && `${user.preferences.sleepTime}`.includes(sleepTime)
+                && `${user.preferences.roomType}`.includes(roomType)
 
             )
         );
@@ -182,6 +186,20 @@ function FindPeople() {
                         </select>
                     </div>
                     <div className="filter">
+                        <label htmlFor="roomtype">Room Type:</label>
+                        <select
+                            id="roomtype"
+                            value={roomType}
+                            onChange={(e) => setRoomType(e.target.value)}
+                        >
+                            <option value=""></option>
+                            <option value="classic">Classic</option>
+                            <option value="deluxe">Deluxe</option>
+                            <option value="plaza">Plaza</option>
+                            <option value="suite">Suite</option>
+                        </select>
+                    </div>
+                    <div className="filter">
                         <label htmlFor="gender">Gender:</label>
                         <select
                             id="gender"
@@ -207,6 +225,21 @@ function FindPeople() {
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div className="filter">
+                        <label htmlFor="sleeptime">Sleeping Time:</label>
+                        <select
+                            id="sleeptime"
+                            value={sleepTime}
+                            onChange={(e) => setSleepTime(e.target.value)}
+                        >
+                            <option value=""></option>
+                            <option value="1">6 PM - 8 PM</option>
+                            <option value="2">8 PM - 10 PM</option>
+                            <option value="3">10 PM - 12 AM</option>
+                            <option value="4">12 AM - 2 AM</option>
+                            <option value="5">Other</option>
                         </select>
                     </div>
                     </>

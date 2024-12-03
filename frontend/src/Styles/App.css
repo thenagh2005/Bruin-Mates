@@ -70,7 +70,7 @@
 [data-theme="dark"] {
   /* General Background and Text */
   --background-color: black;
-  --find-user-background: #121212;
+  --find-user-background: rgb(22, 21, 21);
   --text-color: #ffffff;
   --secondary-text-color: #aaaaaa;
   --disabled-text-color: #555555;
@@ -97,8 +97,8 @@
   /* Buttons */
   --button-bg-color: #007bff;
   --button-hover-bg-color: #0056b3;
-  --button-bg-color-2: #FEB2E0;
-  --button-hover-bg-color-2: #E44C9A;
+  --button-bg-color-2: #007bff;
+  --button-hover-bg-color-2: #0056b3;
   --button-text-color: #ffffff;
   --button-disabled-bg-color: #333333;
   --button-disabled-text-color: #777777;
