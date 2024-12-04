@@ -72,19 +72,19 @@ const Messages = () => {
     const acceptInvite = async (userId) => {
         try {
             console.log(userId);
-            await axios.post(`http://localhost:4000/api/v1/matching/accept-match/${userId}`, {
+            const response = await axios.post(`http://localhost:4000/api/v1/matching/accept-match/${userId}`, {
+                headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
-            }).then((response) => {
-                getPendingRequests();
             });
+            getPendingRequests();
             alert('Accepted Invite')
         } catch(error) {
-            console.error("Error rejecting requests:", error);
+            console.error("Error accepted requests:", error);
         }
     }
 
     return (
-        <>
+        <VerifyLoggedIn>
             <h1>Messages</h1>
             { requestingUsers.length === 0 ? (
                 <p>Loading...</p>
@@ -102,7 +102,7 @@ const Messages = () => {
             ) : (
                 <p>No pending requests.</p>
             )}
-        </>
+        </VerifyLoggedIn>
     )
 }
 
