@@ -63,7 +63,7 @@ async function acceptMatchRequest(req, res, next){
         recipient_id = res.locals.jwtData.id;
         requester_id = req.params.id;
     
-        const request = await Match.findOne({recipient_id: recipient_id, requester_id: requester_id});
+        const request = await MatchRequest.findOne({recipient_id: recipient_id, requester_id: requester_id});
         request.status = 'accepted';
         request.save();
         return res.status(200).json({message: 'OK'});
@@ -78,7 +78,7 @@ async function rejectMatchRequest(req, res, next){
         recipient_id = res.locals.jwtData.id;
         requester_id = req.params.id;
     
-        const request = await Match.findOne({recipient_id: recipient_id, requester_id: requester_id});
+        const request = await MatchRequest.findOne({recipient_id: recipient_id, requester_id: requester_id});
         request.status = 'rejected';
         request.save();
         return res.status(200).json({message: 'OK'});
@@ -90,10 +90,9 @@ async function rejectMatchRequest(req, res, next){
 
 
 async function getAllPendingMatches(res, res, next){
-    console.log('HIT')
     try {
         const userId = res.locals.jwtData.id;
-        const receivedRequests = await Match.find({ recipient_id: userId, status: 'pending' });
+        const receivedRequests = await MatchRequest.find({ recipient_id: userId, status: 'pending'});
 
         return res.status(200).json({ message: 'OK', receivedRequests});
     } catch(error){
@@ -107,7 +106,7 @@ async function getAllAcceptedMatches(res, res, next){
     try {
         const userId = res.locals.jwtData.id;
         const user = await User.findById(userId);
-        const acceptedMatches = await Match.find({ // both parties have agreed
+        const acceptedMatches = await MatchRequest.find({ // both parties have agreed
             $or: [{ requester_id: userId }, { recipient_id: userId }],
             status: 'accepted'
         });

@@ -46,7 +46,7 @@ function NavBar() {
                     <>
                         <li><a href="/">Home</a></li>
                         <li><a href="/about">About</a></li>
-                        <li><a href="/view-profile">Messages</a></li>
+                        <li><a href="/messages">Messages</a></li>
                         <li><a href="/view-profile">Profile</a></li>
                         <li><a href="/find">Find People</a></li>
                         <li className="align-right">
