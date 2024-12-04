@@ -80,7 +80,7 @@ const ViewProfile = () => {
                         setClicked(!clicked);}}
                         className={`prof-card ${clicked ? 'clicked' : ''}`}>
                     {!clicked && <div className='front'>
-                        <img src={
+                        <img className="profile-picture" src={
                                 currUser.profilePicture ||
                                 'https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png'
                             }

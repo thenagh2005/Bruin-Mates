@@ -10,11 +10,7 @@
     
     box-shadow: var(--default-shadow);
     outline: 2px solid var(--focused-border-color);
-
-    
 }
-
-
 
 .header {
     display: flex;
@@ -92,8 +88,8 @@
 }
 
 .submit:hover {
-    background-color: var(--navbar-hover-color);
-    color: #5E5D43;
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-text-color);
 }
 
 .error {

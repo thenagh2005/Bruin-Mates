@@ -38,6 +38,8 @@ function Login() {
 
     const submit = async (e) => {
         e.preventDefault();
+
+        setLoginError("");
         
         const response = await fetch('http://localhost:4000/api/v1/user/login', {
             method: 'POST',

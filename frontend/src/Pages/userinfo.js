@@ -73,7 +73,7 @@ function UserInfo() {
       <div className='super-container'>
         <div className='info-container'>
           <div className='profile-info'>
-            <img src={profilePicture} style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
+            <img className="profile-picture" src={profilePicture} alt="pfp" />
             <h1>Name</h1>
             <h2>{user.name}</h2>
             <h2>Age: {age}</h2>
