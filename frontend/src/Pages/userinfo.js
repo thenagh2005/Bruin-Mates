@@ -8,7 +8,7 @@ function UserInfo() {
     '8 PM - 10 PM',
     '10 PM - 12 AM',
     '12 AM - 2 AM',
-    "I'm Nocturnal HAHAHAHAHAHAHA"];
+    "Other"];
 
   const { id } = useParams();
   const [user, setUsers] = useState([]);
