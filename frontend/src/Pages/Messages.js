@@ -37,18 +37,19 @@ const Messages = () => {
 
     useEffect(() => {
         const getUsersData = async () => {
-            let users = [];
-            console.log(requests)
-            requests.forEach(async (request) => {
-                await axios.get('http://localhost:4000/api/v1/user/users/' + request.requester_id, {
-                    withCredentials: true
-                }).then((response) => {
-                    console.log(response.data)
-                    setRequestingUsers((prevUsers) => [...prevUsers, response.data]);
+            // Fetch all user data in parallel
+            const userPromises = requests.map((request) =>
+                axios.get(`http://localhost:4000/api/v1/user/users/${request.requester_id}`, {
+                    withCredentials: true,
                 })
-            })
-            // console.log(users)
-            // setRequestingUsers(users);
+            );
+
+            // Wait for all requests to resolve
+            const userResponses = await Promise.all(userPromises);
+
+            // Extract data and set state
+            const users = userResponses.map((response) => response.data);
+            setRequestingUsers(users);
         }
         getUsersData();
 
@@ -61,7 +62,8 @@ const Messages = () => {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
             }).then((response) => {
-                getPendingRequests();
+                let users = requestingUsers.filter(user => user._id != userId);
+                setRequestingUsers(users);            
             });
             alert('Rejected Invite')
         } catch(error) {
@@ -77,7 +79,8 @@ const Messages = () => {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
             });
-            getPendingRequests();
+            let users = requestingUsers.filter(user => user._id != userId);
+            setRequestingUsers(users);
             alert('Accepted Invite')
         } catch(error) {
             console.error("Error accepted requests:", error);
