@@ -1,0 +1,84 @@
+/* General styles */
+
+
+/* Messages heading */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Requests list styles */
+.requests-list {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+}
+
+/* Message item styles */
+.message-item {
+    
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--info-card-bg);
+    width: 80%; /* Reduce width to 80% of the parent container */
+    max-width: 600px; /* Limit maximum width */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message-item:hover {
+    transform: scale(1.05); /* Slightly increases size */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds a more prominent shadow */
+  }
+
+/* Link styles */
+.message-item a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.message-item a:hover {
+    text-decoration: underline;
+}
+
+/* Button styles */
+.message-item button {
+    margin-top: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    width: 100px;
+    text-align: center;
+    transition: width 0.3s ease;
+}
+
+.message-item button:first-of-type {
+    background-color: #28a745; /* Green for Accept */
+}
+
+.message-item button:last-of-type {
+    background-color: #dc3545; /* Red for Reject */
+}
+
+.message-item button:hover {
+    opacity: 0.9;
+    width: 100%;
+}
+
+/* No requests message */
+.message-item .message-text {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
