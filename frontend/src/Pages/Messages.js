@@ -57,7 +57,8 @@ const Messages = () => {
     const rejectInvite = async (userId) => {
         try {
             console.log(userId);
-            await axios.post(`http://localhost:4000/api/v1/matching/reject-match/${userId}`, {
+            await axios.post(`http://localhost:4000/api/v1/matching/reject-match/${userId}`, {}, {
+                headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
             }).then((response) => {
                 getPendingRequests();
@@ -72,7 +73,7 @@ const Messages = () => {
     const acceptInvite = async (userId) => {
         try {
             console.log(userId);
-            const response = await axios.post(`http://localhost:4000/api/v1/matching/accept-match/${userId}`, {
+            const response = await axios.post(`http://localhost:4000/api/v1/matching/accept-match/${userId}`, {}, {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
             });
@@ -86,9 +87,7 @@ const Messages = () => {
     return (
         <VerifyLoggedIn>
             <h1>Messages</h1>
-            { requestingUsers.length === 0 ? (
-                <p>Loading...</p>
-            ) : requestingUsers.length > 0 ? (
+            { requestingUsers.length > 0 ? (
                 <ol>
                     { requestingUsers.map((user, index) => (
                         <div>

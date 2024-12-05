@@ -71,7 +71,7 @@ function UserInfo() {
 
   const sendConnectionRequest = async () => {
       try {
-        const match_response = await axios.post(`http://localhost:4000/api/v1/matching/process-match/${id}`, {
+        const match_response = await axios.post(`http://localhost:4000/api/v1/matching/process-match/${id}`, {}, {
           withCredentials: true
         });
         alert('Connection request sent!');
