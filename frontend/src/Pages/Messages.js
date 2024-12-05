@@ -127,6 +127,7 @@ const Messages = () => {
             });
             let users = requestingUsers.filter(user => user._id != userId);
             setRequestingUsers(users);
+            getAcceptedMatches();
             alert('Accepted Invite')
         } catch(error) {
             console.error("Error accepted requests:", error);
