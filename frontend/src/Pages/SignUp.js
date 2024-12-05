@@ -8,8 +8,6 @@ import NotLoggedIn from '../Components/NotLoggedIn.js';
 
 function SignUp() {
     const [name, setName] = useState('');
-    // const [userClicked, setUNClicked] = useState(false);
-    // const [userError, setUNError] = useState();
 
     const [username, setUsername] = useState('');
     const [userClicked, setUNClicked] = useState(false);
@@ -29,29 +27,44 @@ function SignUp() {
     const navigate = useNavigate();
     const { login } = useAuth();
 
-    const handleBlur = (text) => {
-        if (text === 'username' && username.trim() === '') {
+    const validateField = (field, value) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        if (!value.trim()) {
+            return `${field} is required.`;
+        }
+    
+        if (field === 'email' && !emailRegex.test(value)) {
+            return 'Please enter a valid email address.';
+        }
+    
+        if (field === 'username' && emailRegex.test(value)) {
+            return 'Name cannot be in an email format.';
+        }
+    
+        return ''; // No errors
+    };
+    
+    const handleBlur = (field) => {
+        if (field === 'username') {
+            const error = validateField('username', username);
+            setUNError(error);
             setUNClicked(true);
-            setUNError('This field is required.');
         }
-        else if (text === 'username'){
-            setUNError('');
-        }
-        if (text === 'password' && password.trim() === '') {
-            setPWClicked(true);
-            setPWError('This field is required.');
-        }
-        else if (text === 'password'){
-            setPWError('');
-        }
-        if (text === 'email' && email.trim() === '') {
+    
+        if (field === 'email') {
+            const error = validateField('email', email);
+            setEmailError(error);
             setEmailClicked(true);
-            setEmailError('This field is required.');
         }
-        else if (text === 'email'){
-            setEmailError('');
+    
+        if (field === 'password') {
+            const error = password.trim() ? '' : 'This field is required.';
+            setPWError(error);
+            setPWClicked(true);
         }
     };
+    
 
     const submit = async (e) => {
         e.preventDefault();

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import '../Styles/Profile.css'
-
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
 import VerifyLoggedIn from '../Components/VerifyLoggedIn.js';
@@ -29,9 +28,9 @@ const ViewProfile = () => {
     const [currUser, setCurrUser] = useState([]);
     const [cleanliness, setCleanliness] = useState("");
     const [sleepTime, setSleepTime] = useState("");
-    const [smoking, setSmoking] = useState(false);
-    const [alcohol, setAlcohol] = useState(false);
-    const [genderInclusivity, setGenderInclusivity] = useState(false);
+    const [smoking, setSmoking] = useState(null);
+    const [alcohol, setAlcohol] = useState(null);
+    const [genderInclusivity, setGenderInclusivity] = useState(null);
     const [roomType, setRoomType] = useState("");
     const [building, setBuilding] = useState("");
     const [occupancy, setOccupancy] = useState("");
@@ -40,6 +39,7 @@ const ViewProfile = () => {
     const [biography, setBiography] = useState("");
     const [gender, setGender] = useState("");
     const [pronouns, setPronouns] = useState("");
+    const [clicked, setClicked] = useState(false);
 
     useEffect(() => {
         const getCurrUser = async () => {
@@ -75,30 +75,36 @@ const ViewProfile = () => {
     return (
         <>
             <VerifyLoggedIn>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr", gridGap: 20, padding: 20 }}>
-                    <div>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
-                        <h1>Name</h1>
-                        <h2>{currUser.name ? `@${currUser.name}` : ""}</h2>
-                        <h2>{age ? "Age:" : ""}</h2>
-                        <p>{age}</p>
-                        <h2>{biography ? "Biography:" : ""}</h2>
-                        <p>{biography}</p>
-                        <h2>{gender ? "Gender:" : ""}</h2>
-                        <p>{gender}</p>
-                        <h2>{pronouns ? "Preferred Pronouns:" : ""}</h2>
-                        <p>{pronouns}</p>
-
-
-                    </div>
-                    <div>
+                <div className='prof-container'>
+                    <div onClick={() => {
+                        setClicked(!clicked);}}
+                        className={`prof-card ${clicked ? 'clicked' : ''}`}>
+                    {!clicked && <div className='front'>
+                        <img className="profile-picture" src={
+                                currUser.profilePicture ||
+                                'https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png'
+                            }
+                            // style={{ width: '5vw', minWidth: '100px' }} alt="pfp" 
+                            />
+                            <h1>Name</h1>
+                            <h2>{currUser.name ? `@${currUser.name}` : ""}</h2>
+                            <h2>{age ? "Age:" : ""}</h2>
+                            <p>{age}</p>
+                            <h2>{biography ? "Biography:" : ""}</h2>
+                            <p>{biography}</p>
+                            <h2>{gender ? "Gender:" : ""}</h2>
+                            <p>{gender}</p>
+                            <h2>{pronouns ? "Preferred Pronouns:" : ""}</h2>
+                            <p>{pronouns}</p>
+                    </div>}
+                    {clicked && <div className='preferences'>
                         <h1>Preferences</h1>
                         
                         <h2>{cleanliness ? "Cleanliness:" : ""}</h2>
                         <p>{cleanliness}</p>
 
                         <h2>{sleepTime ? "Preferred Sleeping Time:" : ""}</h2>
-                        <p>{sleepTime}</p>
+                        <p>{sleepTime ? sleepTime : ""}</p>
 
                         <h2>{smoking != null ? "Smoking:" : ""}</h2>
                         <p>{smoking != null ? (smoking ? "Yes" : "No") : ""}</p>
@@ -119,6 +125,7 @@ const ViewProfile = () => {
                         <p>{occupancy}</p>
                         
                         <a href="/profile-form">Edit your profile</a>
+                    </div>}
                     </div>
                 </div>
             </VerifyLoggedIn>

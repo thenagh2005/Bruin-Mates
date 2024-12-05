@@ -9,16 +9,16 @@ function UserInfo() {
     '8 PM - 10 PM',
     '10 PM - 12 AM',
     '12 AM - 2 AM',
-    "I'm Nocturnal HAHAHAHAHAHAHA"];
+    "Other"];
 
   const { id } = useParams();
   const [user, setUsers] = useState([]);
 
   const [cleanliness, setCleanliness] = useState("");
   const [sleepTime, setSleepTime] = useState("");
-  const [smoking, setSmoking] = useState(false);
-  const [alcohol, setAlcohol] = useState(false);
-  const [genderInclusivity, setGenderInclusivity] = useState(false);
+  const [smoking, setSmoking] = useState(null);
+  const [alcohol, setAlcohol] = useState(null);
+  const [genderInclusivity, setGenderInclusivity] = useState(null);
   const [roomType, setRoomType] = useState("");
   const [building, setBuilding] = useState("");
   const [occupancy, setOccupancy] = useState("");
@@ -27,6 +27,8 @@ function UserInfo() {
   const [biography, setBiography] = useState("");
   const [gender, setGender] = useState("");
   const [pronouns, setPronouns] = useState("");
+
+  const [profilePicture, setProfilePicture] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page
@@ -54,7 +56,10 @@ function UserInfo() {
         setBiography(data.profileInfo.biography);
         setGender(data.profileInfo.gender);
         setPronouns(data.profileInfo.pronouns);
-      } catch (err) {
+        setProfilePicture(
+          data.profilePicture || 
+          "https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png"
+        );
 
       } finally {
 
@@ -78,10 +83,9 @@ function UserInfo() {
   return (
     <>
       <div className='super-container'>
-
         <div className='info-container'>
           <div className='profile-info'>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/9-94702_user-outline-icon-clipart-png-download-profile-icon.png" style={{ width: '5vw', minWidth: '100px' }} alt="pfp" />
+            <img className="profile-picture" src={profilePicture} alt="pfp" />
             <h1>Name</h1>
             <h2>{user.name}</h2>
             <h2>Age: {age}</h2>
@@ -97,7 +101,7 @@ function UserInfo() {
 
 
           </div>
-          <div className='prefs'>
+         <div className='prefs'>
             <h1>Preferences</h1>
 
             <h2>Cleanliness: {cleanliness}</h2>
@@ -123,8 +127,6 @@ function UserInfo() {
 
             <h2>Occupancy: {occupancy}</h2>
             <p></p>
-
-
           </div>
           
         </div>

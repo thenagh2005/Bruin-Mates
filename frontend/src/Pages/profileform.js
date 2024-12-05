@@ -68,8 +68,8 @@ function ProfileForm() {
             ...prevData,
             [category]: {
                 ...prevData[category],
-                [name]: type === "checkbox" ? checked : value
-            }
+                [name]: type === 'checkbox' ? checked : value,
+            },
         }));
     };
 
@@ -79,26 +79,57 @@ function ProfileForm() {
             ...prevData,
             preferences: {
                 ...prevData.preferences,
-                roomType: selectedRoomType
-            }
+                roomType: selectedRoomType,
+            },
         }));
         setBuildingOptions(roomTypes[selectedRoomType] || []);
     };
 
+    const handleProfilePictureChange = (e) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            profilePicture: e.target.files[0], // Set the file object
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log('Form Data:', formData);
-
+    
         try {
-            const response = await axios.post('http://localhost:4000/api/v1/user/update-profile', formData, {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
-            });
-
+            const formDataToSend = new FormData();
+    
+            // Append profile picture
+            if (formData.profilePicture) {
+                formDataToSend.append('profilePicture', formData.profilePicture);
+            }
+    
+            // Append preferences
+            for (const key in formData.preferences) {
+                if (formData.preferences[key] !== null && formData.preferences[key] !== '') {
+                    formDataToSend.append(`preferences[${key}]`, formData.preferences[key]);
+                }
+            }
+    
+            // Append profile info
+            for (const key in formData.profileInfo) {
+                if (formData.profileInfo[key] !== null && formData.profileInfo[key] !== '') {
+                    formDataToSend.append(`profileInfo[${key}]`, formData.profileInfo[key]);
+                }
+            }
+    
+            // Send the request
+            const response = await axios.post(
+                'http://localhost:4000/api/v1/user/update-profile',
+                formDataToSend,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    withCredentials: true,
+                }
+            );
+    
             if (response.status === 200) {
-                navigate("/view-profile");
-                console.log('Preferences saved successfully!');
+                navigate('/view-profile');
+                console.log('Profile updated successfully!');
             }
         } catch (error) {
             if (error.response) {
@@ -112,15 +143,18 @@ function ProfileForm() {
             }
         }
     };
+    
+    
+    
 
     return (
         <VerifyLoggedIn>
             <div className="form-container">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <h1 className="profile-header">Preferences:</h1>
 
                     {/* Cleanliness */}
-                    <h2>How important is cleanliness to you? (1 is not important at all, 5 is very important)</h2>
+                    <h2>How important is cleanliness to you? (1 is not important at all, 5 is very important)*</h2>
                     <div className="radio-group">
                         {[1, 2, 3, 4, 5].map((val) => (
                             <label key={val}>
@@ -137,7 +171,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Sleep Time */}
-                    <h2>What time do you prefer to sleep?</h2>
+                    <h2>What time do you prefer to sleep?*</h2>
                     <div className="radio-group">
                         {['1', '2', '3', '4', '5'].map((val, idx) => (
                             <label key={idx}>
@@ -162,7 +196,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Smoking */}
-                    <h2>Are you okay with smoking (any kind)?</h2>
+                    <h2>Are you okay with smoking (any kind)?*</h2>
                     <div className="inline-group">
                         <label>
                             <input
@@ -187,7 +221,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Alcohol */}
-                    <h2>Are you okay with alcohol consumption?</h2>
+                    <h2>Are you okay with alcohol consumption?*</h2>
                     <div className="inline-group">
                         <label>
                             <input
@@ -212,7 +246,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Gender Inclusivity */}
-                    <h2>Are you looking for Gender Inclusive Housing?</h2>
+                    <h2>Are you looking for Gender Inclusive Housing?*</h2>
                     <div className="inline-group">
                         <label>
                             <input
@@ -237,7 +271,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Room Type */}
-                    <h2>Please select your room type</h2>
+                    <h2>Please select your room type*</h2>
                     <div className="radio-group">
                         {Object.keys(roomTypes).map((type) => (
                             <label key={type}>
@@ -256,7 +290,7 @@ function ProfileForm() {
                     {formData.preferences.roomType && (
                         <>
                             {/* Building */}
-                            <h2>Please select your building</h2>
+                            <h2>Please select your building*</h2>
                             <div className="inline-group radio-group">
                                 <select
                                     name="building"
@@ -273,7 +307,7 @@ function ProfileForm() {
                             </div>
 
                         {/* Occupancy */}
-                        <h2>Occupancy</h2>
+                        <h2>Occupancy*</h2>
                         <div className="inline-group">
                             {(formData.preferences.roomType === 'University Apartments'
                                 ? [
@@ -303,7 +337,7 @@ function ProfileForm() {
                     <h1 className="profile-header">About yourself:</h1>
 
                     {/* Biography */}
-                    <h2>Tell us about yourself</h2>
+                    <h2>Tell us about yourself*</h2>
                     <div className="inline-group radio-group">
                         <textarea
                             name="biography"
@@ -316,7 +350,7 @@ function ProfileForm() {
                     </div>
 
                     {/* Age */}
-                    <h2>What is your age?</h2>
+                    <h2>What is your age?*</h2>
                     <div className="inline-group radio-group">
                         <textarea
                             name="age"
@@ -328,7 +362,7 @@ function ProfileForm() {
                         />
                     </div>
                     {/* Gender */}
-                    <h2>Gender</h2>
+                    <h2>Gender*</h2>
                     <div className="inline-group radio-group">
                         <select
                             name="gender"
@@ -355,9 +389,23 @@ function ProfileForm() {
                             cols="25"
                         />
                     </div>
-                    
+                    {/* Profile Picture */}
+                    <h2>Upload Profile Picture</h2>
+                    <div className="radio-group">
+                        <input
+                            type="file"
+                            name="profilePicture"
+                            accept="image/*"
+                            onChange={handleProfilePictureChange}
+                        />
+                    </div>
+
                     {/* Submit */}
                     <button type="submit">Submit</button>
+
+                    <div>
+                        <p>Questions marked with * are required.</p>
+                    </div>
                 </form>
             </div>
         </VerifyLoggedIn>

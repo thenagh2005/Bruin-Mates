@@ -162,61 +162,49 @@ async function getCurrUserInfo(req, res, next) {
 async function updateProfile(req, res, next) {
     try {
         const userId = res.locals.jwtData.id;
-        const username = await User.findById(userId);
-
-        const { preferences, profileInfo } = req.body;
-
-        // Validate preferences (if they are required)
-        if (
-            (!preferences && !username.preferences) ||
-            (preferences.cleanliness == null && username.preferences.cleanliness == null) ||
-            (preferences.sleepTime == null  && username.preferences.sleepTime == null) ||
-            (preferences.smoking == null && username.preferences.smoking == null) ||
-            (preferences.alcohol == null  && username.preferences.alcohol == null)||
-            (preferences.genderInclusivity == null && username.preferences.cleanliness == null) ||
-            (!preferences.roomType && !username.preferences.roomType) ||
-            (!preferences.building && !username.preferences.building) ||
-            (!preferences.occupancy && !username.preferences.occupancy)
-        ) {
-            return res.status(400).json({
-                message: "All preferences are required",
-                missingFields: preferences
-            });
-        }
-
-        // Validate profileInfo (if they are required)
-        if (
-            (!profileInfo && !username.profileInfo) ||
-            (!profileInfo.biography && !username.profileInfo.biography) ||
-            (!profileInfo.gender && !username.profileInfo.gender) ||
-            (!profileInfo.pronouns && !username.profileInfo.pronouns) ||
-            (!profileInfo.age && !username.profileInfo.age)
-        ) {
-            return res.status(400).json({
-                message: "All profile info fields are required",
-                missingFields: profileInfo
-            });
-        }
-
         const user = await User.findById(userId);
+
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // Update preferences and profile info
-        for(const key of Object.keys(preferences)){
-            if(preferences[key] != null && preferences[key] !== ''){
-                user.preferences[key] = preferences[key];
-            }
-        }
-        for(const key of Object.keys(profileInfo)){
-            if(profileInfo[key] != null && profileInfo[key] !== ''){
-                user.profileInfo[key] = profileInfo[key];
+        const { preferences, profileInfo } = req.body;
+
+        // Validate and update preferences
+        if (preferences) {
+            for (const key of Object.keys(preferences)) {
+                if (preferences[key] != null && preferences[key] !== '') {
+                    user.preferences[key] = preferences[key];
+                }
             }
         }
 
+        // Validate and update profile info
+        if (profileInfo) {
+            for (const key of Object.keys(profileInfo)) {
+                if (profileInfo[key] != null && profileInfo[key] !== '') {
+                    user.profileInfo[key] = profileInfo[key];
+                }
+            }
+        }
+
+        // Handle profile picture upload
+        if (req.file) {
+            const imageUrl = req.file.path; // Cloudinary secure URL from multer middleware
+            user.profilePicture = imageUrl;
+        }
+
+        // Save the user
         await user.save();
-        return res.status(200).json({ message: "Profile updated successfully" });
+
+        return res.status(200).json({
+            message: "Profile updated successfully",
+            user: {
+                preferences: user.preferences,
+                profileInfo: user.profileInfo,
+                profilePicture: user.profilePicture,
+            },
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Error updating profile", cause: error.message });
@@ -236,7 +224,37 @@ async function getUserInfo(req, res) {
       }
 }
 
+async function uploadProfilePicture(req, res) {
+    try {
+        const userId = res.locals.jwtData.id;
+        console.log('JWT user ID for picture upload:', userId); // Debug log
+
+        const user = await User.findById(userId);
+        if (!user) {
+            console.log('User not found for picture upload:', userId); // Debug log
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // The uploaded image URL from Cloudinary
+        const result = req.file; // `req.file` contains Cloudinary response
+        console.log('Received file from multer middleware:', result); // Debug log
+
+        const imageUrl = result.path; // Secure URL to the uploaded image
+        user.profilePicture = imageUrl;
+        console.log('Updated profile picture URL:', imageUrl); // Debug log
+
+        await user.save();
+        console.log('User saved after profile picture update:', user); // Debug log
+
+        return res.status(200).json({
+            message: 'Profile picture uploaded successfully',
+            imageUrl,
+        });
+    } catch (error) {
+        console.error('Error uploading profile picture:', error); // Debug log
+        return res.status(500).json({ message: 'Error uploading profile picture', cause: error.message });
+    }
+}
 
 
-
-module.exports = { getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getCurrUserInfo, getUserProfile, updateProfile, getUserInfo };
+module.exports = { getAllUsers, userSignUp, userLogin, verifyUser, userLogout, getCurrUserInfo, getUserProfile, updateProfile, getUserInfo, uploadProfilePicture };
