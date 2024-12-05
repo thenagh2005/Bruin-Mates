@@ -66,6 +66,12 @@ async function acceptMatchRequest(req, res, next){
         const request = await MatchRequest.findOne({recipient_id: recipient_id, requester_id: requester_id});
         request.status = 'accepted';
         request.save();
+        const user1 = await User.findById(recipient_id);
+        const user2 = await User.findById(requester_id);
+        user1.acceptedUsers.push(user2._id);
+        user2.acceptedUsers.push(user1._id);
+        user1.save();
+        user2.save();
         return res.status(200).json({message: 'OK'});
     } catch(error){
         console.log(error);
@@ -110,8 +116,20 @@ async function getAllAcceptedMatches(res, res, next){
             $or: [{ requester_id: userId }, { recipient_id: userId }],
             status: 'accepted'
         });
-
-        return res.status(200).json({ message: 'OK', accepted_matches});
+        console.log(user)
+        const matches = [];
+        if(user.acceptedUsers){
+            for(const id of user.acceptedUsers){
+                console.log(id); // Logs each ID
+                const friend = await User.findById(id);
+                if (friend) {
+                    matches.push(friend); // Add the friend to the matches array
+                }
+            }
+        }
+        console.log('matches')
+        console.log(matches);
+        return res.status(200).json({ message: 'OK', matches: matches});
     } catch(error){
         console.log(error);
         return res.status(500).json({ message: 'ERROR', cause: error.message });
