@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
 import VerifyLoggedIn from '../Components/VerifyLoggedIn.js';
+
+import '../Styles/Messages.css';
+
 import axios from 'axios';
 
 const Messages = () => {
@@ -88,10 +91,10 @@ const Messages = () => {
         <VerifyLoggedIn>
             <h1>Messages</h1>
             { requestingUsers.length > 0 ? (
-                <ol>
+                <ol className='requests-list'>
                     { requestingUsers.map((user, index) => (
-                        <div>
-                            <p><a href={`/users/${user._id}`}>{user.name}</a> wants to join your group!</p>
+                        <div className='message-item'>
+                            <p className='message-text'><a href={`/users/${user._id}`}>{user.name}</a> wants to join your group!</p>
                             <button onClick={() => acceptInvite(user._id)} >Accept</button>
                             <button onClick={() => rejectInvite(user._id)}>Reject</button>
                         </div>
