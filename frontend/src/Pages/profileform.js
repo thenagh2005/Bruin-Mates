@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../Styles/ProfileForm.css';
@@ -61,6 +61,41 @@ function ProfileForm() {
         ]
     };
 
+    useEffect(() => {
+        async function fetchUserData() {
+            try {
+                const response = await axios.get('http://localhost:4000/api/v1/user/curr-user', { withCredentials: true });
+    
+                const user = response.data.user;
+    
+                // Preprocess preferences to convert booleans and numbers to strings
+                const formattedPreferences = Object.fromEntries(
+                    Object.entries(user.preferences).map(([key, value]) => {
+                        if (typeof value === 'boolean') {
+                            return [key, value.toString()]; // Convert booleans to "true" or "false"
+                        }
+                        if (typeof value === 'number') {
+                            return [key, value.toString()]; // Convert numbers to strings
+                        }
+                        return [key, value]; // Leave other values as is
+                    })
+                );
+    
+                setFormData({
+                    ...user,
+                    preferences: formattedPreferences,
+                });
+    
+                if (user.preferences.roomType) {
+                    setBuildingOptions(roomTypes[user.preferences.roomType] || []);
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        }
+        fetchUserData();
+    }, []);
+    
     const handleChange = (e, category) => {
         const { name, value, type, checked } = e.target;
 
