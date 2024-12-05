@@ -138,10 +138,10 @@ const Messages = () => {
         <VerifyLoggedIn>
             <h1>Accepted Matches</h1>
             { acceptedUsers.length > 0 ? (
-                <ol>
+                <ol className='accepted-list'>
                     { acceptedUsers.map((user, index) => (
-                        <div>
-                            <p><a href={`/users/${user._id}`}>{user.name}</a> - <i>Email: {user.email}</i></p>
+                        <div className='accepted-item'>
+                            <p className='accepted-message'><a href={`/users/${user._id}`}>{user.name}</a> - <i>Email: {user.email}</i></p>
                         </div>
                     )) }
                 </ol>
@@ -162,7 +162,7 @@ const Messages = () => {
                     ))}
                 </ol>
             ) : (
-                <p>No pending requests.</p>
+                <p className='message-text'>No pending requests.</p>
             )}
 
         </VerifyLoggedIn>
