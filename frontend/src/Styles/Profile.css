@@ -33,6 +33,7 @@ body{
     display: inline-block;
     background: var(--card-bg-color);
     min-width: 35%;
+    max-width: 45%;
     min-height: 65%;
     height: auto;
     width: auto;

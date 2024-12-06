@@ -381,6 +381,7 @@ function ProfileForm() {
                             placeholder="Write your bio here..."
                             rows="4"
                             cols="50"
+                            maxLength="200"
                         />
                     </div>
 
@@ -422,6 +423,7 @@ function ProfileForm() {
                             placeholder="e.g., he/him, she/her, they/them"
                             rows="1"
                             cols="25"
+                            maxLength="20"
                         />
                     </div>
                     {/* Profile Picture */}
