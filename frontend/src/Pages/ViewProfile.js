@@ -88,41 +88,31 @@ const ViewProfile = () => {
                             />
                             <h1>Name</h1>
                             <h2>{currUser.name ? `@${currUser.name}` : ""}</h2>
-                            <h2>{age ? "Age:" : ""}</h2>
-                            <p>{age}</p>
-                            <h2>{biography ? "Biography:" : ""}</h2>
-                            <p>{biography}</p>
-                            <h2>{gender ? "Gender:" : ""}</h2>
-                            <p>{gender}</p>
-                            <h2>{pronouns ? "Preferred Pronouns:" : ""}</h2>
-                            <p>{pronouns}</p>
+                            <p></p>
+                            <h2>{age ? "Age: " + age : ""}</h2>
+                            <h2>{biography ? "Biography: " + biography : ""}</h2>
+                            <h2>{gender ? "Gender: " + gender : ""}</h2>
+                            <h2>{pronouns ? "Preferred Pronouns: " + pronouns : ""}</h2>
+                            <h2>{currUser.preferences ? "" : "Click on the card to edit your profile."}</h2>
                     </div>}
                     {clicked && <div className='preferences'>
                         <h1>Preferences</h1>
                         
-                        <h2>{cleanliness ? "Cleanliness:" : ""}</h2>
-                        <p>{cleanliness}</p>
+                        <h2>{cleanliness ? "Cleanliness: " + cleanliness : ""}</h2>
 
-                        <h2>{sleepTime ? "Preferred Sleeping Time:" : ""}</h2>
-                        <p>{sleepTime ? sleepTime : ""}</p>
+                        <h2>{sleepTime ? "Preferred Sleeping Time: " + sleepTime : ""}</h2>
 
-                        <h2>{smoking != null ? "Smoking:" : ""}</h2>
-                        <p>{smoking != null ? (smoking ? "Yes" : "No") : ""}</p>
+                        <h2>{smoking != null ? "Smoking: " + (smoking ? "Yes" : "No") : ""}</h2>
 
-                        <h2>{alcohol != null ? "Alcohol:" : ""}</h2>
-                        <p>{alcohol != null ? (alcohol ? "Yes" : "No") : ""}</p>
+                        <h2>{alcohol != null ? "Alcohol: " + (alcohol ? "Yes" : "No") : ""}</h2>
 
-                        <h2>{genderInclusivity != null ? "Gender-Inclusive Housing:" : ""}</h2>
-                        <p>{genderInclusivity != null ? (genderInclusivity ? "Yes" : "No") : ""} </p>
+                        <h2>{genderInclusivity != null ? "Gender-Inclusive Housing: " + (genderInclusivity ? "Yes" : "No") : ""}</h2>
 
-                        <h2>{roomType ? "Room Type:" : ""}</h2>
-                        <p>{roomType}</p>
+                        <h2>{roomType ? "Room Type: " + roomType : ""}</h2>
 
-                        <h2>{building ? "Building:" : ""}</h2>
-                        <p>{building}</p>
+                        <h2>{building ? "Building: " + building : ""}</h2>
 
-                        <h2>{occupancy ? "Occupancy:" : ""}</h2>
-                        <p>{occupancy}</p>
+                        <h2>{occupancy ? "Occupancy: " + occupancy : ""}</h2>
                         
                         <a href="/profile-form">Edit your profile</a>
                     </div>}
