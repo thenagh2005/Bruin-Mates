@@ -133,6 +133,47 @@
   --error-text-color: #ff6666;
 }
 
+/* Custom Theme */
+[data-theme="custom"] {
+  /* General Background and Text */
+  --background-color: #f5f5f5;
+  --find-user-background: #ffffff;
+  --text-color: #2c2c2c;
+  --secondary-text-color: #6e6e6e;
+  --disabled-text-color: #b3b3b3;
+
+  /* Navbar */
+  --navbar-background-color: #3a3a55;
+  --navbar-text-color: #f8f8f8;
+  --navbar-hover-color: var(--accent-color, #52527a);
+  --navbar-hover-text-color: #ffffff;
+  --navbar-border-color: #4a4a6a;
+
+  /* Buttons */
+  --button-bg-color: var(--accent-color, #3a3a55);
+  --button-hover-bg-color: var(--accent-color, #52527a);
+  --button-text-color: #ffffff;
+
+  /* Links */
+  --link-color: var(--accent-color, #3a76c9);
+  --link-hover-color: #1e4fa1;
+
+  /* Cards */
+  --info-card-bg: #ffffff;
+  --card-bg-color: #ffffff;
+  --card-border-color: #e0e0e0;
+
+  /* Shadows */
+  --default-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+
+  /* Advanced: Gradient Colors */
+  --hero-bg-gradient: linear-gradient(
+    to bottom right,
+    var(--gradient-color-start, rgba(0, 55, 120, 0.8)),
+    var(--gradient-color-end, rgba(255, 209, 0, 0.8))
+  );
+}
+
 /* Apply Variables to Components */
 body {
   background-color: var(--background-color);

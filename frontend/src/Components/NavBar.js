@@ -3,10 +3,12 @@ import '../Styles/NavBar.css';
 import { useAuth } from '../AuthContext';
 import { useTheme } from './ThemeContext';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom'; // For navigation
 
 function NavBar() {
     const { isLoggedIn, logout } = useAuth();
     const { theme, toggleTheme } = useTheme();
+    const navigate = useNavigate();
 
     const handleLogout = async (e) => {
         e.preventDefault();
@@ -39,6 +41,15 @@ function NavBar() {
         console.log("logged out!");
     };
 
+    const handleThemeChange = (selectedTheme) => {
+        if (selectedTheme === "custom") {
+            toggleTheme('custom');
+            navigate('/custom-theme'); // Navigate to Custom Theme editor page
+        } else {
+            toggleTheme(selectedTheme); // Apply other themes
+        }
+    };
+
     return (
         <div>
             <ul>
@@ -65,12 +76,13 @@ function NavBar() {
                 <li className="align-right">
                     <select
                         value={theme}
-                        onChange={(e) => toggleTheme(e.target.value)}
+                        onChange={(e) => handleThemeChange(e.target.value)}
                         className="theme-selector"
                     >
                         <option value="light">Light Mode</option>
                         <option value="dark">Dark Mode</option>
                         <option value="system">System Theme</option>
+                        <option value="custom">Custom Theme</option>
                     </select>
                 </li>
             </ul>

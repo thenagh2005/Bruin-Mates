@@ -47,7 +47,7 @@
     margin: auto;
     width: 480px;
     height: 80px;
-    background: var(--background-color);
+    background: var(--info-card-bg);
     border: 1px solid var(--card-border-color);
     border-radius: 6px;
     padding: 20px;
