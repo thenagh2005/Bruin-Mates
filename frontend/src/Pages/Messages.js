@@ -146,7 +146,7 @@ const Messages = () => {
                     )) }
                 </ol>
             ) : (
-                <p>No accepted matches</p>
+                <p className='message-text'>No accepted matches</p>
             )}
 
             <h1>Pending Matches</h1>
