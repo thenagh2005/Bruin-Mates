@@ -1,12 +1,12 @@
 import React from 'react';
 import '../Styles/NavBar.css';
 import { useAuth } from '../AuthContext';
-import { useTheme } from './ThemeContext'; // Import the ThemeContext
+import { useTheme } from './ThemeContext';
 import axios from "axios";
 
 function NavBar() {
     const { isLoggedIn, logout } = useAuth();
-    const { theme, toggleTheme } = useTheme(); // Access theme and toggle function
+    const { theme, toggleTheme } = useTheme();
 
     const handleLogout = async (e) => {
         e.preventDefault();
@@ -61,11 +61,17 @@ function NavBar() {
                         <li className="align-right"><a href="/login">Login</a></li>
                     </>
                 )}
-                {/* Theme Toggle Button (Appears in Both States) */}
+                {/* Theme Toggle Options */}
                 <li className="align-right">
-                    <button className="link-button" onClick={toggleTheme}>
-                        {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
-                    </button>
+                    <select
+                        value={theme}
+                        onChange={(e) => toggleTheme(e.target.value)}
+                        className="theme-selector"
+                    >
+                        <option value="light">Light Mode</option>
+                        <option value="dark">Dark Mode</option>
+                        <option value="system">System Theme</option>
+                    </select>
                 </li>
             </ul>
         </div>
