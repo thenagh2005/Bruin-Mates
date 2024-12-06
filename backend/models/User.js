@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
         genderInclusivity: { type: Boolean, required: false }
     },
     profileInfo: {
+        profileName: {
+            firstName: { type: String, required: false },
+            lastName: { type: String, required: false }
+        },
         biography: { type: String, required: false }, 
         age: { type: String, required: false },
         gender: {

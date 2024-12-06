@@ -22,6 +22,8 @@ function UserInfo() {
   const [building, setBuilding] = useState("");
   const [occupancy, setOccupancy] = useState("");
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
   const [biography, setBiography] = useState("");
   const [gender, setGender] = useState("");
@@ -51,6 +53,15 @@ function UserInfo() {
         setRoomType(data.preferences.roomType);
         setBuilding(data.preferences.building);
         setOccupancy(data.preferences.occupancy);
+        try{
+        setFirstName(data.profileInfo.profileName.firstName);
+        setLastName(data.profileInfo.profileName.LastName);
+        }
+        catch{
+          console.error("user has not set their profile name")
+          setFirstName("J.");
+          setLastName("Bruin (user has not set their profile name)");
+        }
         setAge(data.profileInfo.age);
         setBiography(data.profileInfo.biography);
         setGender(data.profileInfo.gender);
@@ -74,7 +85,7 @@ function UserInfo() {
         <div className='info-container'>
           <div className='profile-info'>
             <img className="profile-picture" src={profilePicture} alt="pfp" />
-            <h1>Name</h1>
+            <h1>{firstName + " " + lastName}</h1>
             <h2>{user.name}</h2>
             <h2>Age: {age}</h2>
             <p></p>

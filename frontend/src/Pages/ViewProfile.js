@@ -35,6 +35,9 @@ const ViewProfile = () => {
     const [building, setBuilding] = useState("");
     const [occupancy, setOccupancy] = useState("");
 
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+
     const [age, setAge] = useState("");
     const [biography, setBiography] = useState("");
     const [gender, setGender] = useState("");
@@ -57,6 +60,8 @@ const ViewProfile = () => {
                 setRoomType(response.data.user.preferences.roomType);
                 setBuilding(response.data.user.preferences.building);
                 setOccupancy(response.data.user.preferences.occupancy);
+                setFirstName(response.data.user.profileInfo.profileName.firstName);
+                setLastName(response.data.user.profileInfo.profileName.lastName);
                 setAge(response.data.user.profileInfo.age);
                 setBiography(response.data.user.profileInfo.biography);
                 setGender(response.data.user.profileInfo.gender);
@@ -72,6 +77,8 @@ const ViewProfile = () => {
         getCurrUser();
     }, [isLoggedIn]);
 
+    let fullName= firstName.concat(" ",lastName);
+
     return (
         <>
             <VerifyLoggedIn>
@@ -86,7 +93,7 @@ const ViewProfile = () => {
                             }
                             // style={{ width: '5vw', minWidth: '100px' }} alt="pfp" 
                             />
-                            <h1>Name</h1>
+                            <h1>{firstName ? fullName : ""}</h1>
                             <h2>{currUser.name ? `@${currUser.name}` : ""}</h2>
                             <h2>{age ? "Age:" : ""}</h2>
                             <p>{age}</p>
