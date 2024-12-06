@@ -36,7 +36,7 @@ const Home = () => {
                     <div className="info-card">
                         <h2>Explore More</h2>
                         <p>Discover roommates, connect with students, and join a thriving community.</p>
-                        <button className="info-card-button">Learn More</button>
+                        <a href="/about">Learn More</a>
                     </div>
                     <div className="abstract-shapes">
                         <div className="circle"></div>

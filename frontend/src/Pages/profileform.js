@@ -20,6 +20,10 @@ function ProfileForm() {
             occupancy: '',
         },
         profileInfo: {
+            profileName: {
+                firstName: '',
+                lastName: '',
+            },
             biography: '',
             gender: '',
             pronouns: '', 
@@ -108,6 +112,21 @@ function ProfileForm() {
         }));
     };
 
+    const handleNameChange = (e) => {
+        const { name, value} = e.target;
+
+        setFormData((prevData) => ({
+            ...prevData,
+            profileInfo: {
+                ...prevData.profileInfo,
+                profileName: {
+                ...prevData.profileInfo.profileName,
+                [name]: value,
+                },
+            },
+        }));
+    };
+
     const handleRoomTypeChange = (e) => {
         const selectedRoomType = e.target.value;
         setFormData((prevData) => ({
@@ -147,9 +166,13 @@ function ProfileForm() {
     
             // Append profile info
             for (const key in formData.profileInfo) {
-                if (formData.profileInfo[key] !== null && formData.profileInfo[key] !== '') {
+                if (formData.profileInfo[key] !== null && formData.profileInfo[key] !== '' && key != "profileName") {
                     formDataToSend.append(`profileInfo[${key}]`, formData.profileInfo[key]);
-                }
+                } else if (key == "profileName") {
+                    formDataToSend.append(`profileInfo[profileName][firstName]`, formData.profileInfo.profileName.firstName);
+                    formDataToSend.append(`profileInfo[profileName][lastName]`, formData.profileInfo.profileName.lastName);
+                    
+                } 
             }
     
             // Send the request
@@ -187,6 +210,30 @@ function ProfileForm() {
             <div className="form-container">
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <h1 className="profile-header">Preferences:</h1>
+
+                    {/* Profile Name */}
+                    <h2>First Name*</h2>
+                    <div className="inline-group radio-group">
+                        <textarea
+                            name="firstName"
+                            value={formData.profileInfo?.profileName?.firstName || ""}
+                            onChange={(e) => handleNameChange(e)}
+                            placeholder="eg. Josie"
+                            rows="1"
+                            cols="25"
+                        />
+                    </div>
+                    <h2>Last Name*</h2>
+                    <div className="inline-group radio-group">
+                        <textarea
+                            name="lastName"
+                            value={formData.profileInfo?.profileName?.lastName || ""}
+                            onChange={(e) => handleNameChange(e)}
+                            placeholder="Bruin"
+                            rows="1"
+                            cols="25"
+                        />
+                    </div>
 
                     {/* Cleanliness */}
                     <h2>How important is cleanliness to you? (1 is not important at all, 5 is very important)*</h2>

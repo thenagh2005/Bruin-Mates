@@ -33,7 +33,7 @@ function App() {
             <Route path="/view-profile" element={<ViewProfile />} />
             <Route path="/find" element={<FindPeople />} />
             <Route path="/users/:id" element={<UserInfo />} />
-            <Route path="/messages" element={<Messages />}/>
+            <Route path="/matches" element={<Messages />}/>
           </Routes>
         </ThemeProvider>
       </AuthProvider>
