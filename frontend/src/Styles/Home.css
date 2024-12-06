@@ -37,6 +37,12 @@
   margin: 20px 0;
 }
 
+.hero-content .header{
+  text-align: left;
+}
+
+
+
 .info-card {
   background: var(--info-card-bg);
   z-index: 1;
