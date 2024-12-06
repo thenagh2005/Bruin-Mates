@@ -70,7 +70,7 @@ function UserInfo() {
         setOccupancy(data.preferences.occupancy);
         try{
         setFirstName(data.profileInfo.profileName.firstName);
-        setLastName(data.profileInfo.profileName.LastName);
+        setLastName(data.profileInfo.profileName.lastName);
         }
         catch{
           console.error("user has not set their profile name")
