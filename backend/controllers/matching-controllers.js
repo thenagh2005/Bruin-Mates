@@ -95,7 +95,7 @@ async function rejectMatchRequest(req, res, next){
 }
 
 
-async function getAllPendingMatches(res, res, next){
+async function getAllPendingMatches(req, res, next){
     try {
         const userId = res.locals.jwtData.id;
         const receivedRequests = await MatchRequest.find({ recipient_id: userId, status: 'pending'});
@@ -107,7 +107,7 @@ async function getAllPendingMatches(res, res, next){
     }
 }
 
-async function getAllAcceptedMatches(res, res, next){
+async function getAllAcceptedMatches(req, res, next){
     console.log('HIT')
     try {
         const userId = res.locals.jwtData.id;
@@ -136,4 +136,29 @@ async function getAllAcceptedMatches(res, res, next){
     }
 }
 
-module.exports = {getAllAcceptedMatches, getAllPendingMatches, processMatchRequest, acceptMatchRequest, rejectMatchRequest};
+async function getMatchStatus(req, res, next){
+    try {
+        const currUserId = res.locals.jwtData.id;
+        const user2Id = req.params.id;
+        console.log(currUserId);
+        console.log(user2Id);
+        let status = 'na';
+        const match = await MatchRequest.find({ 
+            $or: [
+                { requester_id: user2Id, recipient_id: currUserId }, 
+                { requester_id: currUserId, recipient_id: user2Id }
+            ]
+        });
+
+        if(match[0]){
+            status = match[0].status;
+            console.log(status)
+        }
+        return res.status(200).json({ message: 'OK', status: status});
+    } catch(error) {
+        console.log(error);
+        return res.status(500).json({ message: 'ERROR', cause: error.message });
+    }
+}
+
+module.exports = {getAllAcceptedMatches, getAllPendingMatches, processMatchRequest, acceptMatchRequest, rejectMatchRequest, getMatchStatus};

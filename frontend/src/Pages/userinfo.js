@@ -30,6 +30,9 @@ function UserInfo() {
 
   const [profilePicture, setProfilePicture] = useState(null);
 
+  const [matchStatus, setMatchStatus] = useState('')
+  const [connectButtonText, setConnectButtonText] = useState('Connect')
+
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page
   }, []);
@@ -40,6 +43,17 @@ function UserInfo() {
         const response = await fetch(`http://localhost:4000/api/v1/user/users/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch user');
+        }
+
+        const query = await axios.get(`http://localhost:4000/api/v1/matching/match-status/${id}`, {
+          withCredentials: true
+        });
+        console.log(query.data)
+        setMatchStatus(query.data.status);
+        if(query.data.status === 'accepted'){
+          setConnectButtonText("Accepted!");
+        } else if(query.data.status === 'pending'){
+          setConnectButtonText("Pending...")
         }
         const data = await response.json();
         setUsers(data);
@@ -74,6 +88,7 @@ function UserInfo() {
         const match_response = await axios.post(`http://localhost:4000/api/v1/matching/process-match/${id}`, {}, {
           withCredentials: true
         });
+        setConnectButtonText('Pending...')
         alert('Connection request sent!');
       } catch (err) { 
 
@@ -97,7 +112,7 @@ function UserInfo() {
             <h2>Preferred Pronouns: {pronouns}</h2>
             <p></p>
 
-            <button onClick={sendConnectionRequest}>Connect</button>
+            <button onClick={sendConnectionRequest} disabled={matchStatus === 'accepted' || matchStatus === 'pending'}>{connectButtonText}</button>
 
 
           </div>
