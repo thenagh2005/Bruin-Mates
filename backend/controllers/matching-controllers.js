@@ -161,4 +161,37 @@ async function getMatchStatus(req, res, next){
     }
 }
 
-module.exports = {getAllAcceptedMatches, getAllPendingMatches, processMatchRequest, acceptMatchRequest, rejectMatchRequest, getMatchStatus};
+async function removeMatch(req, res, next){
+    try {
+        const userIdToRemove = req.params.id;
+        const currUserId = res.locals.jwtData.id;
+        const currUser = await User.findById(currUserId);
+        console.log(currUser.acceptedUsers);
+        let matches = currUser.acceptedUsers.filter(user_id => user_id != userIdToRemove);
+
+        currUser.acceptedUsers = matches;
+        currUser.save();
+
+        console.log('after');
+        console.log(currUser.acceptedUsers);
+
+        // change match status
+        const match = await MatchRequest.find({ 
+            $or: [
+                { requester_id: userIdToRemove, recipient_id: currUserId }, 
+                { requester_id: currUserId, recipient_id: userIdToRemove }
+            ],
+            status: 'accepted'
+        });
+        console.log(match)
+        match[0].status = 'rejected';
+        match[0].save();
+
+        return res.status(200).json({message: 'OK'});
+    } catch(error) {
+        console.log(error);
+        return res.status(500).json({ message: 'ERROR', cause: error.message });
+    }
+}
+
+module.exports = {getAllAcceptedMatches, getAllPendingMatches, processMatchRequest, acceptMatchRequest, rejectMatchRequest, getMatchStatus, removeMatch};

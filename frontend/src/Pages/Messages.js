@@ -74,33 +74,6 @@ const Messages = () => {
 
     }, [requests]);
 
-    // useEffect(() => {
-    //     const getAcceptedUsersData = async () => {
-    //         const response = await axios.get('http://localhost:4000/api/v1/user/curr-user', {
-    //             withCredentials: true
-    //         });
-    //         const currUser = response.data.user;
-    //         console.log(currUser);
-    //         console.log('---')
-    //         console.log(acceptedMatches);
-    //         const userPromises = acceptedMatches.map((request) => {
-    //             const userId = request.requester_id == currUser._id ? request.recipient_id : request.requester_id;
-    //             console.log('printing user id')
-    //             console.log(userId)
-    //             return axios.get(`http://localhost:4000/api/v1/user/users/${userId}`, {
-    //                 withCredentials: true,
-    //             })
-    //         });
-
-    //         const userResponses = await Promise.all(userPromises);
-    //         console.log('1')
-    //         console.log(userResponses);
-    //         const users = userResponses.map((response) => response.data);
-    //         setAcceptedMatches(users);
-    //     }
-    //     getAcceptedUsersData();
-    // }, [acceptedMatches]);
-
     const rejectInvite = async (userId) => {
         try {
             console.log(userId);
@@ -125,10 +98,24 @@ const Messages = () => {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
             });
+            getAcceptedMatches();
+            alert('Accepted Invite')
+        } catch(error) {
+            console.error("Error removing match:", error);
+        }
+    }
+
+    const removeMatch = async (userId) => {
+        try {
+            console.log(userId);
+            const response = await axios.post(`http://localhost:4000/api/v1/matching/remove-match/${userId}`, {}, {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
+            });
             let users = requestingUsers.filter(user => user._id != userId);
             setRequestingUsers(users);
             getAcceptedMatches();
-            alert('Accepted Invite')
+            alert('Removed connection')
         } catch(error) {
             console.error("Error accepted requests:", error);
         }
@@ -142,6 +129,7 @@ const Messages = () => {
                     { acceptedUsers.map((user, index) => (
                         <div className='accepted-item'>
                             <p className='accepted-message'><a href={`/users/${user._id}`}>{user.name}</a> - <i>Email: {user.email}</i></p>
+                            <button onClick={() => removeMatch(user._id)}>Remove</button>
                         </div>
                     )) }
                 </ol>
