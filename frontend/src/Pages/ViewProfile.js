@@ -121,7 +121,10 @@ const ViewProfile = () => {
 
                         <h2>{occupancy ? "Occupancy: " + occupancy : ""}</h2>
                         
-                        <a href="/profile-form">Edit your profile</a>
+                        <a href="/profile-form" onClick={(e) => {
+                            e.stopPropagation();
+                            setClicked(true);
+                        }}>Edit your profile</a>
                     </div>}
                     </div>
                 </div>
