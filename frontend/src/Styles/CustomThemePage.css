@@ -1,0 +1,96 @@
+.theme-editor {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 8px;
+    box-shadow: var(--default-shadow);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .theme-editor h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--text-color);
+  }
+  
+  .theme-editor label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: var(--text-color);
+  }
+  
+  .theme-editor input[type="color"] {
+    width: 100%;
+    height: 50px;
+    border: none; /* Remove any border */
+    border-radius: 8px; /* Optional: Keep softer corners */
+    cursor: pointer;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+    outline: none; /* Remove default outline */
+    background-color: transparent; /* Optional: Match the background color */
+  }
+  
+  .theme-editor button {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .theme-editor button:hover {
+    background-color: var(--button-hover-bg-color);
+  }
+ 
+  .theme-editor .return-note {
+    font-style: italic;
+    color: red;
+    margin-bottom: 20px;
+  }
+  
+  .theme-editor .return-note span {
+    font-weight: bold;
+  }
+  
+  .theme-editor .toggle-advanced {
+    width: 100%;
+    margin: 20px 0;
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .theme-editor .toggle-advanced:hover {
+    background-color: var(--button-hover-bg-color);
+  }
+  
+  .theme-editor .toggle-advanced-text {
+    color: var(--accent-color, #007bff);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    display: inline-block;
+    text-align: center;
+    width: 100%; 
+    transition: color 0.3s ease;
+  }
+  
+  .theme-editor .toggle-advanced-text:hover {
+    color: var(--button-hover-bg-color, #0056b3);
+  }
+  

@@ -13,6 +13,7 @@ import ViewProfile from './Pages/ViewProfile';
 import FindPeople from './Pages/findpeople';
 import UserInfo from './Pages/userinfo';
 import Messages from './Pages/Messages';
+import CustomThemePage from './Pages/CustomThemePage';
 
 import { AuthProvider } from './AuthContext';
 import { ThemeProvider } from './Components/ThemeContext';
@@ -34,6 +35,7 @@ function App() {
             <Route path="/find" element={<FindPeople />} />
             <Route path="/users/:id" element={<UserInfo />} />
             <Route path="/matches" element={<Messages />}/>
+            <Route path="/custom-theme" element={<CustomThemePage />} />
           </Routes>
         </ThemeProvider>
       </AuthProvider>

@@ -6,42 +6,69 @@ export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    // Retrieve stored theme or fallback to "system"
     const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) return storedTheme;
-
-    // Default to "system" if no stored theme
-    return 'system';
+    return storedTheme || 'system';
   });
 
-  const applyTheme = (selectedTheme) => {
-    if (selectedTheme === 'system') {
-      // Use system preference
+  const [customTheme, setCustomTheme] = useState(() => {
+    const storedCustomTheme = JSON.parse(localStorage.getItem('customTheme'));
+    return (
+      storedCustomTheme || {
+        'background-color': '#ffffff',
+        'navbar-background-color': '#007bff',
+        'text-color': '#000000',
+        'accent-color': '#007bff',
+        'gradient-color-start': '#ffffff',
+        'gradient-color-end': '#000000',
+      }
+    );
+  });
+
+  const applyTheme = (selectedTheme, customVars = customTheme) => {
+    const root = document.documentElement;
+
+    // Reset previously set custom properties
+    Object.keys(customVars).forEach((key) => root.style.removeProperty(`--${key}`));
+
+    if (selectedTheme === 'custom') {
+      root.setAttribute('data-theme', 'custom');
+      Object.entries(customVars).forEach(([key, value]) => {
+        root.style.setProperty(`--${key}`, value);
+      });
+    } else if (selectedTheme === 'system') {
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      document.documentElement.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
+      root.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
     } else {
-      // Use selected theme (light or dark)
-      document.documentElement.setAttribute('data-theme', selectedTheme);
+      root.setAttribute('data-theme', selectedTheme);
     }
   };
 
   const toggleTheme = (newTheme) => {
+    if (newTheme !== 'custom') {
+      const root = document.documentElement;
+      Object.keys(customTheme).forEach((key) => root.style.removeProperty(`--${key}`));
+    }
+
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme); // Save the new theme to localStorage
+    localStorage.setItem('theme', newTheme);
     applyTheme(newTheme);
   };
 
-  useEffect(() => {
-    // Apply the current theme on load
-    applyTheme(theme);
-  }, [theme]);
+  const saveCustomTheme = (customVars) => {
+    setCustomTheme(customVars);
+    localStorage.setItem('customTheme', JSON.stringify(customVars));
+    applyTheme('custom', customVars);
+  };
 
   useEffect(() => {
-    // Listen for system theme changes if "system" mode is active
+    applyTheme(theme);
+  }, [theme, customTheme]);
+
+  useEffect(() => {
     if (theme === 'system') {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      const handleChange = (event) => {
-        applyTheme('system'); // Re-apply system theme
+      const handleChange = () => {
+        applyTheme('system');
       };
 
       mediaQuery.addEventListener('change', handleChange);
@@ -52,7 +79,7 @@ export const ThemeProvider = ({ children }) => {
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, customTheme, saveCustomTheme }}>
       {children}
     </ThemeContext.Provider>
   );

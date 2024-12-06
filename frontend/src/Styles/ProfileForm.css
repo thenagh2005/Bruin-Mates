@@ -77,7 +77,7 @@ button:hover {
 }
 
 select, textarea{
-    background-color: var(--background-color);
+    background-color: var(--info-card-bg);
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
