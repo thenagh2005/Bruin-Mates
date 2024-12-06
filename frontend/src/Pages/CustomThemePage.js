@@ -30,7 +30,7 @@ const CustomThemePage = () => {
 
   return (
     <div className="theme-editor">
-      <h1>Customize Your Theme</h1>
+      <h1 className='header'>Customize Your Theme</h1>
       <p className="return-note">
         <span>*</span> To return to this page, please select a different theme and reselect Custom Theme.
       </p>

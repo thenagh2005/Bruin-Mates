@@ -136,7 +136,7 @@ const Messages = () => {
 
     return (
         <VerifyLoggedIn>
-            <h1>Accepted Matches</h1>
+            <h1 className='header'>Accepted Matches</h1>
             { acceptedUsers.length > 0 ? (
                 <ol className='accepted-list'>
                     { acceptedUsers.map((user, index) => (
@@ -149,7 +149,7 @@ const Messages = () => {
                 <p className='message-text'>No accepted matches</p>
             )}
 
-            <h1>Pending Matches</h1>
+            <h1 className='header'>Pending Matches</h1>
             { requestingUsers.length > 0 ? (
                 <ol className='requests-list'>
                     { requestingUsers.map((user, index) => (

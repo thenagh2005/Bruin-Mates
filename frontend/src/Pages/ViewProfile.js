@@ -93,7 +93,7 @@ const ViewProfile = () => {
                             }
                             // style={{ width: '5vw', minWidth: '100px' }} alt="pfp" 
                             />
-                            <h1>{firstName ? fullName : ""}</h1>
+                            <h1 className='header'>{firstName ? fullName : ""}</h1>
                             <h2>{currUser.name ? `@${currUser.name}` : ""}</h2>
                             <p></p>
                             <h2>{age ? "Age: " + age : ""}</h2>
@@ -103,7 +103,7 @@ const ViewProfile = () => {
                             <h2>{currUser.preferences ? "" : "Click on the card to edit your profile."}</h2>
                     </div>}
                     {clicked && <div className='preferences'>
-                        <h1>Preferences</h1>
+                        <h1 className='header'>Preferences</h1>
                         
                         <h2>{cleanliness ? "Cleanliness: " + cleanliness : ""}</h2>
 

@@ -8,7 +8,7 @@ function About() {
         <div>
             <section className="about-hero">
                 <div className="hero-content">
-                    <h1>About Us</h1>
+                    <h1 class='header'>About Us</h1>
                     <p>We&apos;re here to help you find the perfect roommate at UCLA!</p>
                 </div>
                 <div className="abstract-shapes">
@@ -19,7 +19,7 @@ function About() {
             </section>
             <section className="welcome-message">
                 <div className="welcome-header">
-                    <h1>Find Your Ideal UCLA Roommate Effortlessly</h1>
+                    <h1 className='header'>Find Your Ideal UCLA Roommate Effortlessly</h1>
                     <p>
                         Our web application is designed to make finding the perfect 
                         roommate at UCLA an easy, interactive, and stress-free experience. 
@@ -31,7 +31,7 @@ function About() {
             </section>
             <section className="why-choose-us">
                 <div className="why-choose-us-header">
-                    <h1>Why Choose Us?</h1>
+                    <h1 className='header'>Why Choose Us?</h1>
                     <p>
                         UCLA's existing roommate matching system is functional but lacks customization and depth. 
                         Our application bridges that gap with:
@@ -53,7 +53,7 @@ function About() {
 
             <section className="team-intro">
                 <div className="team-header">
-                    <h1>Meet the Team</h1>
+                    <h1 className='header'>Meet the Team</h1>
                     <p>
                         We are Team USC Trojans, a group of passionate UCLA students dedicated to solving
                         real-world problems with creative technology solutions.

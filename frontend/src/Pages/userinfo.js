@@ -112,7 +112,7 @@ function UserInfo() {
         <div className='info-container'>
           <div className='profile-info'>
             <img className="profile-picture" src={profilePicture} alt="pfp" />
-            <h1>{firstName + " " + lastName}</h1>
+            <h1 className='header'>{firstName + " " + lastName}</h1>
             <h2>{user.name}</h2>
             <h2>Age: {age}</h2>
             <p></p>
@@ -128,7 +128,7 @@ function UserInfo() {
 
           </div>
          <div className='prefs'>
-            <h1>Preferences</h1>
+            <h1 className='header'>Preferences</h1>
 
             <h2>Cleanliness: {cleanliness}</h2>
             <p></p>

@@ -29,7 +29,7 @@ const Home = () => {
                 {/* Abstract Hero Section */}
                 <section className="hero">
                     <div className="hero-content">
-                        <h1>Welcome to the UCLA Roommate Finder</h1>
+                        <h1 className='header'>Welcome to the UCLA Roommate Finder</h1>
                         <p>Made by Bruins for Bruins</p>
                         <button className="cta-button" onClick={scrollToFeatures}>Get Started</button>
                     </div>
