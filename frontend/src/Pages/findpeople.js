@@ -92,7 +92,6 @@ function FindPeople() {
                 console.error("Error fetching users:", error);
             }
         };
-
         fetchUsers();
     }, []);
 
