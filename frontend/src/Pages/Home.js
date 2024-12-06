@@ -30,12 +30,12 @@ const Home = () => {
                 <section className="hero">
                     <div className="hero-content">
                         <h1>Welcome to the UCLA Roommate Finder</h1>
-                        <p>Made by (exhausted) Bruins for Bruins</p>
+                        <p>Made by Bruins for Bruins</p>
                         <button className="cta-button" onClick={scrollToFeatures}>Get Started</button>
                     </div>
                     <div className="info-card">
                         <h2>Explore More</h2>
-                        <p>Discover resources, connect with mentors, and join a thriving community.</p>
+                        <p>Discover roommates, connect with students, and join a thriving community.</p>
                         <button className="info-card-button">Learn More</button>
                     </div>
                     <div className="abstract-shapes">
@@ -64,8 +64,7 @@ const Home = () => {
                             <a href="/signup">Sign Up</a>
                         </div>
                         <div className="feature-card">
-                            <h3>If you're not a UCLA student</h3>
-                            <p>Why are you here?</p>
+                            <h3>Find your perfect Roommate today!</h3>
                         </div>
                     </div>
                 </section>
