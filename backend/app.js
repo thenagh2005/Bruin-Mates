@@ -3,6 +3,7 @@ const app = express();
 const dotenv = require("dotenv");
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize')
 const { connectToDB } = require('./db/connection');
 const appRouter = require('./routes/index.js');
 const User = require('./models/User');
@@ -16,6 +17,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
+app.use(mongoSanitize())
 
 connectToDB();
 

@@ -32,7 +32,11 @@ const userSchema = new mongoose.Schema({
             required: false
         },
         pronouns: { type: String, required: false }
-    }
+    },
+    acceptedUsers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 });
 
 module.exports = mongoose.model("User", userSchema);
