@@ -94,11 +94,13 @@ const Messages = () => {
     const acceptInvite = async (userId) => {
         try {
             console.log(userId);
-            const response = await axios.post(`http://localhost:4000/api/v1/matching/accept-match/${userId}`, {}, {
+            await axios.post(`http://localhost:4000/api/v1/matching/accept-match/${userId}`, {}, {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
+            }).then((response) => {
+                let users = requestingUsers.filter(user => user._id != userId);
+                setRequestingUsers(users);  
             });
-            getAcceptedMatches();
             alert('Accepted Invite')
         } catch(error) {
             console.error("Error removing match:", error);

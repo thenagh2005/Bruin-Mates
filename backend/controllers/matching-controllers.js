@@ -166,14 +166,20 @@ async function removeMatch(req, res, next){
         const userIdToRemove = req.params.id;
         const currUserId = res.locals.jwtData.id;
         const currUser = await User.findById(currUserId);
+        const user2 = await User.findById(userIdToRemove);
+
         console.log(currUser.acceptedUsers);
         let matches = currUser.acceptedUsers.filter(user_id => user_id != userIdToRemove);
 
         currUser.acceptedUsers = matches;
         currUser.save();
-
-        console.log('after');
-        console.log(currUser.acceptedUsers);
+        console.log('************')
+        console.log(user2.acceptedUsers);
+        let matches2 = user2.acceptedUsers.filter(user_id => user_id != currUserId);
+        user2.acceptedUsers = matches2;
+        user2.save();
+        console.log(user2.acceptedUsers);
+        console.log('************')
 
         // change match status
         const match = await MatchRequest.find({ 
