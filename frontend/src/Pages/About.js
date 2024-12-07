@@ -74,11 +74,11 @@ function About() {
                     </div>
                     <div className="team-card">
                         <h2>Lune Chan</h2>
-                        <p>Flex Developer</p>
+                        <p>Full-stack Developer</p>
                     </div>
                     <div className="team-card">
                         <h2>Lorenzo Bolls</h2>
-                        <p>Flex Developer</p>
+                        <p>Full-stack Developer</p>
                     </div>
                 </div>
             </section>
